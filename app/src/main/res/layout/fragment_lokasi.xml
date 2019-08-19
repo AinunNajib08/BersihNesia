@@ -7,16 +7,27 @@
     tools:context=".fragment.tablayout.LokasiFragment">
 
     <ScrollView
-        android:scrollbars="none"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
-        <!-- TODO: Update blank fragment layout -->
-        <ImageView
-            android:src="@drawable/ic_banner"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <!-- TODO: Update blank fragment layout -->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_banner" />
 
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="440dp">
+            </com.google.android.gms.maps.MapView>
+        </LinearLayout>
     </ScrollView>
+
 
 </FrameLayout>

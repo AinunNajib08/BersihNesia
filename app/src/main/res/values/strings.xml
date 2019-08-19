@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">BersihNesia</string>
+    <string name="login">LOGIN</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forget_password">Forget Password ?</string>
+    <string name="don_t_have_account">Don\'t Have Account ? </string>
+    <string name="register_now"> Register Now</string>
+    <string name="home">Home</string>
+    <string name="notification">Notification</string>
+    <string name="profile">Profile</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="my_point">My Point</string>
+    <string name="community">Komunitas</string>
+    <string name="information">Informasi</string>
+    <string name="event">Event Terbaru</string>
+    <string name="more">Lebih</string>
+    <string name="join_community">Join Komunitas</string>
+    <string name="news">News</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis at cupiditate fugit obcaecati omnis, exercitationem temporibus sit nulla quisquam earum ratione repellendus pariatur alias facere dicta quia iure reiciendis expedita.</string>
+    <string name="title_activity_event">EventActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="registrasi">Registrasi</string>
+    <string name="nama_lengkap">Nama Lengkap</string>
+    <string name="no_hp">No Hp</string>
+    <string name="upload_foto">Upload Foto</string>
+</resources>

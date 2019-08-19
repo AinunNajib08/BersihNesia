@@ -13,6 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBAvXvjp4tqbGc40f3ynHJ1ojaiQRMawKI" />
         <activity android:name=".activity.DrawTrashActivity" />
         <activity
             android:name=".activity.HomeActivity"

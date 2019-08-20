@@ -1,9 +1,11 @@
 package com.example.bersihnesia.fragment.tablayout;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,7 +38,7 @@ public class LokasiFragment extends Fragment implements OnMapReadyCallback {
     Geocoder geocoder;
     TextView tvLocation;
     List<Address> addresses;
-    int value;
+    String value;
     public LokasiFragment() {
         // Required empty public constructor
     }
@@ -51,10 +53,14 @@ public class LokasiFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layout for this fragment\
 
         View view = inflater.inflate(R.layout.fragment_lokasi, container, false);
-        value = getArguments().getInt(HomeFragment.STATE_EVENT);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        int Hallo = sharedPreferences.getInt(HomeFragment.STATE_EVENT, 0);
+        Log.e("RAG", "asds: "+Hallo );
+
         Log.e("RAG", "onCreateView: " + value );
         tvLocation = view.findViewById(R.id.tvLocation);
         geocoder = new Geocoder(getActivity(), Locale.getDefault());

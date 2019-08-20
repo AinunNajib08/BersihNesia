@@ -1,9 +1,12 @@
 package com.example.bersihnesia.activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.example.bersihnesia.R;
 import com.example.bersihnesia.adapter.CommunityAdapter;
@@ -32,6 +35,9 @@ BaseApiService mApiInterface;
         mRecyclerView.setLayoutManager(mLayoutManager);
         mApiInterface=UtilsApi.getAPIService();
         refresh();
+
+        SharedPreferences setting = this.getSharedPreferences("Setting", Context.MODE_PRIVATE);
+        Log.e("RAG", "onCreate: "+setting.getInt("YYYY", 0) );
     }
 
     private void refresh() {

@@ -4,14 +4,18 @@ package com.example.bersihnesia.fragment;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -25,6 +29,7 @@ import com.example.bersihnesia.activity.CommunityActivity;
 import com.example.bersihnesia.adapter.EventAdapter;
 import com.example.bersihnesia.apihelper.BaseApiService;
 import com.example.bersihnesia.apihelper.UtilsApi;
+import com.example.bersihnesia.fragment.tablayout.LokasiFragment;
 import com.example.bersihnesia.listener.ItemClickSupport;
 import com.example.bersihnesia.model.Event;
 import com.synnapps.carouselview.CarouselView;
@@ -104,13 +109,21 @@ ImageView komunitas;
         ItemClickSupport.addTo(rv_event).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                EventFragment nextFrag= new EventFragment();
-                Bundle sendData = new Bundle();
-                sendData.putInt(STATE_EVENT, arrayList.get(position).getId_event());
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container_layout, nextFrag, "findThisFragment")
-                        .addToBackStack(null)
-                        .commit();
+                Bundle bundle = new Bundle();
+                bundle.putInt("Code", arrayList.get(position).getId_event());
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                EventFragment eventFragment = new EventFragment();
+                eventFragment.setArguments(bundle);
+
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                final SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt(STATE_EVENT, arrayList.get(position).getId_event());
+                editor.apply();
+
+                fragmentTransaction.replace(R.id.container_layout, eventFragment);
+                fragmentTransaction.commit();
             }
         });
 

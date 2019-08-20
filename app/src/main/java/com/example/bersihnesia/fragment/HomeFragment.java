@@ -3,6 +3,7 @@ package com.example.bersihnesia.fragment;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -20,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.bersihnesia.R;
+import com.example.bersihnesia.activity.CommunityActivity;
 import com.example.bersihnesia.adapter.EventAdapter;
 import com.example.bersihnesia.apihelper.BaseApiService;
 import com.example.bersihnesia.apihelper.UtilsApi;
@@ -44,7 +46,7 @@ import retrofit2.Response;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment implements LocationListener {
-
+ImageView komunitas;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -117,6 +119,14 @@ public class HomeFragment extends Fragment implements LocationListener {
             @Override
             public void setImageForPosition(int position, ImageView imageView) {
                 imageView.setImageResource(mImage[position]);
+            }
+        });
+        komunitas=view.findViewById(R.id.komunitas);
+        komunitas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(),CommunityActivity.class);
+                startActivity(intent);
             }
         });
         return view;
@@ -199,4 +209,5 @@ public class HomeFragment extends Fragment implements LocationListener {
         outState.putParcelableArrayList(EXTRA_MOVIE, new ArrayList<>(eventAdapter.getListEvent()));
         super.onSaveInstanceState(outState);
     }
+
 }

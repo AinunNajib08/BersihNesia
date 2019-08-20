@@ -5,9 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.bersihnesia.activity.DrawTrashActivity;
 import com.example.bersihnesia.activity.HomeActivity;
-import com.example.bersihnesia.activity.LoginActivity;
 import com.example.bersihnesia.activity.RegisterActivity;
 
 public class MainActivity extends AppCompatActivity {

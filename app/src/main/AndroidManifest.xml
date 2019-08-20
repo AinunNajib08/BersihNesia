@@ -30,6 +30,21 @@
         <activity
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:name=".activity.RegisterActivity"/>
+        <activity
+            android:name=".activity.InformationActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.CommunityActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.DetailCommuntiyActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:name=".activity.CreateCommunityActivity"></activity>
+        <activity
+            android:name=".activity.PdfActivity"
+            android:theme="@style/AppThemeKu"/>
     </application>
 
 </manifest>

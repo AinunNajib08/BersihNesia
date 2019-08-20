@@ -13,12 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBAvXvjp4tqbGc40f3ynHJ1ojaiQRMawKI" />
         <activity android:name=".activity.DrawTrashActivity" />
         <activity
             android:name=".activity.HomeActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity
-            android:name=".activity.LoginActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -30,6 +30,21 @@
         <activity
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:name=".activity.RegisterActivity"/>
+        <activity
+            android:name=".activity.InformationActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.CommunityActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.DetailCommuntiyActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:name=".activity.CreateCommunityActivity"></activity>
+        <activity
+            android:name=".activity.PdfActivity"
+            android:theme="@style/AppThemeKu"/>
     </application>
 
 </manifest>

@@ -1,7 +1,10 @@
 package com.example.bersihnesia.apihelper;
 
+import com.example.bersihnesia.model.GetCommunity;
 import com.example.bersihnesia.model.PostPersonal;
 import com.example.bersihnesia.model.UploadImage;
+
+import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -10,9 +13,11 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -39,4 +44,18 @@ public interface BaseApiService {
                                     @Field("jk") String jk,
                                     @Field("photo") String photo
                                     );
+    @FormUrlEncoded
+    @POST("api/login_personal")
+    Call<PostPersonal> postLogin(@Field("email") String email,
+                                 @Field("password") String password
+
+    );
+    @GET("api/list_community")
+    Call<GetCommunity> getCommunity();
+
+    @Multipart
+    @POST("api/upload_image")
+    Call<UploadImage> upload( @Header("Authorization") String authorization,
+                              @PartMap Map<String, RequestBody> map
+    );
 }

@@ -186,6 +186,7 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/komunitas"
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_community" />

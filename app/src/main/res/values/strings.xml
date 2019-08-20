@@ -27,4 +27,7 @@
     <string name="nama_lengkap">Nama Lengkap</string>
     <string name="no_hp">No Hp</string>
     <string name="upload_foto">Upload Foto</string>
+    <string name="pick_file">Pick file</string>
+    <string name="msg_loading">Loading...</string>
+    <string name="deskripsi_singkat">Deskripsi Singkat</string>
 </resources>

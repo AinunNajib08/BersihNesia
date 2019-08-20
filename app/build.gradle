@@ -18,6 +18,11 @@ android {
         }
     }
 }
+repositories {
+    maven {
+        url "http://dl.bintray.com/lukaville/maven"
+    }
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -40,4 +45,20 @@ dependencies {
 
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.google.maps.android:android-maps-utils:0.5+'
+    // Auto Complete Place & location
+    implementation 'com.android.support:support-v4:+'
+    implementation 'com.android.support:appcompat-v7:+'
+
+    implementation 'com.google.android.gms:play-services-location:15.0.1'
+    implementation 'com.google.android.gms:play-services-places:15.0.1'
+    implementation 'com.google.android.gms:play-services-maps:16.0.0'
+
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+    implementation 'com.afollestad.material-dialogs:core:0.9.4.5'
+
+    implementation 'com.nbsp:library:1.8'
+    configurations.all {
+        exclude group: 'com.android.support', module: 'support-v13'
+    }
 }

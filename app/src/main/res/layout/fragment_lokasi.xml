@@ -7,16 +7,60 @@
     tools:context=".fragment.tablayout.LokasiFragment">
 
     <ScrollView
-        android:scrollbars="none"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
-        <!-- TODO: Update blank fragment layout -->
-        <ImageView
-            android:src="@drawable/ic_banner"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!-- TODO: Update blank fragment layout -->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_banner" />
 
+            <LinearLayout
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_ico_location"/>
+
+                <TextView
+                    android:id="@+id/tvLocation"
+                    android:layout_marginStart="13dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="234dp"></com.google.android.gms.maps.MapView>
+            
+            <TextView
+                android:layout_marginTop="13dp"
+                android:textStyle="bold"
+                android:layout_marginStart="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deskripsi_singkat"/>
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_marginStart="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
     </ScrollView>
+
 
 </FrameLayout>

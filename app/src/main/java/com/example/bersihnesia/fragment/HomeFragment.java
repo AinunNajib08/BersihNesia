@@ -3,6 +3,7 @@ package com.example.bersihnesia.fragment;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -20,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.bersihnesia.R;
+import com.example.bersihnesia.activity.CommunityActivity;
 import com.example.bersihnesia.adapter.EventAdapter;
 import com.example.bersihnesia.apihelper.BaseApiService;
 import com.example.bersihnesia.apihelper.UtilsApi;
@@ -44,7 +46,7 @@ import retrofit2.Response;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment implements LocationListener {
-
+ImageView komunitas;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -103,6 +105,8 @@ public class HomeFragment extends Fragment implements LocationListener {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 EventFragment nextFrag= new EventFragment();
+                Bundle sendData = new Bundle();
+                sendData.putInt(STATE_EVENT, arrayList.get(position).getId_event());
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container_layout, nextFrag, "findThisFragment")
                         .addToBackStack(null)
@@ -117,6 +121,14 @@ public class HomeFragment extends Fragment implements LocationListener {
             @Override
             public void setImageForPosition(int position, ImageView imageView) {
                 imageView.setImageResource(mImage[position]);
+            }
+        });
+        komunitas=view.findViewById(R.id.komunitas);
+        komunitas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(),CommunityActivity.class);
+                startActivity(intent);
             }
         });
         return view;
@@ -194,44 +206,11 @@ public class HomeFragment extends Fragment implements LocationListener {
                 });
     }
 
-    void getCommunity(){
-        mApiService.getCommunity()
-                .enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        if (response.isSuccessful()){
-                            try {
-                                JSONObject jsonRESULTS = new JSONObject(response.body().string());
-                                JSONArray data = jsonRESULTS.getJSONArray("result");
-                                for (int i=0; i <data.length(); i++) {
-                                    JSONObject jsonObject = data.getJSONObject(i);
-                                    int id_event = jsonObject.getInt("id_event");
-                                    String name_event = jsonObject.getString("name_event");
-                                    Event event = new Event();
-                                    event.setId_event(id_event);
-                                    event.setName_event(name_event);
-                                    arrayList.add(event);
-                                }
-                                eventAdapter.setListEvent(arrayList);
-                                rv_event.setAdapter(eventAdapter);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                    }
-                });
-    }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putParcelableArrayList(EXTRA_MOVIE, new ArrayList<>(eventAdapter.getListEvent()));
         super.onSaveInstanceState(outState);
     }
+
 }

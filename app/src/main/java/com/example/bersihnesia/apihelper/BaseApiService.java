@@ -21,6 +21,9 @@ public interface BaseApiService {
     @GET("api/list_event")
     Call<ResponseBody> getEvent();
 
+    @GET("api/list_community")
+    Call<ResponseBody> getCommunity();
+
     @GET("api/list_event/data/{id_event}")
     Call<ResponseBody> getEventDetail(@Path("movie_id") Integer id_event);
 

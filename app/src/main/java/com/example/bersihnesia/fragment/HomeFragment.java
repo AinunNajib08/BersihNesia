@@ -194,6 +194,41 @@ public class HomeFragment extends Fragment implements LocationListener {
                 });
     }
 
+    void getCommunity(){
+        mApiService.getCommunity()
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()){
+                            try {
+                                JSONObject jsonRESULTS = new JSONObject(response.body().string());
+                                JSONArray data = jsonRESULTS.getJSONArray("result");
+                                for (int i=0; i <data.length(); i++) {
+                                    JSONObject jsonObject = data.getJSONObject(i);
+                                    int id_event = jsonObject.getInt("id_event");
+                                    String name_event = jsonObject.getString("name_event");
+                                    Event event = new Event();
+                                    event.setId_event(id_event);
+                                    event.setName_event(name_event);
+                                    arrayList.add(event);
+                                }
+                                eventAdapter.setListEvent(arrayList);
+                                rv_event.setAdapter(eventAdapter);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
+    }
+
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putParcelableArrayList(EXTRA_MOVIE, new ArrayList<>(eventAdapter.getListEvent()));

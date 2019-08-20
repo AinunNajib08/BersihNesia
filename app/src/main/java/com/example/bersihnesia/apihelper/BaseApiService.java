@@ -27,7 +27,7 @@ public interface BaseApiService {
     Call<ResponseBody> getEvent();
 
     @GET("api/list_event/data/{id_event}")
-    Call<ResponseBody> getEventDetail(@Path("movie_id") Integer id_event);
+    Call<ResponseBody> getEventDetail(@Path("id_event") Integer id_event);
 
     @Multipart
     @POST("api/upload_image")

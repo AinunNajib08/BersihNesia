@@ -1,5 +1,7 @@
 package com.example.bersihnesia.apihelper;
 
+import android.text.Editable;
+
 import com.example.bersihnesia.model.GetCommunity;
 import com.example.bersihnesia.model.PostPersonal;
 import com.example.bersihnesia.model.UploadImage;
@@ -28,6 +30,9 @@ public interface BaseApiService {
 
     @GET("api/list_event/data/{id_event}")
     Call<ResponseBody> getEventDetail(@Path("id_event") Integer id_event);
+
+    @GET("api/list_community/search/{cari}")
+    Call<GetCommunity> getSearch(@Path("cari") Editable cari);
 
     @Multipart
     @POST("api/upload_image")

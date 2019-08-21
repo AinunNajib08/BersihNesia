@@ -99,13 +99,7 @@ ImageView komunitas;
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rv_event.setLayoutManager(layoutManager);
-        if (savedInstanceState==null){
-            getEvent();
-        } else {
-            arrayList = savedInstanceState.getParcelableArrayList(EXTRA_MOVIE);
-            eventAdapter.setListEvent(arrayList);
-            rv_event.setAdapter(eventAdapter);
-        }
+        getEvent();
         ItemClickSupport.addTo(rv_event).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
@@ -123,6 +117,7 @@ ImageView komunitas;
                 editor.apply();
 
                 fragmentTransaction.replace(R.id.container_layout, eventFragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });
@@ -179,6 +174,12 @@ ImageView komunitas;
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        arrayList.clear();
+    }
+
+    @Override
     public void onProviderDisabled(String provider) {
 
     }
@@ -217,13 +218,6 @@ ImageView komunitas;
                     public void onFailure(@NonNull Call<ResponseBody> call,@NonNull Throwable t) {
                     }
                 });
-    }
-
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putParcelableArrayList(EXTRA_MOVIE, new ArrayList<>(eventAdapter.getListEvent()));
-        super.onSaveInstanceState(outState);
     }
 
 }

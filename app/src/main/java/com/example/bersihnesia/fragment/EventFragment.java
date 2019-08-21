@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.bersihnesia.R;
@@ -46,6 +47,7 @@ public class EventFragment extends Fragment {
         // Required empty public constructor
     }
 
+    ProgressBar progressBar;
     TextView tvNameEvent, tvCommunity, tvFollow, tvMode;
     String nameEvent, Community, Follow, Mode;
     BaseApiService mApiService;
@@ -60,6 +62,8 @@ public class EventFragment extends Fragment {
         tvCommunity = view.findViewById(R.id.name_community);
         tvFollow = view.findViewById(R.id.follow);
         tvMode = view.findViewById(R.id.tvMode);
+        progressBar = view.findViewById(R.id.progBar);
+        progressBar.setVisibility(View.GONE);
         getDataEvent();
         return view;
     }
@@ -68,6 +72,7 @@ public class EventFragment extends Fragment {
         Bundle bundleget = getArguments();
         int Hallo = bundleget.getInt("Code");
         Log.e("RAG", "onViewCreated: "+Hallo );
+        progressBar.setVisibility(View.VISIBLE);
         mApiService.getEventDetail(Hallo)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
@@ -90,6 +95,7 @@ public class EventFragment extends Fragment {
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
+                            progressBar.setVisibility(View.GONE);
                         }
                     }
 

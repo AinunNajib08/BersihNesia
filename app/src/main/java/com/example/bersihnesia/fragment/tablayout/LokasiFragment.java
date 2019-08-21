@@ -1,5 +1,6 @@
 package com.example.bersihnesia.fragment.tablayout;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.Address;
@@ -11,9 +12,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bersihnesia.apihelper.BaseApiService;
+import com.example.bersihnesia.apihelper.UtilsApi;
 import com.example.bersihnesia.fragment.HomeFragment;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -24,9 +28,18 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.bersihnesia.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,9 +48,13 @@ public class LokasiFragment extends Fragment implements OnMapReadyCallback {
     private MapView mapView;
     private GoogleMap mMap;
     Geocoder geocoder;
-    TextView tvLocation;
+    TextView tvLocation, tvDesc;
     List<Address> addresses;
     String value;
+    String longlat;
+    BaseApiService mApiService;
+    String[] latlong;
+    ProgressBar progressBar;
     public LokasiFragment() {
         // Required empty public constructor
     }
@@ -45,51 +62,84 @@ public class LokasiFragment extends Fragment implements OnMapReadyCallback {
     String data;
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_lokasi, container, false);
+        mApiService = UtilsApi.getAPIService();
+        progressBar = view.findViewById(R.id.progBar);
+        progressBar.setVisibility(View.GONE);
+        tvDesc = view.findViewById(R.id.tvDesc);
+        getDataEvent();
+        tvLocation = view.findViewById(R.id.tvLocation);
+        mapView = (MapView) view.findViewById(R.id.map);
+        mapView.onCreate(savedInstanceState);
+        return view;
+    }
+
+    public void openMap(){
+        mapView.onResume();
+        mapView.getMapAsync(this);
+    }
+
+    private void getDataEvent(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        int Hallo = sharedPreferences.getInt(HomeFragment.STATE_EVENT, 0);
+        Log.e("RAG", "getDataEvent: "+Hallo );
+        progressBar.setVisibility(View.VISIBLE);
+        mApiService.getEventDetail(Hallo)
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            try {
+                                JSONObject jsonRESULTS = new JSONObject(response.body().string());
+                                JSONArray data = jsonRESULTS.getJSONArray("result");
+                                for (int i = 0; i < data.length(); i++) {
+                                    JSONObject jsonObject = data.getJSONObject(i);
+                                    longlat = jsonObject.getString("longlat");
+                                    String desc = jsonObject.getString("description");
+                                    tvDesc.setText(desc);
+                                    latlong =  longlat.split(",");
+                                    openMap();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment\
-
-        View view = inflater.inflate(R.layout.fragment_lokasi, container, false);
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        int Hallo = sharedPreferences.getInt(HomeFragment.STATE_EVENT, 0);
-        Log.e("RAG", "asds: "+Hallo );
-
-        Log.e("RAG", "onCreateView: " + value );
-        tvLocation = view.findViewById(R.id.tvLocation);
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        double latitude = Double.parseDouble(latlong[0]);
+        double longitude = Double.parseDouble(latlong[1]);
         geocoder = new Geocoder(getActivity(), Locale.getDefault());
         try {
-            addresses = geocoder.getFromLocation(-7.917427, 113.828638, 1);
+            addresses = geocoder.getFromLocation(latitude, longitude, 1);
             String address = addresses.get(0).getAddressLine(0);
             data = address;
             tvLocation.setText(data);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        mapView = (MapView) view.findViewById(R.id.map);
-        mapView.onCreate(savedInstanceState);
-        mapView.onResume();
-        mapView.getMapAsync(this);
-        return view;
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-7.917427, 113.828638);
+        LatLng sydney = new LatLng(latitude, longitude);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         float zoom = 16.0f;
         CameraUpdate cu = CameraUpdateFactory.newLatLngZoom(sydney, zoom);
         mMap.animateCamera(cu);
+        progressBar.setVisibility(View.GONE);
 
     }
 

@@ -35,9 +35,6 @@ BaseApiService mApiInterface;
         mRecyclerView.setLayoutManager(mLayoutManager);
         mApiInterface=UtilsApi.getAPIService();
         refresh();
-
-        SharedPreferences setting = this.getSharedPreferences("Setting", Context.MODE_PRIVATE);
-        Log.e("RAG", "onCreate: "+setting.getInt("YYYY", 0) );
     }
 
     private void refresh() {

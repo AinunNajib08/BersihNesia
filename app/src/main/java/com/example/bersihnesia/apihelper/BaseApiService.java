@@ -34,6 +34,9 @@ public interface BaseApiService {
     @GET("api/list_community/search/{cari}")
     Call<GetCommunity> getSearch(@Path("cari") Editable cari);
 
+    @GET("api/list_event/search/{cari}")
+    Call<ResponseBody> getEventSearch(@Path("cari") Editable cari);
+
     @Multipart
     @POST("api/upload_image")
     Call<UploadImage> uploadFile(@Part MultipartBody.Part file,

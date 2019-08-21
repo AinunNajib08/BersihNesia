@@ -13,10 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        android:theme="@style/AppTheme">
+        <activity android:name=".activity.EventActivity"></activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBAvXvjp4tqbGc40f3ynHJ1ojaiQRMawKI" />
+
         <activity android:name=".activity.DrawTrashActivity" />
         <activity
             android:name=".activity.HomeActivity"
@@ -29,29 +31,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:name=".activity.RegisterActivity"/>
+            android:name=".activity.RegisterActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".activity.InformationActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".activity.CommunityActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.SEARCH"/>
+                <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
         <activity
             android:name=".activity.DetailCommuntiyActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:name=".activity.CreateCommunityActivity"></activity>
+            android:name=".activity.CreateCommunityActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".activity.PdfActivity"
-            android:theme="@style/AppThemeKu"/>
+            android:theme="@style/AppThemeKu" />
     </application>
 
 </manifest>

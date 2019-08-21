@@ -23,6 +23,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.bersihnesia.R;
 import com.example.bersihnesia.activity.CommunityActivity;
@@ -73,6 +75,7 @@ ImageView komunitas;
     public static final String EXTRA_MOVIE = "arrayList";
     public static final String STATE_EVENT = "state_event";
     EventAdapter eventAdapter;
+    ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -95,6 +98,8 @@ ImageView komunitas;
         eventAdapter = new EventAdapter(mContext);
         mApiService = UtilsApi.getAPIService();
         rv_event = view.findViewById(R.id.rv_event);
+        progressBar = view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
         rv_event.setHasFixedSize(true);
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -185,6 +190,7 @@ ImageView komunitas;
     }
 
     void getEvent(){
+        progressBar.setVisibility(View.VISIBLE);
         mApiService.getEvent()
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
@@ -204,6 +210,7 @@ ImageView komunitas;
                                 }
                                 eventAdapter.setListEvent(arrayList);
                                 rv_event.setAdapter(eventAdapter);
+                                progressBar.setVisibility(View.GONE);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             } catch (IOException e) {
@@ -216,6 +223,8 @@ ImageView komunitas;
 
                     @Override
                     public void onFailure(@NonNull Call<ResponseBody> call,@NonNull Throwable t) {
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(getActivity(), "Error "+t, Toast.LENGTH_SHORT).show();
                     }
                 });
     }

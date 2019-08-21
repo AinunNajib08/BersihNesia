@@ -46,8 +46,8 @@ ProgressBar progressBar;
         progressBar = findViewById(R.id.pBar);
         progressBar.setVisibility(View.GONE);
         mApiInterface=UtilsApi.getAPIService();
-        refresh();
         editText = findViewById(R.id.search);
+        refresh();
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

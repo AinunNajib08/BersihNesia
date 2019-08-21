@@ -23,11 +23,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.bersihnesia.R;
 import com.example.bersihnesia.activity.CommunityActivity;
+import com.example.bersihnesia.activity.EventActivity;
 import com.example.bersihnesia.adapter.EventAdapter;
 import com.example.bersihnesia.apihelper.BaseApiService;
 import com.example.bersihnesia.apihelper.UtilsApi;
@@ -75,6 +77,7 @@ ImageView komunitas;
     public static final String EXTRA_MOVIE = "arrayList";
     public static final String STATE_EVENT = "state_event";
     EventAdapter eventAdapter;
+    LinearLayout linearLayout;
     ProgressBar progressBar;
 
     @Override
@@ -95,6 +98,14 @@ ImageView komunitas;
 
         // For Event
         mContext = getContext();
+        linearLayout = view.findViewById(R.id.event_click);
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goEvent = new Intent(getActivity(), EventActivity.class);
+                startActivity(goEvent);
+            }
+        });
         eventAdapter = new EventAdapter(mContext);
         mApiService = UtilsApi.getAPIService();
         rv_event = view.findViewById(R.id.rv_event);

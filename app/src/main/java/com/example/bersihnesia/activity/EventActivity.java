@@ -2,9 +2,11 @@ package com.example.bersihnesia.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -34,6 +36,7 @@ public class EventActivity extends AppCompatActivity {
     RecyclerView rv_event;
     BaseApiService mApiService;
     ArrayList<Event> arrayList = new ArrayList<>();
+    EventActivityAdapter eventAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +44,18 @@ public class EventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event);
 
         progressBar = findViewById(R.id.pBar);
-        progressBar.setVisibility(View.GONE);
-        searchBar = findViewById(R.id.search);
-        rv_event = findViewById(R.id.rv_event);
-        mApiService = UtilsApi.getAPIService();
 
+        eventAdapter = new EventActivityAdapter(this);
+        progressBar.setVisibility(View.GONE);
+        searchBar = findViewById(R.id.search_event);
+        rv_event = findViewById(R.id.rv_event);
+
+        mApiService = UtilsApi.getAPIService();
+        rv_event.setHasFixedSize(true);
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rv_event.setLayoutManager(layoutManager);
+        getEvent(null);
         searchBar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -59,6 +69,9 @@ public class EventActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (s.length() != 0){
+                    getEvent(s);
+                }
 
             }
         });
@@ -70,6 +83,7 @@ public class EventActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful()){
+                            progressBar.setVisibility(View.VISIBLE);
                             try {
                                 JSONObject jsonRESULTS = new JSONObject(response.body().string());
                                 JSONArray data = jsonRESULTS.getJSONArray("result");
@@ -83,10 +97,11 @@ public class EventActivity extends AppCompatActivity {
                                     event.setName_event(name_event);
                                     event.setDescription(desc);
                                     arrayList.add(event);
+                                    Log.e("RAG", "onResponse: "+arrayList );
                                 }
-                                EventActivityAdapter eventAdapter = new EventActivityAdapter();
                                 eventAdapter.setListEvent(arrayList);
                                 rv_event.setAdapter(eventAdapter);
+                                progressBar.setVisibility(View.GONE);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             } catch (IOException e) {

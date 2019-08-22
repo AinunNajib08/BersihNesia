@@ -79,7 +79,6 @@ ProgressBar progressBar;
 
             }
         });
-
     }
 
     void getSearch(Editable cari){

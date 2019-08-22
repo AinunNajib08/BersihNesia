@@ -76,14 +76,14 @@ public class EventFragment extends Fragment {
         sharedPreferences = view.getContext().getSharedPreferences("remember", Context.MODE_PRIVATE);
 
         idPersonal = sharedPreferences.getString("id_personal",null);
-//        followEvent.setVisibility(View.GONE);
-//        followEvent.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                getInsert();
-//                followEvent.setVisibility(View.GONE);
-//            }
-//        });
+        followEvent.setVisibility(View.GONE);
+        followEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getInsert();
+                followEvent.setVisibility(View.GONE);
+            }
+        });
         return view;
     }
 
@@ -107,6 +107,9 @@ public class EventFragment extends Fragment {
                                     Community = jsonObject.getString("name_community");
                                     Mode = jsonObject.getString("status");
                                     tvNameEvent.setText(nameEvent);
+                                    tvCommunity.setText("by "+Community);
+                                    tvMode.setText(Mode);
+                                    getCheck();
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -180,11 +183,6 @@ public class EventFragment extends Fragment {
                             try {
                                 JSONObject jsonRESULTS = new JSONObject(response.body().string());
                                 Boolean data = jsonRESULTS.getBoolean("result");
-                                if (data){
-                                    followEvent.setVisibility(View.GONE);
-                                } else {
-                                    followEvent.setVisibility(View.VISIBLE);
-                                }
                                 Log.e("RAG", "onResponse: "+data );
                             } catch (JSONException e) {
                                 e.printStackTrace();

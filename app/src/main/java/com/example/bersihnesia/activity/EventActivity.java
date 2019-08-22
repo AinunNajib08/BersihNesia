@@ -1,5 +1,10 @@
 package com.example.bersihnesia.activity;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,11 +15,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.bersihnesia.R;
 import com.example.bersihnesia.adapter.EventActivityAdapter;
 import com.example.bersihnesia.apihelper.BaseApiService;
 import com.example.bersihnesia.apihelper.UtilsApi;
+import com.example.bersihnesia.fragment.EventFragment;
+import com.example.bersihnesia.listener.ItemClickSupport;
 import com.example.bersihnesia.model.Event;
 
 import org.json.JSONArray;
@@ -55,7 +63,7 @@ public class EventActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rv_event.setLayoutManager(layoutManager);
-        getEvent(null);
+        getEvent();
         searchBar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -70,9 +78,29 @@ public class EventActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length() != 0){
+                    arrayList.clear();
                     getEvent(s);
+                } else {
+                    getEvent();
                 }
 
+            }
+        });
+
+        ItemClickSupport.addTo(rv_event).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("Code", arrayList.get(position).getId_event());
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                EventFragment eventFragment = new EventFragment();
+                eventFragment.setArguments(bundle);
+
+                fragmentTransaction.replace(R.id.container_layout, eventFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
     }
@@ -113,6 +141,45 @@ public class EventActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
 
+                    }
+                });
+    }
+
+    void getEvent(){
+        progressBar.setVisibility(View.VISIBLE);
+        mApiService.getEvent()
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                        if (response.isSuccessful()){
+                            try {
+                                JSONObject jsonRESULTS = new JSONObject(response.body().string());
+                                JSONArray data = jsonRESULTS.getJSONArray("result");
+                                for (int i=0; i <data.length(); i++) {
+                                    JSONObject jsonObject = data.getJSONObject(i);
+                                    int id_event = jsonObject.getInt("id_event");
+                                    String name_event = jsonObject.getString("name_event");
+                                    Event event = new Event();
+                                    event.setId_event(id_event);
+                                    event.setName_event(name_event);
+                                    arrayList.add(event);
+                                }
+                                eventAdapter.setListEvent(arrayList);
+                                rv_event.setAdapter(eventAdapter);
+                                progressBar.setVisibility(View.GONE);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<ResponseBody> call,@NonNull Throwable t) {
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
     }

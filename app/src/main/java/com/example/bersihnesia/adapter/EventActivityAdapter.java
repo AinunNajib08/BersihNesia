@@ -1,7 +1,14 @@
 package com.example.bersihnesia.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.bersihnesia.R;
+import com.example.bersihnesia.activity.DetailCommuntiyActivity;
+import com.example.bersihnesia.fragment.EventFragment;
 import com.example.bersihnesia.model.Event;
 
 import java.util.ArrayList;
@@ -36,7 +45,7 @@ public class EventActivityAdapter extends RecyclerView.Adapter<EventActivityAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EventActivityAdapter.GridViewHolder gridViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final EventActivityAdapter.GridViewHolder gridViewHolder, final int i) {
         gridViewHolder.tvNameEvent.setText(getListEvent().get(i).getName_event());
         gridViewHolder.tvNameEvent.setText(getListEvent().get(i).getDescription());
     }

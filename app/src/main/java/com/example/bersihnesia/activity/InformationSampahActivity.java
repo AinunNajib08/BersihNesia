@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-
 import com.example.bersihnesia.R;
 import com.example.bersihnesia.adapter.CommunityAdapter;
 import com.example.bersihnesia.adapter.SampahOrganikAdapter;
@@ -56,8 +55,8 @@ ProgressBar progressBar;
             @Override
             public void onResponse(Call<GetSampahOrganik> call, Response<GetSampahOrganik> response) {
                 progressBar.setVisibility(View.VISIBLE);
-                List<SampahOrganik> sampahOrganikList=response.body().getSampahOrganikList();
-                mAdapter=new CommunityAdapter(sampahOrganikList,InformationSampahActivity.this);
+                List<SampahOrganik> sampahOrganikList = response.body().getSampahOrganikList();
+                mAdapter=new SampahOrganikAdapter(sampahOrganikList, InformationSampahActivity.this);
                 nonorganik.setAdapter(mAdapter);
             }
 

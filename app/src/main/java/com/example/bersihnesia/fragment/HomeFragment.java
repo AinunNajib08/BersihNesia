@@ -12,6 +12,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -56,6 +57,7 @@ import retrofit2.Response;
  */
 public class HomeFragment extends Fragment implements LocationListener {
 ImageView komunitas;
+FloatingActionButton fab;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -153,6 +155,18 @@ ImageView komunitas;
             public void onClick(View v) {
                 Intent intent=new Intent(getActivity(),CommunityActivity.class);
                 startActivity(intent);
+            }
+        });
+        fab=view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReportFragment fragment2 = new ReportFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_layout, fragment2);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
         return view;

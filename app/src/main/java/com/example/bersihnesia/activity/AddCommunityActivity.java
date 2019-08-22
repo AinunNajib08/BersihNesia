@@ -3,6 +3,8 @@ package com.example.bersihnesia.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.bersihnesia.R;
+
 public class AddCommunityActivity extends AppCompatActivity {
 
     @Override

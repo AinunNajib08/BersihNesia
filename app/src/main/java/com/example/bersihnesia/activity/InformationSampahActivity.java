@@ -29,7 +29,6 @@ RecyclerView nonorganik, organik;
 RecyclerView.Adapter mAdapter;
 RecyclerView.LayoutManager mLayoutManager;
 BaseApiService mApiInterface;
-EditText editText;
 ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

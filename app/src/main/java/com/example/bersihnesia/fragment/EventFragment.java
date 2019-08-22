@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -71,24 +72,25 @@ public class EventFragment extends Fragment {
         tvMode = view.findViewById(R.id.tvMode);
         progressBar = view.findViewById(R.id.progBar);
         progressBar.setVisibility(View.GONE);
-        sharedPreferences = view.getContext().getSharedPreferences("remember", Context.MODE_PRIVATE);
-        idPersonal = sharedPreferences.getString("id_personal",null);
         getDataEvent();
-        followEvent.setVisibility(View.GONE);
-        followEvent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getCheck();
-            }
-        });
+        sharedPreferences = view.getContext().getSharedPreferences("remember", Context.MODE_PRIVATE);
+
+        idPersonal = sharedPreferences.getString("id_personal",null);
+//        followEvent.setVisibility(View.GONE);
+//        followEvent.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getInsert();
+//                followEvent.setVisibility(View.GONE);
+//            }
+//        });
         return view;
     }
 
     private void getDataEvent(){
         Bundle bundleget = getArguments();
         int Hallo = bundleget.getInt("Code");
-        Log.e("RAG", "onViewCreated: "+Hallo );
-        progressBar.setVisibility(View.VISIBLE);
+        Log.e("RAG", "Codeeee : "+Hallo );
         mApiService.getEventDetail(Hallo)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
@@ -100,14 +102,11 @@ public class EventFragment extends Fragment {
                                 for (int i = 0; i < data.length(); i++) {
                                     JSONObject jsonObject = data.getJSONObject(i);
                                     id_event = jsonObject.getInt("id_event");
-                                    getCheck();
                                     Log.e("RAG", "onResponse: "+id_event );
                                     nameEvent = jsonObject.getString("name_event");
                                     Community = jsonObject.getString("name_community");
                                     Mode = jsonObject.getString("status");
                                     tvNameEvent.setText(nameEvent);
-                                    tvCommunity.setText("by "+Community);
-                                    tvMode.setText(Mode);
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -171,4 +170,35 @@ public class EventFragment extends Fragment {
                 });
     }
 
+    void getInsert(){
+        int id_personal = Integer.parseInt(idPersonal);
+        mApiService.getInsert(id_event, id_personal)
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            try {
+                                JSONObject jsonRESULTS = new JSONObject(response.body().string());
+                                Boolean data = jsonRESULTS.getBoolean("result");
+                                if (data){
+                                    followEvent.setVisibility(View.GONE);
+                                } else {
+                                    followEvent.setVisibility(View.VISIBLE);
+                                }
+                                Log.e("RAG", "onResponse: "+data );
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
+    }
 }

@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.example.bersihnesia.R;
 import com.example.bersihnesia.adapter.CommunityAdapter;
 import com.example.bersihnesia.apihelper.BaseApiService;

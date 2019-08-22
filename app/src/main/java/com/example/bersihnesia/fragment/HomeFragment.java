@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.example.bersihnesia.R;
 import com.example.bersihnesia.activity.CommunityActivity;
 import com.example.bersihnesia.activity.EventActivity;
+import com.example.bersihnesia.activity.InformationActivity;
 import com.example.bersihnesia.adapter.EventAdapter;
 import com.example.bersihnesia.apihelper.BaseApiService;
 import com.example.bersihnesia.apihelper.UtilsApi;
@@ -106,6 +107,17 @@ ImageView komunitas;
                 startActivity(goEvent);
             }
         });
+
+        linearLayout = view.findViewById(R.id.information_click);
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goSampah = new Intent(getActivity(), InformationActivity.class);
+                startActivity(goSampah);
+            }
+        });
+
+
         eventAdapter = new EventAdapter(mContext);
         mApiService = UtilsApi.getAPIService();
         rv_event = view.findViewById(R.id.rv_event);
@@ -156,6 +168,9 @@ ImageView komunitas;
             }
         });
         return view;
+
+
+
     }
 
     @Override

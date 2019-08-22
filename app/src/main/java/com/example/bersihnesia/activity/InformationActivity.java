@@ -19,6 +19,7 @@ CardView tentangsampah;
             @Override
             public void onClick(View v) {
                 Intent g = new Intent(InformationActivity.this, InformationSampahActivity.class);
+                startActivity(g);
             }
         });
     }

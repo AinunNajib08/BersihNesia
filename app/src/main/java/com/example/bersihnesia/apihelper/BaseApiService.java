@@ -58,6 +58,14 @@ public interface BaseApiService {
                                     @Field("photo") String photo
                                     );
     @FormUrlEncoded
+    @POST("api/register_personal")
+    Call<PostPersonal> postReport(@Field("id_personal") String id_personal,
+                                    @Field("address") String address,
+                                    @Field("longlat") String longlat,
+                                    @Field("description") String description,
+                                    @Field("photo") String photo
+    );
+    @FormUrlEncoded
     @POST("api/login_personal")
     Call<PostPersonal> postLogin(@Field("email") String email,
                                  @Field("password") String password

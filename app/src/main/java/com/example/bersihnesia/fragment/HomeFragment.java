@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.hardware.camera2.CameraManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -91,15 +92,6 @@ FloatingActionButton fab;
         carouselView.setPageCount(mImage.length);
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         boolean permissionGranted = ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-
-        if(permissionGranted) {
-            Location location = locationManager.getLastKnownLocation(locationManager.NETWORK_PROVIDER);
-            onLocationChanged(location);
-        } else {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 200);
-        }
-
-        // For Event
         mContext = getContext();
         linearLayout = view.findViewById(R.id.event_click);
         linearLayout.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +121,9 @@ FloatingActionButton fab;
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rv_event.setLayoutManager(layoutManager);
-        getEvent();
+        if (arrayList.size() != 0) {
+            getEvent();
+        }
         ItemClickSupport.addTo(rv_event).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
@@ -173,6 +167,14 @@ FloatingActionButton fab;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CameraManager cameraManager
+                        = (CameraManager) getActivity().getSystemService(Context.CAMERA_SERVICE);
+                boolean permissionGranted = ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
+
+                if(permissionGranted) {
+                } else {
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 200);
+                }
                 ReportFragment fragment2 = new ReportFragment();
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -219,9 +221,18 @@ FloatingActionButton fab;
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+        arrayList.clear();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         arrayList.clear();
+        if (arrayList.size() == 0){
+            getEvent();
+        }
     }
 
     @Override

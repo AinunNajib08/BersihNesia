@@ -120,4 +120,7 @@ public class EventFragment extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
     }
 
+    void getCheck(){
+    }
+
 }

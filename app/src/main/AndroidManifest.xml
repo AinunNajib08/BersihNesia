@@ -20,6 +20,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activity.InformationSampahActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name=".activity.DetailEventActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
             android:name=".activity.EventActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

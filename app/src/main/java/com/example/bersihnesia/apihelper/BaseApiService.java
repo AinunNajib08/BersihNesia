@@ -3,6 +3,7 @@ package com.example.bersihnesia.apihelper;
 import android.text.Editable;
 
 import com.example.bersihnesia.model.GetCommunity;
+import com.example.bersihnesia.model.GetSampahOrganik;
 import com.example.bersihnesia.model.PostPersonal;
 import com.example.bersihnesia.model.UploadImage;
 
@@ -61,6 +62,9 @@ public interface BaseApiService {
 
     @GET("api/list_community")
     Call<GetCommunity> getCommunity();
+
+    @GET("api/Informasi_sampah")
+    Call<GetSampahOrganik> getSampahOrganik();
 
     @Multipart
     @POST("api/upload_image")

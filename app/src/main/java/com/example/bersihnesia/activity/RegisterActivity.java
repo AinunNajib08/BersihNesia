@@ -111,29 +111,17 @@ public class RegisterActivity extends AppCompatActivity {
         try {
             // When an Image is picked
             if (requestCode == 0 && resultCode == RESULT_OK && null != data) {
-
-                // Get the Image from data
                 Uri selectedImage = data.getData();
                 String[] filePathColumn = {MediaStore.Images.Media.DATA};
-
                 Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
                 assert cursor != null;
                 cursor.moveToFirst();
-
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 mediaPath = cursor.getString(columnIndex);
-
-                // str1.setText(mediaPath);
                 String filename = mediaPath.substring(mediaPath.lastIndexOf("/") + 1);
                 name_photo.setText(filename);
-
-
-                // Set the Image in ImageView for Previewing the Media
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
-                //Bitmap bMapScaled = Bitmap.createScaledBitmap(bitmap, 150, 00, true);
-
                 photo.setImageBitmap(bitmap);
-                //imgView.setImageBitmap(BitmapFactory.decodeFile(mediaPath));
                 cursor.close();
 
             } else {

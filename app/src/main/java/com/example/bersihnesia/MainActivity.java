@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.bersihnesia.activity.HomeActivity;
+import com.example.bersihnesia.activity.LoginActivity;
 import com.example.bersihnesia.activity.RegisterActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void asd(View view) {
         Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+        startActivity(intent);
+    }
+
+    public void Login(View view) {
+        Intent intent=new Intent(MainActivity.this,LoginActivity.class);
         startActivity(intent);
     }
 }

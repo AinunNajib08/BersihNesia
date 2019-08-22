@@ -1,7 +1,9 @@
 package com.example.bersihnesia.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -25,6 +27,7 @@ EditText email,password;
 Button login;
 ProgressDialog progressDialog;
 BaseApiService mApiService;
+SharedPreferences  sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +36,7 @@ BaseApiService mApiService;
         password=findViewById(R.id.password);
         login=findViewById(R.id.login);
         mApiService = UtilsApi.getAPIService();
+        sharedPreferences = LoginActivity.this.getSharedPreferences("remember",Context.MODE_PRIVATE);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,6 +51,13 @@ BaseApiService mApiService;
                     public void onResponse(retrofit2.Call<PostPersonal> call, Response<PostPersonal> response) {
                         progressDialog.dismiss();
                         String id_personal = response.body().getId_personal();
+                        String email=response.body().getEmail();
+                        String name=response.body().getName();
+                        String address=response.body().getAddress();
+                        String jk=response.body().getJk();
+                        String no=response.body().getContact_person();
+                        String photo=response.body().getPhoto();
+
                         Log.e("Berhasil Login", "Berhasil " +id_personal);
                         if (TextUtils.isEmpty(id_personal)){
                             Toast.makeText(LoginActivity.this,"Email atau Password Salah",Toast.LENGTH_LONG).show();
@@ -54,6 +65,14 @@ BaseApiService mApiService;
                         else{
                             Toast.makeText(LoginActivity.this,"Berhasil Login",Toast.LENGTH_LONG).show();
                             Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("name", name);
+                            editor.putString("no", no);
+                            editor.putString("address", address);
+                            editor.putString("jk", jk);
+                            editor.putString("photo", photo);
+                            editor.putString("email", email);
+                            editor.commit();
                             startActivity(intent);
                         }
                     }

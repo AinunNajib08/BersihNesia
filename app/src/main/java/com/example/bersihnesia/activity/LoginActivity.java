@@ -66,13 +66,15 @@ SharedPreferences  sharedPreferences;
                             Toast.makeText(LoginActivity.this,"Berhasil Login",Toast.LENGTH_LONG).show();
                             Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("id_personal", id_personal);
+                            Log.e("RAG", "onResponse: " + id_personal );
                             editor.putString("name", name);
                             editor.putString("no", no);
                             editor.putString("address", address);
                             editor.putString("jk", jk);
                             editor.putString("photo", photo);
                             editor.putString("email", email);
-                            editor.commit();
+                            editor.apply();
                             startActivity(intent);
                         }
                     }

@@ -38,6 +38,10 @@ public interface BaseApiService {
     @GET("api/list_event/search/{cari}")
     Call<ResponseBody> getEventSearch(@Path("cari") Editable cari);
 
+    @GET("api/list_event/detail/{id_event}/{id_personal}")
+    Call<ResponseBody> getCheck(@Path("id_event") int id_event,
+                                      @Path("id_personal") int id_personal);
+
     @Multipart
     @POST("api/upload_image")
     Call<UploadImage> uploadFile(@Part MultipartBody.Part file,

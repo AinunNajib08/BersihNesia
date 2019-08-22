@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -28,7 +29,6 @@ RecyclerView nonorganik, organik;
 RecyclerView.Adapter mAdapter;
 RecyclerView.LayoutManager mLayoutManager;
 BaseApiService mApiInterface;
-EditText editText;
 ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +41,13 @@ ProgressBar progressBar;
         progressBar = findViewById(R.id.pBar);
         progressBar.setVisibility(View.GONE);
         mApiInterface= UtilsApi.getAPIService();
-        nonorganik.setVisibility(View.GONE);
+        nonorganik.setVisibility(View.VISIBLE);
+        refresh();
 
     }
 
     public void nonorganik(View view) {
-        nonorganik.setVisibility(View.GONE);
+        nonorganik.setVisibility(View.VISIBLE);
     }
 
     private void refresh() {
@@ -57,6 +58,8 @@ ProgressBar progressBar;
                 progressBar.setVisibility(View.VISIBLE);
                 List<SampahOrganik> sampahOrganikList = response.body().getSampahOrganikList();
                 mAdapter=new SampahOrganikAdapter(sampahOrganikList, InformationSampahActivity.this);
+                Log.d("Retrofit Get", "Jumlah data Kontak: " +
+                        String.valueOf(sampahOrganikList.size()));
                 nonorganik.setAdapter(mAdapter);
             }
 

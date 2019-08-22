@@ -46,7 +46,7 @@ ProgressBar progressBar;
     }
 
     public void nonorganik(View view) {
-        nonorganik.setVisibility(View.VISIBLE);
+        nonorganik.setVisibility(View.GONE);
     }
 
     private void refresh() {

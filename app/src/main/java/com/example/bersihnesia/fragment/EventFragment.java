@@ -1,6 +1,7 @@
 package com.example.bersihnesia.fragment;
 
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -48,9 +50,13 @@ public class EventFragment extends Fragment {
     }
 
     ProgressBar progressBar;
+    SharedPreferences sharedPreferences;
     TextView tvNameEvent, tvCommunity, tvFollow, tvMode;
     String nameEvent, Community, Follow, Mode;
+    String idPersonal;
+    int id_event;
     BaseApiService mApiService;
+    Button followEvent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,12 +65,22 @@ public class EventFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_event, container, false);
         mApiService = UtilsApi.getAPIService();
         tvNameEvent = view.findViewById(R.id.name_event);
+        followEvent = view.findViewById(R.id.followEvent);
         tvCommunity = view.findViewById(R.id.name_community);
         tvFollow = view.findViewById(R.id.follow);
         tvMode = view.findViewById(R.id.tvMode);
         progressBar = view.findViewById(R.id.progBar);
         progressBar.setVisibility(View.GONE);
+        sharedPreferences = view.getContext().getSharedPreferences("remember", Context.MODE_PRIVATE);
+        idPersonal = sharedPreferences.getString("id_personal",null);
         getDataEvent();
+        followEvent.setVisibility(View.GONE);
+        followEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getCheck();
+            }
+        });
         return view;
     }
 
@@ -83,6 +99,9 @@ public class EventFragment extends Fragment {
                                 JSONArray data = jsonRESULTS.getJSONArray("result");
                                 for (int i = 0; i < data.length(); i++) {
                                     JSONObject jsonObject = data.getJSONObject(i);
+                                    id_event = jsonObject.getInt("id_event");
+                                    getCheck();
+                                    Log.e("RAG", "onResponse: "+id_event );
                                     nameEvent = jsonObject.getString("name_event");
                                     Community = jsonObject.getString("name_community");
                                     Mode = jsonObject.getString("status");
@@ -121,6 +140,35 @@ public class EventFragment extends Fragment {
     }
 
     void getCheck(){
+        int id_personal = Integer.parseInt(idPersonal);
+        mApiService.getCheck(id_event, id_personal)
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            try {
+                                JSONObject jsonRESULTS = new JSONObject(response.body().string());
+                                Boolean data = jsonRESULTS.getBoolean("result");
+                                if (data){
+                                    followEvent.setVisibility(View.GONE);
+                                } else {
+                                    followEvent.setVisibility(View.VISIBLE);
+                                }
+                                Log.e("RAG", "onResponse: "+data );
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
     }
 
 }

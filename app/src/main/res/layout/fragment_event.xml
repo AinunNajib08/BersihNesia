@@ -75,6 +75,7 @@
                 android:textAlignment="textEnd" />
 
             <Button
+                android:id="@+id/followEvent"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:layout_gravity="end"

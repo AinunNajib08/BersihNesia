@@ -297,7 +297,7 @@
             android:id="@+id/imageNews"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_banner"/>
+            android:src="@drawable/ic_banner" />
 
         <TextView
             android:layout_marginTop="2dp"

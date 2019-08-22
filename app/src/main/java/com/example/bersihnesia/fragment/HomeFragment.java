@@ -121,7 +121,9 @@ FloatingActionButton fab;
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rv_event.setLayoutManager(layoutManager);
-        getEvent();
+        if (arrayList.size() != 0){
+            getEvent();
+        }
         ItemClickSupport.addTo(rv_event).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
@@ -223,20 +225,20 @@ FloatingActionButton fab;
 
     }
 
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        arrayList.clear();
-//    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        arrayList.clear();
+    }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        arrayList.clear();
-//        if (arrayList.size() == 0){
-//            getEvent();
-//        }
-//    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        arrayList.clear();
+        if (arrayList.size() == 0){
+            getEvent();
+        }
+    }
 
 
     void getEvent(){

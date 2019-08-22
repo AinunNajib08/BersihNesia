@@ -41,13 +41,28 @@ ProgressBar progressBar;
         progressBar = findViewById(R.id.pBar);
         progressBar.setVisibility(View.GONE);
         mApiInterface= UtilsApi.getAPIService();
-        nonorganik.setVisibility(View.VISIBLE);
+        nonorganik.setVisibility(View.GONE);
+        organik.setVisibility(View.GONE);
         refresh();
+        organik.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (organik.getVisibility() == View.VISIBLE) {
+                    organik.setVisibility(View.GONE);
+                } else {
+                    organik.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
     }
 
     public void nonorganik(View view) {
-        nonorganik.setVisibility(View.VISIBLE);
+        if (nonorganik.getVisibility() == View.VISIBLE) {
+            nonorganik.setVisibility(View.GONE);
+        } else {
+            nonorganik.setVisibility(View.VISIBLE);
+        }
     }
 
     private void refresh() {

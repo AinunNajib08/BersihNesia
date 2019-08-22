@@ -1,5 +1,6 @@
 package com.example.bersihnesia.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -90,17 +91,10 @@ public class EventActivity extends AppCompatActivity {
         ItemClickSupport.addTo(rv_event).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                Bundle bundle = new Bundle();
-                bundle.putInt("Code", arrayList.get(position).getId_event());
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                EventFragment eventFragment = new EventFragment();
-                eventFragment.setArguments(bundle);
-
-                fragmentTransaction.replace(R.id.container_layout, eventFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                Intent intent = new Intent(EventActivity.this, DetailEventActivity.class);
+                intent.putExtra("data1", arrayList.get(position).getId_event());
+                Log.e("RAG", "onItemClicked: "+arrayList.get(position).getId_event() );
+                startActivity(intent);
             }
         });
     }

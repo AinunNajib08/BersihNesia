@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bersihnesia.R;
+import com.example.bersihnesia.activity.RegisterActivity;
 import com.example.bersihnesia.apihelper.BaseApiService;
 import com.example.bersihnesia.apihelper.UtilsApi;
 import com.example.bersihnesia.model.PostPersonal;
@@ -32,6 +33,8 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 import java.io.IOException;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -39,13 +42,14 @@ import static android.app.Activity.RESULT_OK;
 
 public class ReportFragment extends Fragment {
     ImageView photo;
-    TextView name_photo;
+    TextView name_photo,longlat;
     ImageButton btn_camera, btn_galeri;
     CardView btn_lokasi;
     Bitmap bitmap;
     EditText txt_alamat,description;
     Button btn_report;
     BaseApiService mApiService;
+    String Id;
     private int PLACE_PICKER_REQUEST = 2;
     private static final int CAMERA_REQUEST = 1888;
     SharedPreferences sharedPreferences;
@@ -80,6 +84,7 @@ public class ReportFragment extends Fragment {
         });
         name_photo = view.findViewById(R.id.name_photo);
         btn_lokasi = view.findViewById(R.id.btn_lokasi);
+        longlat=view.findViewById(R.id.longlat);
         btn_lokasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,14 +100,29 @@ public class ReportFragment extends Fragment {
 
             }
         });
+        description=view.findViewById(R.id.description);
         txt_alamat=view.findViewById(R.id.txt_alamat);
+        name_photo=view.findViewById(R.id.name_photo);
         sharedPreferences = view.getContext().getSharedPreferences("remember",Context.MODE_PRIVATE);
-        String sNama = sharedPreferences.getString("name","0");
+        Id = sharedPreferences.getString("id_personal","0");
         btn_report=view.findViewById(R.id.btn_report);
         btn_report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Call<PostPersonal> postReport=mApiService.postReport()
+                Call<PostPersonal> postReport=mApiService.postReport(Id,txt_alamat.getText().toString(),longlat.getText().toString(),description.getText().toString(),name_photo.getText().toString());
+                postReport.enqueue(new Callback<PostPersonal>() {
+                    @Override
+                    public void onResponse(Call<PostPersonal> call, Response<PostPersonal> response) {
+                        Toast.makeText(getContext(), "Berhasil", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<PostPersonal> call, Throwable t) {
+                        Toast.makeText(getContext(), "Gagal", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
             }
         });
         return view;
@@ -140,6 +160,7 @@ public class ReportFragment extends Fragment {
                     String toastLatLong=String.format(
                             place.getLatLng().latitude+","+place.getLatLng().longitude);
                     txt_alamat.setText(toastMsg);
+                    longlat.setText(toastLatLong);
                 }
         } catch (Exception e) {
             Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG).show();

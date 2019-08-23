@@ -121,7 +121,7 @@ FloatingActionButton fab;
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rv_event.setLayoutManager(layoutManager);
-        if (arrayList.size() != 0) {
+        if (arrayList.size() != 0){
             getEvent();
         }
         ItemClickSupport.addTo(rv_event).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
@@ -221,6 +221,11 @@ FloatingActionButton fab;
     }
 
     @Override
+    public void onProviderDisabled(String provider) {
+
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
         arrayList.clear();
@@ -235,10 +240,6 @@ FloatingActionButton fab;
         }
     }
 
-    @Override
-    public void onProviderDisabled(String provider) {
-
-    }
 
     void getEvent(){
         progressBar.setVisibility(View.VISIBLE);

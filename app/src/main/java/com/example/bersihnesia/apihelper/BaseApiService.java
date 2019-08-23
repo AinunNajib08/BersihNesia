@@ -42,6 +42,10 @@ public interface BaseApiService {
     Call<ResponseBody> getCheck(@Path("id_event") int id_event,
                                       @Path("id_personal") int id_personal);
 
+    @GET("api/list_event/insert/{id_event}/{id_personal}")
+    Call<ResponseBody> getInsert(@Path("id_event") int id_event,
+                                @Path("id_personal") int id_personal);
+
     @Multipart
     @POST("api/upload_image")
     Call<UploadImage> uploadFile(@Part MultipartBody.Part file,
@@ -57,6 +61,14 @@ public interface BaseApiService {
                                     @Field("jk") String jk,
                                     @Field("photo") String photo
                                     );
+    @FormUrlEncoded
+    @POST("api/register_personal")
+    Call<PostPersonal> postReport(@Field("id_personal") String id_personal,
+                                    @Field("address") String address,
+                                    @Field("longlat") String longlat,
+                                    @Field("description") String description,
+                                    @Field("photo") String photo
+    );
     @FormUrlEncoded
     @POST("api/login_personal")
     Call<PostPersonal> postLogin(@Field("email") String email,

@@ -23,6 +23,19 @@ public class PostPersonal {
     String point;
     @SerializedName("address")
     String address;
+    @SerializedName("description")
+    String description;
+    @SerializedName("longlat")
+    String longlat;
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getPhoto() {
         return photo;
@@ -34,6 +47,7 @@ public class PostPersonal {
 
     @SerializedName("photo")
     String photo;
+
 
     public String getJk() {
         return jk;

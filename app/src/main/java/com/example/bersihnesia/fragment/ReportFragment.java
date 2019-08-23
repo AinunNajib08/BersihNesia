@@ -2,6 +2,7 @@ package com.example.bersihnesia.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -20,12 +21,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bersihnesia.R;
+import com.example.bersihnesia.apihelper.BaseApiService;
+import com.example.bersihnesia.apihelper.UtilsApi;
+import com.example.bersihnesia.model.PostPersonal;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
 import java.io.IOException;
+
+import retrofit2.Call;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -37,9 +43,12 @@ public class ReportFragment extends Fragment {
     ImageButton btn_camera, btn_galeri;
     CardView btn_lokasi;
     Bitmap bitmap;
-    EditText txt_alamat;
+    EditText txt_alamat,description;
+    Button btn_report;
+    BaseApiService mApiService;
     private int PLACE_PICKER_REQUEST = 2;
     private static final int CAMERA_REQUEST = 1888;
+    SharedPreferences sharedPreferences;
 
     public ReportFragment() {
         // Required empty public constructor
@@ -60,6 +69,7 @@ public class ReportFragment extends Fragment {
                 startActivityForResult(intent, 1);
             }
         });
+        mApiService = UtilsApi.getAPIService();
         btn_galeri = view.findViewById(R.id.btn_galeri);
         btn_galeri.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +96,15 @@ public class ReportFragment extends Fragment {
             }
         });
         txt_alamat=view.findViewById(R.id.txt_alamat);
+        sharedPreferences = view.getContext().getSharedPreferences("remember",Context.MODE_PRIVATE);
+        String sNama = sharedPreferences.getString("name","0");
+        btn_report=view.findViewById(R.id.btn_report);
+        btn_report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Call<PostPersonal> postReport=mApiService.postReport()
+            }
+        });
         return view;
     }
 

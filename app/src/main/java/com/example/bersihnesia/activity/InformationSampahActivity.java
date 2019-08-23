@@ -108,7 +108,7 @@ ProgressBar progressBar;
 
             @Override
             public void onFailure(Call<GetSampahnonOrganik> call, Throwable t) {
-
+//
             }
         });
     }

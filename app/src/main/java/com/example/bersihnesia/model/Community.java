@@ -1,6 +1,15 @@
 package com.example.bersihnesia.model;
 
 public class Community {
+    public int getId_community() {
+        return id_community;
+    }
+
+    public void setId_community(int id_community) {
+        this.id_community = id_community;
+    }
+
+    int id_community;
     public String name_community,contact_person,description,photo;
 
     public String getName_community() {

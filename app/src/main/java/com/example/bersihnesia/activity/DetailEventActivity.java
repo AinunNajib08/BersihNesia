@@ -25,12 +25,12 @@ public class DetailEventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_event);
         mApiService = UtilsApi.getAPIService();
         Bundle bundle = getIntent().getExtras();
-//        code = bundle.getInt("data1");
-//        TabLayout tabLayout = findViewById(R.id.event_tab_layout);
-//        ViewPager viewPager = findViewById(R.id.event_viewpager);
-//        viewPager.setOffscreenPageLimit(3);
-//        viewPager.setAdapter(new EventTabLayout(getSupportFragmentManager(), this));
-//        tabLayout.setupWithViewPager(viewPager);
+        code = bundle.getInt("data1");
+        TabLayout tabLayout = findViewById(R.id.event_tab_layout);
+        ViewPager viewPager = findViewById(R.id.event_viewpager);
+        viewPager.setOffscreenPageLimit(3);
+        viewPager.setAdapter(new EventTabLayout(getSupportFragmentManager(), this));
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     void getEvent(){

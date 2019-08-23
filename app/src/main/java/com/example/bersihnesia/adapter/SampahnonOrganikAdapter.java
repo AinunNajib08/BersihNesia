@@ -52,7 +52,7 @@ public class SampahnonOrganikAdapter extends RecyclerView.Adapter<SampahnonOrgan
         public MyViewHolder( View itemView) {
             super(itemView);
             name_information=itemView.findViewById(R.id.name_information);
-            description=itemView.findViewById(R.id.description);
+            description=itemView.findViewById(R.id.txt_description);
 //            photo=itemView.findViewById(R.id.photo_sampah);
         }
     }

@@ -49,10 +49,10 @@ ProgressBar progressBar;
         organik.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (organik.getVisibility() == View.VISIBLE) {
-                    organik.setVisibility(View.GONE);
+                if (rv_organik.getVisibility() == View.VISIBLE) {
+                    rv_organik.setVisibility(View.GONE);
                 } else {
-                    organik.setVisibility(View.VISIBLE);
+                    rv_organik.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -60,10 +60,10 @@ ProgressBar progressBar;
     }
 
     public void nonorganik(View view) {
-        if (nonorganik.getVisibility() == View.VISIBLE) {
-            nonorganik.setVisibility(View.GONE);
+        if (rv_nonorganik.getVisibility() == View.VISIBLE) {
+            rv_nonorganik.setVisibility(View.GONE);
         } else {
-            nonorganik.setVisibility(View.VISIBLE);
+            rv_nonorganik.setVisibility(View.VISIBLE);
         }
     }
 

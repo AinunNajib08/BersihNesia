@@ -2,6 +2,7 @@ package com.example.bersihnesia.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -23,7 +24,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class InformationSampahActivity extends AppCompatActivity {
-RecyclerView nonorganik, organik;
+RecyclerView rv_nonorganik, rv_organik;
+CardView organik, nonorganik;
 RecyclerView.Adapter mAdapter;
 RecyclerView.LayoutManager mLayoutManager;
 BaseApiService mApiInterface;
@@ -32,15 +34,16 @@ ProgressBar progressBar;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information_sampah);
-        nonorganik = findViewById(R.id.rv_nonorganik);
-        organik = findViewById(R.id.rv_organik);
+        rv_nonorganik = findViewById(R.id.rv_nonorganik);
+        rv_organik = findViewById(R.id.rv_organik);
         mLayoutManager=new LinearLayoutManager(this);
-        nonorganik.setLayoutManager(mLayoutManager);
+        rv_nonorganik.setLayoutManager(mLayoutManager);
+        rv_organik.setLayoutManager(mLayoutManager);
         progressBar = findViewById(R.id.pBar);
         progressBar.setVisibility(View.GONE);
         mApiInterface= UtilsApi.getAPIService();
-        nonorganik.setVisibility(View.GONE);
-        organik.setVisibility(View.GONE);
+        rv_nonorganik.setVisibility(View.GONE);
+        rv_organik.setVisibility(View.GONE);
         refresh();
         refresh2();
         organik.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +77,7 @@ ProgressBar progressBar;
                 mAdapter=new SampahOrganikAdapter(sampahOrganikList, InformationSampahActivity.this);
                 Log.d("Retrofit Get", "Jumlah data Kontak: " +
                         String.valueOf(sampahOrganikList.size()));
-                organik.setAdapter(mAdapter);
+                rv_organik.setAdapter(mAdapter);
             }
 
             @Override
@@ -95,7 +98,7 @@ ProgressBar progressBar;
                 mAdapter=new SampahnonOrganikAdapter(sampahnonOrganikList, InformationSampahActivity.this);
                 Log.d("Retrofit Get", "Jumlah data Kontak: " +
                         String.valueOf(sampahnonOrganikList.size()));
-                organik.setAdapter(mAdapter);
+                rv_nonorganik.setAdapter(mAdapter);
             }
 
             @Override

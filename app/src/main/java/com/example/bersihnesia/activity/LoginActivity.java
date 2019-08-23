@@ -67,7 +67,6 @@ SharedPreferences  sharedPreferences;
                             Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("id_personal", id_personal);
-                            Log.e("RAG", "onResponse: " + id_personal );
                             editor.putString("name", name);
                             editor.putString("no", no);
                             editor.putString("address", address);

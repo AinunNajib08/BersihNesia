@@ -25,7 +25,7 @@ import retrofit2.Response;
 
 public class InformationSampahActivity extends AppCompatActivity {
 RecyclerView rv_nonorganik, rv_organik;
-CardView organik, nonorganik;
+CardView organik;
 RecyclerView.Adapter mAdapter;
 RecyclerView.LayoutManager mLayoutManager;
 BaseApiService mApiInterface;
@@ -35,7 +35,7 @@ ProgressBar progressBar;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information_sampah);
         rv_nonorganik = findViewById(R.id.rv_nonorganik);
-        rv_organik = findViewById(R.id.rv_organik);
+        rv_organik = (RecyclerView) findViewById(R.id.rv_organik);
         mLayoutManager=new LinearLayoutManager(this);
         rv_nonorganik.setLayoutManager(mLayoutManager);
         rv_organik.setLayoutManager(mLayoutManager);
@@ -45,7 +45,6 @@ ProgressBar progressBar;
         rv_nonorganik.setVisibility(View.GONE);
         rv_organik.setVisibility(View.GONE);
         refresh();
-        refresh2();
         organik.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +71,7 @@ ProgressBar progressBar;
         sampahOrganikCall.enqueue(new Callback<GetSampahOrganik>() {
             @Override
             public void onResponse(Call<GetSampahOrganik> call, Response<GetSampahOrganik> response) {
-                progressBar.setVisibility(View.VISIBLE);
+//                progressBar.setVisibility(View.VISIBLE);
                 List<SampahOrganik> sampahOrganikList = response.body().getSampahOrganikList();
                 mAdapter=new SampahOrganikAdapter(sampahOrganikList, InformationSampahActivity.this);
                 Log.d("Retrofit Get", "Jumlah data Kontak: " +

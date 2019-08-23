@@ -49,8 +49,7 @@ public class SampahOrganikAdapter extends RecyclerView.Adapter<SampahOrganikAdap
         public MyViewHolder( View itemView) {
             super(itemView);
             name_information=itemView.findViewById(R.id.name_information);
-            description=itemView.findViewById(R.id.description);
-//            photo=itemView.findViewById(R.id.photo_sampah);
+            description=itemView.findViewById(R.id.txt_description);
         }
     }
 }

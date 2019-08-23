@@ -35,10 +35,16 @@ ProgressBar progressBar;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information_sampah);
         rv_nonorganik = findViewById(R.id.rv_nonorganik);
-        rv_organik = (RecyclerView) findViewById(R.id.rv_organik);
-        mLayoutManager=new LinearLayoutManager(this);
-        rv_nonorganik.setLayoutManager(mLayoutManager);
-        rv_organik.setLayoutManager(mLayoutManager);
+        organik = findViewById(R.id.c_sampah_organik);
+        rv_organik = findViewById(R.id.rv_organik);
+        rv_nonorganik.setHasFixedSize(true);
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rv_nonorganik.setLayoutManager(layoutManager);
+        rv_organik.setHasFixedSize(true);
+        LinearLayoutManager layoutManager1
+                = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rv_organik.setLayoutManager(layoutManager1);
         progressBar = findViewById(R.id.pBar);
         progressBar.setVisibility(View.GONE);
         mApiInterface= UtilsApi.getAPIService();

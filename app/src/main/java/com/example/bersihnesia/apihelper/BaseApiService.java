@@ -79,6 +79,9 @@ public interface BaseApiService {
     @GET("api/list_community")
     Call<GetCommunity> getCommunity();
 
+    @GET("api/list_community")
+    Call<ResponseBody> getComm();
+
     @GET("api/Informasi_sampah")
     Call<GetSampahOrganik> getSampahOrganik();
 

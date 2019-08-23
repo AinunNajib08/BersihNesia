@@ -1,5 +1,6 @@
 package com.example.bersihnesia.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -100,4 +101,8 @@ ProgressBar progressBar;
         });
     }
 
+    public void create_community(View view) {
+        Intent goCreate = new Intent(CommunityActivity.this, CreateCommunityActivity.class);
+        startActivity(goCreate);
+    }
 }

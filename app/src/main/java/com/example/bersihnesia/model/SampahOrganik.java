@@ -1,11 +1,11 @@
 package com.example.bersihnesia.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.sql.Blob;
 
-public class SampahOrganik {
-    public String name_information, contact_person, description, date, value;
-    public Blob photo;
-
+public class SampahOrganik implements Parcelable {
     public String getName_information() {
         return name_information;
     }
@@ -30,6 +30,14 @@ public class SampahOrganik {
         this.description = description;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     public String getDate() {
         return date;
     }
@@ -46,19 +54,45 @@ public class SampahOrganik {
         this.value = value;
     }
 
-    public Blob getPhoto() {
-        return photo;
+    public String name_information, contact_person, description, photo, date, value;
+
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setPhoto(Blob photo) {
-        this.photo = photo;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.name_information);
+        dest.writeString(this.contact_person);
+        dest.writeString(this.description);
+        dest.writeString(this.photo);
+        dest.writeString(this.date);
+        dest.writeString(this.value);
     }
 
-    public SampahOrganik(String name_information, String description, Blob photo, String date, String value) {
-        this.name_information = name_information;
-        this.contact_person = description;
-        this.photo = photo;
-        this.date = date;
-        this.value = value;
+    public SampahOrganik() {
     }
+
+    protected SampahOrganik(Parcel in) {
+        this.name_information = in.readString();
+        this.contact_person = in.readString();
+        this.description = in.readString();
+        this.photo = in.readString();
+        this.date = in.readString();
+        this.value = in.readString();
+    }
+
+    public static final Parcelable.Creator<SampahOrganik> CREATOR = new Parcelable.Creator<SampahOrganik>() {
+        @Override
+        public SampahOrganik createFromParcel(Parcel source) {
+            return new SampahOrganik(source);
+        }
+
+        @Override
+        public SampahOrganik[] newArray(int size) {
+            return new SampahOrganik[size];
+        }
+    };
 }

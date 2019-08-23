@@ -67,7 +67,7 @@ public interface BaseApiService {
                                     @Field("photo") String photo
                                     );
     @FormUrlEncoded
-    @POST("api/register_personal")
+    @POST("api/report_lokasi")
     Call<PostPersonal> postReport(@Field("id_personal") String id_personal,
                                     @Field("address") String address,
                                     @Field("longlat") String longlat,

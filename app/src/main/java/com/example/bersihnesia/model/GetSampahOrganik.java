@@ -11,7 +11,6 @@ public class GetSampahOrganik {
     List<SampahOrganik> sampahOrganikList;
     @SerializedName("message")
     String message;
-
     public String getStatus() {
         return status;
     }
@@ -35,4 +34,5 @@ public class GetSampahOrganik {
     public void setMessage(String message) {
         this.message = message;
     }
+
 }

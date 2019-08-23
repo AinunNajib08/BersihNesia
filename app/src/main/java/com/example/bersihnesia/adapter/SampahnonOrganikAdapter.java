@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.bersihnesia.R;
 import com.example.bersihnesia.activity.DetailCommuntiyActivity;
-import com.example.bersihnesia.model.SampahOrganik;
 import com.example.bersihnesia.model.SampahnonOrganik;
+
 
 import java.util.List;
 
@@ -53,7 +53,7 @@ public class SampahnonOrganikAdapter extends RecyclerView.Adapter<SampahnonOrgan
             super(itemView);
             name_information=itemView.findViewById(R.id.name_information);
             description=itemView.findViewById(R.id.description);
-            photo=itemView.findViewById(R.id.photo_sampah);
+//            photo=itemView.findViewById(R.id.photo_sampah);
         }
     }
 }

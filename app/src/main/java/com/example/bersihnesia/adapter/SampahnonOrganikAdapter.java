@@ -45,6 +45,7 @@ public class SampahnonOrganikAdapter extends RecyclerView.Adapter<SampahnonOrgan
     public int getItemCount() {
         return mSampahnonOrganik.size();
     }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name_information,description;
         public ImageView photo;

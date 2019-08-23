@@ -2,30 +2,30 @@ package com.example.bersihnesia.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import com.example.bersihnesia.R;
-import com.example.bersihnesia.adapter.CommunityAdapter;
 import com.example.bersihnesia.adapter.SampahOrganikAdapter;
+import com.example.bersihnesia.adapter.SampahnonOrganikAdapter;
 import com.example.bersihnesia.apihelper.BaseApiService;
 import com.example.bersihnesia.apihelper.UtilsApi;
-import com.example.bersihnesia.model.SampahOrganik;
+import com.example.bersihnesia.model.GetSampahnonOrganik;
 import com.example.bersihnesia.model.SampahOrganik;
 import com.example.bersihnesia.model.GetSampahOrganik;
-import com.example.bersihnesia.model.SampahOrganik;
+import com.example.bersihnesia.model.SampahnonOrganik;
 
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class InformationSampahActivity extends AppCompatActivity {
-RecyclerView nonorganik, organik;
+RecyclerView rv_nonorganik, rv_organik;
+CardView organik, nonorganik;
 RecyclerView.Adapter mAdapter;
 RecyclerView.LayoutManager mLayoutManager;
 BaseApiService mApiInterface;
@@ -34,24 +34,41 @@ ProgressBar progressBar;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information_sampah);
-        nonorganik = findViewById(R.id.rv_nonorganik);
-        organik = findViewById(R.id.rv_organik);
+        rv_nonorganik = findViewById(R.id.rv_nonorganik);
+        rv_organik = findViewById(R.id.rv_organik);
         mLayoutManager=new LinearLayoutManager(this);
-        nonorganik.setLayoutManager(mLayoutManager);
+        rv_nonorganik.setLayoutManager(mLayoutManager);
+        rv_organik.setLayoutManager(mLayoutManager);
         progressBar = findViewById(R.id.pBar);
         progressBar.setVisibility(View.GONE);
         mApiInterface= UtilsApi.getAPIService();
-        nonorganik.setVisibility(View.VISIBLE);
+        rv_nonorganik.setVisibility(View.GONE);
+        rv_organik.setVisibility(View.GONE);
         refresh();
+        refresh2();
+        organik.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (organik.getVisibility() == View.VISIBLE) {
+                    organik.setVisibility(View.GONE);
+                } else {
+                    organik.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
     }
 
     public void nonorganik(View view) {
-        nonorganik.setVisibility(View.VISIBLE);
+        if (nonorganik.getVisibility() == View.VISIBLE) {
+            nonorganik.setVisibility(View.GONE);
+        } else {
+            nonorganik.setVisibility(View.VISIBLE);
+        }
     }
 
     private void refresh() {
-        Call<GetSampahOrganik> sampahOrganikCall=mApiInterface.getSampahOrganik();
+        Call<GetSampahOrganik> sampahOrganikCall = mApiInterface.getSampahOrganik();
         sampahOrganikCall.enqueue(new Callback<GetSampahOrganik>() {
             @Override
             public void onResponse(Call<GetSampahOrganik> call, Response<GetSampahOrganik> response) {
@@ -60,7 +77,7 @@ ProgressBar progressBar;
                 mAdapter=new SampahOrganikAdapter(sampahOrganikList, InformationSampahActivity.this);
                 Log.d("Retrofit Get", "Jumlah data Kontak: " +
                         String.valueOf(sampahOrganikList.size()));
-                nonorganik.setAdapter(mAdapter);
+                rv_organik.setAdapter(mAdapter);
             }
 
             @Override
@@ -69,5 +86,25 @@ ProgressBar progressBar;
             }
         });
 
+    }
+
+    private void refresh2() {
+        Call<GetSampahnonOrganik> sampahnonOrganikCall = mApiInterface.getSampahnonOrganik();
+        sampahnonOrganikCall.enqueue(new Callback<GetSampahnonOrganik>() {
+            @Override
+            public void onResponse(Call<GetSampahnonOrganik> call, Response<GetSampahnonOrganik> response) {
+                progressBar.setVisibility(View.VISIBLE);
+                List<SampahnonOrganik> sampahnonOrganikList = response.body().getSampahnonOrganikList();
+                mAdapter=new SampahnonOrganikAdapter(sampahnonOrganikList, InformationSampahActivity.this);
+                Log.d("Retrofit Get", "Jumlah data Kontak: " +
+                        String.valueOf(sampahnonOrganikList.size()));
+                rv_nonorganik.setAdapter(mAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<GetSampahnonOrganik> call, Throwable t) {
+
+            }
+        });
     }
 }

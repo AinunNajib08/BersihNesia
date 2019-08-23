@@ -11,38 +11,41 @@ import android.widget.TextView;
 import com.example.bersihnesia.R;
 import com.example.bersihnesia.activity.DetailCommuntiyActivity;
 import com.example.bersihnesia.model.SampahOrganik;
+import com.example.bersihnesia.model.SampahnonOrganik;
+
 import java.util.List;
 
 
-public class SampahOrganikAdapter extends RecyclerView.Adapter<SampahOrganikAdapter.MyViewHolder> {
-    List<SampahOrganik> mSampahOrganik;
+public class SampahnonOrganikAdapter extends RecyclerView.Adapter<SampahnonOrganikAdapter.MyViewHolder> {
+    List<SampahnonOrganik> mSampahnonOrganik;
     Context context;
-    public SampahOrganikAdapter(List<SampahOrganik>ListSampahOrganik, Context context){
-        mSampahOrganik=ListSampahOrganik;
+    public SampahnonOrganikAdapter(List<SampahnonOrganik>ListSampahnonOrganik, Context context){
+        mSampahnonOrganik=ListSampahnonOrganik;
         this.context=context;
     }
-    public SampahOrganikAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SampahnonOrganikAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View mView=LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sampahorganik,parent,false);
         MyViewHolder myViewHolder=new MyViewHolder(mView);
         return myViewHolder;
     }
     @Override
-    public void onBindViewHolder(SampahOrganikAdapter.MyViewHolder holder, final int posisi) {
-        holder.name_information.setText(mSampahOrganik.get(posisi).getName_information());
-        holder.description.setText(mSampahOrganik.get(posisi).getDescription());
+    public void onBindViewHolder(SampahnonOrganikAdapter.MyViewHolder holder, final int posisi) {
+        holder.name_information.setText(mSampahnonOrganik.get(posisi).getName_information());
+        holder.description.setText(mSampahnonOrganik.get(posisi).getDescription());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(v.getContext(),DetailCommuntiyActivity.class);
-                intent.putExtra("name_information",mSampahOrganik.get(posisi).getName_information());
+                intent.putExtra("name_information",mSampahnonOrganik.get(posisi).getName_information());
                 v.getContext().startActivity(intent);
             }
         });
     }
     @Override
     public int getItemCount() {
-        return mSampahOrganik.size();
+        return mSampahnonOrganik.size();
     }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name_information,description;
         public ImageView photo;

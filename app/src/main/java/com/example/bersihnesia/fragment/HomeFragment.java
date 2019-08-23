@@ -33,11 +33,14 @@ import com.example.bersihnesia.R;
 import com.example.bersihnesia.activity.CommunityActivity;
 import com.example.bersihnesia.activity.EventActivity;
 import com.example.bersihnesia.activity.InformationActivity;
+import com.example.bersihnesia.adapter.CommAdapter;
 import com.example.bersihnesia.adapter.EventAdapter;
 import com.example.bersihnesia.apihelper.BaseApiService;
 import com.example.bersihnesia.apihelper.UtilsApi;
 import com.example.bersihnesia.fragment.tablayout.LokasiFragment;
 import com.example.bersihnesia.listener.ItemClickSupport;
+import com.example.bersihnesia.model.Comm;
+import com.example.bersihnesia.model.Community;
 import com.example.bersihnesia.model.Event;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
@@ -76,11 +79,13 @@ FloatingActionButton fab;
     private LocationManager locationManager;
     private BaseApiService mApiService;
     private ArrayList<Event> arrayList = new ArrayList<>();
-    RecyclerView rv_event;
+    private ArrayList<Comm> arrayCom = new ArrayList<>();
+    RecyclerView rv_event, rv_community;
     Context mContext;
     public static final String EXTRA_MOVIE = "arrayList";
     public static final String STATE_EVENT = "state_event";
     EventAdapter eventAdapter;
+    CommAdapter commAdapter;
     LinearLayout linearLayout;
     ProgressBar progressBar;
 
@@ -113,15 +118,28 @@ FloatingActionButton fab;
 
 
         eventAdapter = new EventAdapter(mContext);
+        commAdapter = new CommAdapter(mContext);
         mApiService = UtilsApi.getAPIService();
         rv_event = view.findViewById(R.id.rv_event);
+        rv_community = view.findViewById(R.id.rv_community);
         progressBar = view.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
         rv_event.setHasFixedSize(true);
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rv_event.setLayoutManager(layoutManager);
-        getEvent();
+
+        rv_community.setHasFixedSize(true);
+        LinearLayoutManager lM
+                = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        rv_community.setLayoutManager(lM);
+        if (arrayList.size() != 0){
+            getEvent();
+        }
+
+        if (arrayCom.size() != 0){
+            getCommunity();
+        }
         ItemClickSupport.addTo(rv_event).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
@@ -223,20 +241,26 @@ FloatingActionButton fab;
 
     }
 
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        arrayList.clear();
-//    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        arrayList.clear();
+        arrayCom.clear();
+    }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        arrayList.clear();
-//        if (arrayList.size() == 0){
-//            getEvent();
-//        }
-//    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        arrayList.clear();
+        if (arrayList.size() == 0){
+            getEvent();
+        }
+
+        arrayCom.clear();
+        if (arrayCom.size() == 0){
+            getCommunity();
+        }
+    }
 
 
     void getEvent(){
@@ -277,6 +301,45 @@ FloatingActionButton fab;
                         Toast.makeText(getActivity(), "Error "+t, Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    void getCommunity(){
+        mApiService.getComm()
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                        if (response.isSuccessful()){
+                            try {
+                                JSONObject jsonRESULTS = new JSONObject(response.body().string());
+                                JSONArray data = jsonRESULTS.getJSONArray("result");
+                                for (int i=0; i <data.length(); i++) {
+                                    JSONObject jsonObject = data.getJSONObject(i);
+                                    int id_community = jsonObject.getInt("id_community");
+                                    String name_community = jsonObject.getString("name_community");
+                                    Comm c = new Comm();
+                                    c.setId_community(id_community);
+                                    c.setName_community(name_community);
+                                    arrayCom.add(c);
+                                }
+                                commAdapter.setListEvent(arrayCom);
+                                rv_community.setAdapter(commAdapter);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<ResponseBody> call,@NonNull Throwable t) {
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(getActivity(), "Error "+t, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 
 }

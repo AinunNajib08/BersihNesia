@@ -4,6 +4,7 @@ import android.text.Editable;
 
 import com.example.bersihnesia.model.GetCommunity;
 import com.example.bersihnesia.model.GetSampahOrganik;
+import com.example.bersihnesia.model.GetSampahnonOrganik;
 import com.example.bersihnesia.model.PostPersonal;
 import com.example.bersihnesia.model.UploadImage;
 
@@ -75,12 +76,17 @@ public interface BaseApiService {
                                  @Field("password") String password
 
     );
-
     @GET("api/list_community")
     Call<GetCommunity> getCommunity();
 
+    @GET("api/list_community")
+    Call<ResponseBody> getComm();
+
     @GET("api/Informasi_sampah")
     Call<GetSampahOrganik> getSampahOrganik();
+
+    @GET("api/Informasi_sampahnon")
+    Call<GetSampahnonOrganik> getSampahnonOrganik();
 
     @Multipart
     @POST("api/upload_image")

@@ -9,10 +9,14 @@ import android.view.View;
 import android.widget.ProgressBar;
 import com.example.bersihnesia.R;
 import com.example.bersihnesia.adapter.SampahOrganikAdapter;
+import com.example.bersihnesia.adapter.SampahnonOrganikAdapter;
 import com.example.bersihnesia.apihelper.BaseApiService;
 import com.example.bersihnesia.apihelper.UtilsApi;
+import com.example.bersihnesia.model.GetSampahnonOrganik;
 import com.example.bersihnesia.model.SampahOrganik;
 import com.example.bersihnesia.model.GetSampahOrganik;
+import com.example.bersihnesia.model.SampahnonOrganik;
+
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,6 +42,7 @@ ProgressBar progressBar;
         nonorganik.setVisibility(View.GONE);
         organik.setVisibility(View.GONE);
         refresh();
+        refresh2();
         organik.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +74,7 @@ ProgressBar progressBar;
                 mAdapter=new SampahOrganikAdapter(sampahOrganikList, InformationSampahActivity.this);
                 Log.d("Retrofit Get", "Jumlah data Kontak: " +
                         String.valueOf(sampahOrganikList.size()));
-                nonorganik.setAdapter(mAdapter);
+                organik.setAdapter(mAdapter);
             }
 
             @Override
@@ -78,5 +83,25 @@ ProgressBar progressBar;
             }
         });
 
+    }
+
+    private void refresh2() {
+        Call<GetSampahnonOrganik> sampahnonOrganikCall = mApiInterface.getSampahnonOrganik();
+        sampahnonOrganikCall.enqueue(new Callback<GetSampahnonOrganik>() {
+            @Override
+            public void onResponse(Call<GetSampahnonOrganik> call, Response<GetSampahnonOrganik> response) {
+                progressBar.setVisibility(View.VISIBLE);
+                List<SampahnonOrganik> sampahnonOrganikList = response.body().getSampahnonOrganikList();
+                mAdapter=new SampahnonOrganikAdapter(sampahnonOrganikList, InformationSampahActivity.this);
+                Log.d("Retrofit Get", "Jumlah data Kontak: " +
+                        String.valueOf(sampahnonOrganikList.size()));
+                organik.setAdapter(mAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<GetSampahnonOrganik> call, Throwable t) {
+
+            }
+        });
     }
 }

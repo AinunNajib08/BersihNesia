@@ -6,20 +6,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import com.example.bersihnesia.R;
-import com.example.bersihnesia.adapter.CommunityAdapter;
 import com.example.bersihnesia.adapter.SampahOrganikAdapter;
 import com.example.bersihnesia.apihelper.BaseApiService;
 import com.example.bersihnesia.apihelper.UtilsApi;
 import com.example.bersihnesia.model.SampahOrganik;
-import com.example.bersihnesia.model.SampahOrganik;
 import com.example.bersihnesia.model.GetSampahOrganik;
-import com.example.bersihnesia.model.SampahOrganik;
-
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,7 +45,7 @@ ProgressBar progressBar;
     }
 
     private void refresh() {
-        Call<GetSampahOrganik> sampahOrganikCall=mApiInterface.getSampahOrganik();
+        Call<GetSampahOrganik> sampahOrganikCall = mApiInterface.getSampahOrganik();
         sampahOrganikCall.enqueue(new Callback<GetSampahOrganik>() {
             @Override
             public void onResponse(Call<GetSampahOrganik> call, Response<GetSampahOrganik> response) {

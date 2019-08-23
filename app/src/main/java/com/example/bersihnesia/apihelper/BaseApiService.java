@@ -63,7 +63,6 @@ public interface BaseApiService {
                                  @Field("password") String password
 
     );
-
     @GET("api/list_community")
     Call<GetCommunity> getCommunity();
 

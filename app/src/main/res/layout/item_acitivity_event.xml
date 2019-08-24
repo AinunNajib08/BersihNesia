@@ -34,7 +34,7 @@
                 android:text="Lorem ipsum dolor sit,"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/i_community"
-                android:layout_below="@id/txt_title"
+                android:layout_below="@id/tvName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </RelativeLayout>

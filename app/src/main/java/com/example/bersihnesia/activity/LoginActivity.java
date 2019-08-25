@@ -57,6 +57,7 @@ SharedPreferences  sharedPreferences;
                         String jk=response.body().getJk();
                         String no=response.body().getContact_person();
                         String photo=response.body().getPhoto();
+                        String point=response.body().getPoint();
 
                         Log.e("Berhasil Login", "Berhasil " +id_personal);
                         if (TextUtils.isEmpty(id_personal)){
@@ -67,6 +68,7 @@ SharedPreferences  sharedPreferences;
                             Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("id_personal", id_personal);
+                            editor.putString("point", point);
                             editor.putString("name", name);
                             editor.putString("no", no);
                             editor.putString("address", address);

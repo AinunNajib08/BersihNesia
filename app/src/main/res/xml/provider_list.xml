@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <external-path
+        name="bersihnesia"
+        path="Android/data/com.example.bersihnesia/files/Pictures"/>
+    <!-- replace com.androidwave.filepicker with your package name -->
+</paths>

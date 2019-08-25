@@ -44,6 +44,9 @@ public interface BaseApiService {
     Call<ResponseBody> getCheck(@Path("id_event") int id_event,
                                 @Path("id_personal") int id_personal);
 
+    @GET("api/list_event/member/{id_event}")
+    Call<ResponseBody> getMember(@Path("id_event") int id_event);
+
     @GET("api/list_event/insert/{id_event}/{id_personal}")
     Call<ResponseBody> getInsert(@Path("id_event") int id_event,
                                  @Path("id_personal") int id_personal);

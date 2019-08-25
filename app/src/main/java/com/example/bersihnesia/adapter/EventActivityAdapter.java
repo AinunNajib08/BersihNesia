@@ -47,7 +47,7 @@ public class EventActivityAdapter extends RecyclerView.Adapter<EventActivityAdap
     @Override
     public void onBindViewHolder(@NonNull final EventActivityAdapter.GridViewHolder gridViewHolder, final int i) {
         gridViewHolder.tvNameEvent.setText(getListEvent().get(i).getName_event());
-        gridViewHolder.tvNameEvent.setText(getListEvent().get(i).getDescription());
+        gridViewHolder.tvDesc.setText(getListEvent().get(i).getDescription());
     }
 
     @Override

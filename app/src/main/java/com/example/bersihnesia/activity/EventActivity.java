@@ -81,7 +81,9 @@ public class EventActivity extends AppCompatActivity {
                 if (s.length() != 0){
                     arrayList.clear();
                     getEvent(s);
-                } else {
+                }
+                if (s.length() == 0){
+                    arrayList.clear();
                     getEvent();
                 }
 
@@ -153,10 +155,13 @@ public class EventActivity extends AppCompatActivity {
                                     JSONObject jsonObject = data.getJSONObject(i);
                                     int id_event = jsonObject.getInt("id_event");
                                     String name_event = jsonObject.getString("name_event");
+                                    String desc = jsonObject.getString("description");
                                     Event event = new Event();
                                     event.setId_event(id_event);
                                     event.setName_event(name_event);
+                                    event.setDescription(desc);
                                     arrayList.add(event);
+                                    Log.e("RAG", "onResponse: "+arrayList );
                                 }
                                 eventAdapter.setListEvent(arrayList);
                                 rv_event.setAdapter(eventAdapter);

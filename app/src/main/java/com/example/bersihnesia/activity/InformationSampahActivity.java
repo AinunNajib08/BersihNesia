@@ -25,7 +25,7 @@ import retrofit2.Response;
 
 public class InformationSampahActivity extends AppCompatActivity {
 RecyclerView rv_nonorganik, rv_organik;
-CardView organik, nonorganik;
+CardView organik;
 RecyclerView.Adapter mAdapter;
 RecyclerView.LayoutManager mLayoutManager;
 BaseApiService mApiInterface;
@@ -35,10 +35,16 @@ ProgressBar progressBar;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information_sampah);
         rv_nonorganik = findViewById(R.id.rv_nonorganik);
+        organik = findViewById(R.id.c_sampah_organik);
         rv_organik = findViewById(R.id.rv_organik);
-        mLayoutManager=new LinearLayoutManager(this);
-        rv_nonorganik.setLayoutManager(mLayoutManager);
-        rv_organik.setLayoutManager(mLayoutManager);
+        rv_nonorganik.setHasFixedSize(true);
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rv_nonorganik.setLayoutManager(layoutManager);
+        rv_organik.setHasFixedSize(true);
+        LinearLayoutManager layoutManager1
+                = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rv_organik.setLayoutManager(layoutManager1);
         progressBar = findViewById(R.id.pBar);
         progressBar.setVisibility(View.GONE);
         mApiInterface= UtilsApi.getAPIService();
@@ -49,10 +55,10 @@ ProgressBar progressBar;
         organik.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (organik.getVisibility() == View.VISIBLE) {
-                    organik.setVisibility(View.GONE);
+                if (rv_organik.getVisibility() == View.VISIBLE) {
+                    rv_organik.setVisibility(View.GONE);
                 } else {
-                    organik.setVisibility(View.VISIBLE);
+                    rv_organik.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -60,10 +66,10 @@ ProgressBar progressBar;
     }
 
     public void nonorganik(View view) {
-        if (nonorganik.getVisibility() == View.VISIBLE) {
-            nonorganik.setVisibility(View.GONE);
+        if (rv_nonorganik.getVisibility() == View.VISIBLE) {
+            rv_nonorganik.setVisibility(View.GONE);
         } else {
-            nonorganik.setVisibility(View.VISIBLE);
+            rv_nonorganik.setVisibility(View.VISIBLE);
         }
     }
 
@@ -103,7 +109,7 @@ ProgressBar progressBar;
 
             @Override
             public void onFailure(Call<GetSampahnonOrganik> call, Throwable t) {
-
+//
             }
         });
     }

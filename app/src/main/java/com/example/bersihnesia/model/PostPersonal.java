@@ -27,7 +27,46 @@ public class PostPersonal {
     String description;
     @SerializedName("longlat")
     String longlat;
+    @SerializedName("latlong")
+    String latlong;
+    @SerializedName("name_community")
+    String name_community;
+    @SerializedName("legality")
+    String legality;
+    @SerializedName("photo")
+    String photo;
 
+    public String getLatlong() {
+        return latlong;
+    }
+
+    public void setLatlong(String latlong) {
+        this.latlong = latlong;
+    }
+
+    public String getLonglat() {
+        return longlat;
+    }
+
+    public void setLonglat(String longlat) {
+        this.longlat = longlat;
+    }
+
+    public String getName_community() {
+        return name_community;
+    }
+
+    public void setName_community(String name_community) {
+        this.name_community = name_community;
+    }
+
+    public String getLegality() {
+        return legality;
+    }
+
+    public void setLegality(String legality) {
+        this.legality = legality;
+    }
 
     public String getDescription() {
         return description;
@@ -45,8 +84,7 @@ public class PostPersonal {
         this.photo = photo;
     }
 
-    @SerializedName("photo")
-    String photo;
+
 
 
     public String getJk() {

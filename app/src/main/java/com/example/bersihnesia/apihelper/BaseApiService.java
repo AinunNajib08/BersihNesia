@@ -3,6 +3,7 @@ package com.example.bersihnesia.apihelper;
 import android.text.Editable;
 
 import com.example.bersihnesia.model.GetCommunity;
+import com.example.bersihnesia.model.GetItemReedem;
 import com.example.bersihnesia.model.GetSampahOrganik;
 import com.example.bersihnesia.model.GetSampahnonOrganik;
 import com.example.bersihnesia.model.PostPersonal;
@@ -41,14 +42,14 @@ public interface BaseApiService {
 
     @GET("api/list_event/detail/{id_event}/{id_personal}")
     Call<ResponseBody> getCheck(@Path("id_event") int id_event,
-                                      @Path("id_personal") int id_personal);
+                                @Path("id_personal") int id_personal);
 
     @GET("api/list_event/member/{id_event}")
     Call<ResponseBody> getMember(@Path("id_event") int id_event);
 
     @GET("api/list_event/insert/{id_event}/{id_personal}")
     Call<ResponseBody> getInsert(@Path("id_event") int id_event,
-                                @Path("id_personal") int id_personal);
+                                 @Path("id_personal") int id_personal);
 
     @Multipart
     @POST("api/upload_image")
@@ -64,23 +65,42 @@ public interface BaseApiService {
                                     @Field("password") String password,
                                     @Field("jk") String jk,
                                     @Field("photo") String photo
-                                    );
+    );
+
     @FormUrlEncoded
     @POST("api/report_lokasi")
     Call<PostPersonal> postReport(@Field("id_personal") String id_personal,
-                                    @Field("address") String address,
-                                    @Field("longlat") String longlat,
-                                    @Field("description") String description,
-                                    @Field("photo") String photo
+                                  @Field("address") String address,
+                                  @Field("longlat") String longlat,
+                                  @Field("description") String description,
+                                  @Field("photo") String photo
     );
+
+    @FormUrlEncoded
+    @POST("api/register_community")
+    Call<PostPersonal> postCommunity(@Field("id_personal") String id_personal,
+                                     @Field("name_community") String name_community,
+                                     @Field("contact_person") String contact_person,
+                                     @Field("address") String address,
+                                     @Field("latlong") String latlong,
+                                     @Field("description") String description,
+                                     @Field("legality") String legality
+
+    );
+
+
     @FormUrlEncoded
     @POST("api/login_personal")
     Call<PostPersonal> postLogin(@Field("email") String email,
                                  @Field("password") String password
 
     );
+
     @GET("api/list_community")
     Call<GetCommunity> getCommunity();
+
+    @GET("api/item_reedem")
+    Call<GetItemReedem> getItem();
 
     @GET("api/list_community")
     Call<ResponseBody> getComm();
@@ -93,7 +113,7 @@ public interface BaseApiService {
 
     @Multipart
     @POST("api/upload_image")
-    Call<UploadImage> upload( @Header("Authorization") String authorization,
-                              @PartMap Map<String, RequestBody> map
+    Call<UploadImage> upload(@Header("Authorization") String authorization,
+                             @PartMap Map<String, RequestBody> map
     );
 }

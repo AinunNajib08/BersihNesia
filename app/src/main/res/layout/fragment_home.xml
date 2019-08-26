@@ -69,6 +69,7 @@
                 android:padding="21dp">
 
                 <LinearLayout
+                    android:id="@+id/l_reedem"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:layout_marginEnd="40dp"
@@ -255,7 +256,7 @@
                 android:layout_marginStart="13dp"
                 android:textStyle="italic|bold"
                 android:text="@string/more"/>
-            
+
 
         </LinearLayout>
         <ProgressBar

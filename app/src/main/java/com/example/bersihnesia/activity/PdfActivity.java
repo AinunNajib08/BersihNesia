@@ -75,7 +75,10 @@ public class PdfActivity extends AppCompatActivity implements OnPageChangeListen
                 launchPicker();
                 return true;
             case R.id.upload:
-                uploadFile();
+                Intent intent=new Intent(PdfActivity.this,CreateCommunityActivity.class);
+                intent.putExtra("pdf_name",pdfFileName);
+                startActivity(intent);
+                finish();
                 return true;
         }
 
@@ -175,7 +178,7 @@ public class PdfActivity extends AppCompatActivity implements OnPageChangeListen
 
     }
 
-    private void uploadFile() {
+    public void uploadFile() {
         if (pdfPath == null) {
             Toast.makeText(this, "please select an image ", Toast.LENGTH_LONG).show();
             return;
@@ -203,9 +206,7 @@ public class PdfActivity extends AppCompatActivity implements OnPageChangeListen
                     }else {
                         hidepDialog();
                         Toast.makeText(getApplicationContext(), "Berhsail", Toast.LENGTH_SHORT).show();
-                        Intent intent=new Intent(PdfActivity.this,CreateCommunityActivity.class);
-                        intent.putExtra("pdf_name",pdfFileName);
-                        startActivity(intent);
+
                     }
                 }
 

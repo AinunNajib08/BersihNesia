@@ -31,9 +31,13 @@
         android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="2dp"/>
+    <ScrollView
+        android:layout_below="@id/v1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <RelativeLayout
         android:layout_marginVertical="16dp"
-        android:layout_below="@id/v1"
+
         android:layout_marginHorizontal="16dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -44,7 +48,8 @@
             android:layout_height="wrap_content"
             android:text="Nama Komunitas"/>
         <EditText
-            android:paddingLeft="5dp"
+            android:textSize="12sp"
+            android:padding="10dp"
             android:id="@+id/name_community"
             android:background="@drawable/ic_form"
             android:layout_below="@+id/txt_nama"
@@ -52,10 +57,31 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"/>
         <TextView
+            android:id="@+id/txt_no"
+            android:textColor="@android:color/black"
+            android:text="No HP"
+            android:layout_below="@id/name_community"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:textSize="12sp"
+            android:padding="10dp"
+            android:id="@+id/no_hp"
+            android:layout_below="@id/txt_no"
+            android:background="@drawable/ic_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"/>
+        <TextView
             android:id="@+id/txt_lokasi"
             android:text="Lokasi Komunitas"
-            android:layout_below="@id/name_community"
+            android:layout_below="@id/no_hp"
             android:textColor="@android:color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/longlat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <LinearLayout
@@ -65,7 +91,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         <EditText
-            android:paddingLeft="5dp"
+            android:textSize="12sp"
+            android:padding="10dp"
             android:layout_weight="1"
             android:id="@+id/lokasi"
             android:background="@drawable/ic_form"
@@ -88,8 +115,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <EditText
-            android:paddingLeft="5dp"
-            android:paddingTop="15dp"
+            android:textSize="12sp"
+            android:padding="10dp"
             android:id="@+id/deskripsi"
             android:layout_below="@+id/txt_deskripsi"
             android:layout_width="match_parent"
@@ -131,6 +158,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Button
+            android:id="@+id/daftar"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:textColor="@android:color/white"
@@ -140,5 +168,6 @@
             android:layout_height="wrap_content" />
 
     </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

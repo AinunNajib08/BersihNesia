@@ -61,6 +61,9 @@ ProgressBar progressBar;
                 if (s.length() != 0) {
                     getSearch(s);
                 }
+                if (s.length() == 0) {
+                    refresh();
+                }
             }
         });
     }

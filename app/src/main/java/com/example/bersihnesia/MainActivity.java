@@ -16,6 +16,7 @@ import android.view.View;
 
 import com.example.bersihnesia.activity.HomeActivity;
 import com.example.bersihnesia.activity.LoginActivity;
+import com.example.bersihnesia.activity.ReedemActivity;
 import com.example.bersihnesia.activity.RegisterActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void asd(View view) {
-        Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+        Intent intent = new Intent(MainActivity.this, ReedemActivity.class);
         startActivity(intent);
     }
 

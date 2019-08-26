@@ -1,5 +1,6 @@
 package com.example.bersihnesia.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bersihnesia.R;
@@ -38,11 +40,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.bersihnesia.fragment.HomeFragment.STATE_EVENT;
+
 public class EventActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
     EditText searchBar;
+    TextView tvNameEvent, tvCommunity, tvMode;
     RecyclerView rv_event;
+    Context context;
     BaseApiService mApiService;
     ArrayList<Event> arrayList = new ArrayList<>();
     EventActivityAdapter eventAdapter;
@@ -81,7 +87,9 @@ public class EventActivity extends AppCompatActivity {
                 if (s.length() != 0){
                     arrayList.clear();
                     getEvent(s);
-                } else {
+                }
+                if (s.length() == 0){
+                    arrayList.clear();
                     getEvent();
                 }
 
@@ -93,6 +101,10 @@ public class EventActivity extends AppCompatActivity {
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 Intent intent = new Intent(EventActivity.this, DetailEventActivity.class);
                 intent.putExtra("data1", arrayList.get(position).getId_event());
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                final SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt(STATE_EVENT, arrayList.get(position).getId_event());
+                editor.apply();
                 Log.e("RAG", "onItemClicked: "+arrayList.get(position).getId_event() );
                 startActivity(intent);
             }
@@ -153,10 +165,13 @@ public class EventActivity extends AppCompatActivity {
                                     JSONObject jsonObject = data.getJSONObject(i);
                                     int id_event = jsonObject.getInt("id_event");
                                     String name_event = jsonObject.getString("name_event");
+                                    String desc = jsonObject.getString("description");
                                     Event event = new Event();
                                     event.setId_event(id_event);
                                     event.setName_event(name_event);
+                                    event.setDescription(desc);
                                     arrayList.add(event);
+                                    Log.e("RAG", "onResponse: "+arrayList );
                                 }
                                 eventAdapter.setListEvent(arrayList);
                                 rv_event.setAdapter(eventAdapter);

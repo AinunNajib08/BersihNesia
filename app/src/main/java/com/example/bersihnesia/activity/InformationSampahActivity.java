@@ -88,7 +88,7 @@ BaseApiService mApiInterface;
         sampahOrganikCall.enqueue(new Callback<GetSampahOrganik>() {
             @Override
             public void onResponse(Call<GetSampahOrganik> call, Response<GetSampahOrganik> response) {
-//                progressBar.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
                 List<SampahOrganik> sampahOrganikList = response.body().getSampahOrganikList();
                 mAdapter=new SampahOrganikAdapter(sampahOrganikList, InformationSampahActivity.this);
                 Log.d("Retrofit Get", "Jumlah data Kontak: " +

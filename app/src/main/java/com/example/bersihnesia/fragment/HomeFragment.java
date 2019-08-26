@@ -27,12 +27,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bersihnesia.R;
 import com.example.bersihnesia.activity.CommunityActivity;
 import com.example.bersihnesia.activity.EventActivity;
 import com.example.bersihnesia.activity.InformationActivity;
+import com.example.bersihnesia.activity.ReedemActivity;
 import com.example.bersihnesia.adapter.CommAdapter;
 import com.example.bersihnesia.adapter.EventAdapter;
 import com.example.bersihnesia.apihelper.BaseApiService;
@@ -63,7 +65,7 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment implements LocationListener {
 ImageView komunitas;
 FloatingActionButton fab;
-
+TextView point;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -86,8 +88,9 @@ FloatingActionButton fab;
     public static final String STATE_EVENT = "state_event";
     EventAdapter eventAdapter;
     CommAdapter commAdapter;
-    LinearLayout linearLayout;
+    LinearLayout linearLayout,l_reedem;
     ProgressBar progressBar;
+    SharedPreferences sharedPreferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -98,6 +101,8 @@ FloatingActionButton fab;
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         boolean permissionGranted = ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
         mContext = getContext();
+        sharedPreferences=view.getContext().getSharedPreferences("remember",Context.MODE_PRIVATE);
+        String sPoint = sharedPreferences.getString("point","0");
         linearLayout = view.findViewById(R.id.event_click);
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +111,14 @@ FloatingActionButton fab;
                 startActivity(goEvent);
             }
         });
-
+        l_reedem=view.findViewById(R.id.l_reedem);
+        l_reedem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(), ReedemActivity.class);
+                startActivity(intent);
+            }
+        });
         linearLayout = view.findViewById(R.id.information_click);
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,6 +129,8 @@ FloatingActionButton fab;
         });
 
 
+        point=view.findViewById(R.id.point);
+        point.setText(sPoint+" p");
         eventAdapter = new EventAdapter(mContext);
         commAdapter = new CommAdapter(mContext);
         mApiService = UtilsApi.getAPIService();

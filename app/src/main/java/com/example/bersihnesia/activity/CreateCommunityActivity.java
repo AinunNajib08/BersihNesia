@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,13 +49,6 @@ public class CreateCommunityActivity extends PdfActivity {
         Intent mIntent = getIntent();
         pdf_name.setText(mIntent.getStringExtra("pdf_name"));
         btn_pilih = findViewById(R.id.btn_pilih);
-        btn_pilih.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CreateCommunityActivity.this, PdfActivity.class);
-                startActivity(intent);
-            }
-        });
         name_community = findViewById(R.id.name_community);
         no_hp = findViewById(R.id.no_hp);
         no_hp.setText(sNo);
@@ -96,6 +91,23 @@ public class CreateCommunityActivity extends PdfActivity {
             }
         });
 
+        btn_pilih.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CreateCommunityActivity.this, PdfActivity.class);
+                intent.putExtra("name_com", name_community.getText().toString());
+                intent.putExtra("location", lokasi.getText().toString());
+                intent.putExtra("desc", deskripsi.getText().toString());
+                startActivity(intent);
+            }
+        });
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null){
+            name_community.setText(bundle.getString("komunitas"));
+            lokasi.setText(bundle.getString("lokasi"));
+            deskripsi.setText(bundle.getString("deskripsi"));
+        }
 
     }
 

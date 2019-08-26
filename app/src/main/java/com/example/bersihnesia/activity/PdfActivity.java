@@ -77,6 +77,10 @@ public class PdfActivity extends AppCompatActivity implements OnPageChangeListen
             case R.id.upload:
                 Intent intent=new Intent(PdfActivity.this,CreateCommunityActivity.class);
                 intent.putExtra("pdf_name",pdfFileName);
+                Bundle bundle = getIntent().getExtras();
+                intent.putExtra("komunitas", bundle.getString("name_com"));
+                intent.putExtra("lokasi", bundle.getString("location"));
+                intent.putExtra("deskripsi", bundle.getString("desc"));
                 startActivity(intent);
                 finish();
                 return true;

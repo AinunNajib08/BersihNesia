@@ -25,32 +25,32 @@ import retrofit2.Response;
 
 public class InformationSampahActivity extends AppCompatActivity {
 RecyclerView rv_nonorganik, rv_organik;
-CardView organik;
+CardView organik, nonorganik;
 RecyclerView.Adapter mAdapter;
 RecyclerView.LayoutManager mLayoutManager;
 BaseApiService mApiInterface;
-ProgressBar progressBar;
+//ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information_sampah);
         rv_nonorganik = findViewById(R.id.rv_nonorganik);
-        organik = findViewById(R.id.c_sampah_organik);
         rv_organik = findViewById(R.id.rv_organik);
+        organik = findViewById(R.id.c_sampah_organik);
+        nonorganik = findViewById(R.id.c_sampah_organik);
         rv_nonorganik.setHasFixedSize(true);
-        LinearLayoutManager layoutManager
-                = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rv_nonorganik.setLayoutManager(layoutManager);
-        rv_organik.setHasFixedSize(true);
-        LinearLayoutManager layoutManager1
-                = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rv_nonorganik.setHasFixedSize(true);
+        LinearLayoutManager layoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rv_organik.setLayoutManager(layoutManager1);
-        progressBar = findViewById(R.id.pBar);
-        progressBar.setVisibility(View.GONE);
+//        progressBar = findViewById(R.id.pBar);
+//        progressBar.setVisibility(View.GONE);
         mApiInterface= UtilsApi.getAPIService();
         rv_nonorganik.setVisibility(View.GONE);
         rv_organik.setVisibility(View.GONE);
         refresh();
+        refresh2();
         organik.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,13 +62,24 @@ ProgressBar progressBar;
             }
         });
 
+
     }
+
+
 
     public void nonorganik(View view) {
         if (rv_nonorganik.getVisibility() == View.VISIBLE) {
             rv_nonorganik.setVisibility(View.GONE);
         } else {
             rv_nonorganik.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void organik(View view) {
+        if (rv_organik.getVisibility() == View.VISIBLE) {
+            rv_organik.setVisibility(View.GONE);
+        } else {
+            rv_organik.setVisibility(View.VISIBLE);
         }
     }
 
@@ -98,7 +109,7 @@ ProgressBar progressBar;
         sampahnonOrganikCall.enqueue(new Callback<GetSampahnonOrganik>() {
             @Override
             public void onResponse(Call<GetSampahnonOrganik> call, Response<GetSampahnonOrganik> response) {
-                progressBar.setVisibility(View.VISIBLE);
+//                progressBar.setVisibility(View.VISIBLE);
                 List<SampahnonOrganik> sampahnonOrganikList = response.body().getSampahnonOrganikList();
                 mAdapter=new SampahnonOrganikAdapter(sampahnonOrganikList, InformationSampahActivity.this);
                 Log.d("Retrofit Get", "Jumlah data Kontak: " +

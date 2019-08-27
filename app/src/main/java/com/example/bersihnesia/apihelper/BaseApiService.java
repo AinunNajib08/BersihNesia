@@ -6,6 +6,7 @@ import com.example.bersihnesia.model.GetCommunity;
 import com.example.bersihnesia.model.GetItemReedem;
 import com.example.bersihnesia.model.GetSampahOrganik;
 import com.example.bersihnesia.model.GetSampahnonOrganik;
+import com.example.bersihnesia.model.PostNotif;
 import com.example.bersihnesia.model.PostPersonal;
 import com.example.bersihnesia.model.UploadImage;
 
@@ -39,6 +40,17 @@ public interface BaseApiService {
 
     @GET("api/list_event/search/{cari}")
     Call<ResponseBody> getEventSearch(@Path("cari") Editable cari);
+
+    @GET("api/status_member/sum/{id_community}")
+    Call<ResponseBody> getSum(@Path("id_community") int id_community);
+
+    @GET("api/status_member/check/{id_community}/{id_personal}")
+    Call<ResponseBody> getCheckMember(@Path("id_community") int id_community,
+                                      @Path("id_personal") int id_personal);
+
+    @GET("api/status_member/insert/{id_community}/{id_personal}")
+    Call<ResponseBody> getInsertJoin(@Path("id_community") int id_community,
+                                      @Path("id_personal") int id_personal);
 
     @GET("api/list_event/detail/{id_event}/{id_personal}")
     Call<ResponseBody> getCheck(@Path("id_event") int id_event,
@@ -88,11 +100,34 @@ public interface BaseApiService {
 
     );
 
+    @FormUrlEncoded
+    @POST("api/item_reedem")
+    Call<PostPersonal> postReedem(
+                                    @Field("id_personal") String id_personal,
+                                    @Field("id_item") int id_item,
+                                     @Field("nama") String nama,
+                                     @Field("no_hp") String no_hp,
+                                     @Field("alamat_pengiriman") String alamat_pengiriman,
+                                     @Field("reedem_point") String reedem_point
+
+    );
+
 
     @FormUrlEncoded
     @POST("api/login_personal")
     Call<PostPersonal> postLogin(@Field("email") String email,
                                  @Field("password") String password
+
+    );
+
+    @FormUrlEncoded
+    @POST("api/item_reedem/point")
+    Call<PostPersonal> postPoint(@Field("id_personal") String id_personal
+
+    );
+    @FormUrlEncoded
+    @POST("api/item_reedem/trans")
+    Call<PostNotif> postTrans(@Field("id_personal") String id_personal
 
     );
 

@@ -35,6 +35,58 @@ public class PostPersonal {
     String legality;
     @SerializedName("photo")
     String photo;
+    @SerializedName("nama")
+    String nama;
+    @SerializedName("id_item")
+    int id_item;
+    @SerializedName("no_hp")
+    String no_hp;
+    @SerializedName("alamat_pengiriman")
+    String alamat_pengiriman;
+    @SerializedName("reedem_point")
+    int reedem_point;
+
+
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public int getId_item() {
+        return id_item;
+    }
+
+    public void setId_item(int id_item) {
+        this.id_item = id_item;
+    }
+
+    public String getNo_hp() {
+        return no_hp;
+    }
+
+    public void setNo_hp(String no_hp) {
+        this.no_hp = no_hp;
+    }
+
+    public String getAlamat_pengiriman() {
+        return alamat_pengiriman;
+    }
+
+    public void setAlamat_pengiriman(String alamat_pengiriman) {
+        this.alamat_pengiriman = alamat_pengiriman;
+    }
+
+    public int getReedem_point() {
+        return reedem_point;
+    }
+
+    public void setReedem_point(int reedem_point) {
+        this.reedem_point = reedem_point;
+    }
 
     public String getLatlong() {
         return latlong;
@@ -83,9 +135,6 @@ public class PostPersonal {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
-
-
-
 
     public String getJk() {
         return jk;

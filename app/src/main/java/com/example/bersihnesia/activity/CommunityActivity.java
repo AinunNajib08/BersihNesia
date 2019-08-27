@@ -27,12 +27,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CommunityActivity extends AppCompatActivity {
-RecyclerView mRecyclerView;
-RecyclerView.Adapter mAdapter;
-RecyclerView.LayoutManager mLayoutManager;
-BaseApiService mApiInterface;
-EditText editText;
-ProgressBar progressBar;
+    RecyclerView mRecyclerView;
+    RecyclerView.Adapter mAdapter;
+    RecyclerView.LayoutManager mLayoutManager;
+    BaseApiService mApiInterface;
+    EditText editText;
+    ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

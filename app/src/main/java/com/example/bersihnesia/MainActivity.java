@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void asd(View view) {
-        Intent intent = new Intent(MainActivity.this, ReedemActivity.class);
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
     }
 

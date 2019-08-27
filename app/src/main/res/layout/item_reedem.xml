@@ -45,6 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <Button
+                    android:id="@+id/reedem"
                     android:foreground="?attr/selectableItemBackground"
                     android:layout_marginStart="16dp"
                     android:textAllCaps="false"

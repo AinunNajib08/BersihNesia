@@ -44,6 +44,7 @@ import com.example.bersihnesia.listener.ItemClickSupport;
 import com.example.bersihnesia.model.Comm;
 import com.example.bersihnesia.model.Community;
 import com.example.bersihnesia.model.Event;
+import com.example.bersihnesia.model.PostPersonal;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -91,6 +92,7 @@ TextView point;
     LinearLayout linearLayout,l_reedem;
     ProgressBar progressBar;
     SharedPreferences sharedPreferences;
+    String sIdPersonal;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -102,7 +104,7 @@ TextView point;
         boolean permissionGranted = ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
         mContext = getContext();
         sharedPreferences=view.getContext().getSharedPreferences("remember",Context.MODE_PRIVATE);
-        String sPoint = sharedPreferences.getString("point","1");
+        sIdPersonal = sharedPreferences.getString("id_personal","2");
         linearLayout = view.findViewById(R.id.event_click);
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +132,6 @@ TextView point;
 
 
         point=view.findViewById(R.id.point);
-        point.setText(sPoint+" p");
         eventAdapter = new EventAdapter(mContext);
         commAdapter = new CommAdapter(mContext);
         mApiService = UtilsApi.getAPIService();
@@ -213,10 +214,29 @@ TextView point;
                 fragmentTransaction.commit();
             }
         });
+        getPoint();
         return view;
 
 
 
+    }
+
+    private void getPoint() {
+        Call<PostPersonal> postPoint=mApiService.postPoint(sIdPersonal);
+        postPoint.enqueue(new Callback<PostPersonal>() {
+            @Override
+            public void onResponse(Call<PostPersonal> call, Response<PostPersonal> response) {
+                String my_point=response.body().getPoint();
+                point.setText(my_point+" pt");
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("point", my_point);
+                editor.apply();
+            }
+            @Override
+            public void onFailure(Call<PostPersonal> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override

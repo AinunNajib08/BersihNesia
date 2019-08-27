@@ -28,8 +28,6 @@ public class Reedem {
         this.id_item = id_item;
     }
 
-
-
     public String getName_item() {
         return name_item;
     }

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.bersihnesia.R;
 import com.example.bersihnesia.activity.DetailCommuntiyActivity;
@@ -39,13 +40,14 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.MyVi
         Glide.with(context)
                 .load("http://jwpdigitalent.com/gagas/upload/"+mCommunity.get(posisi).getPhoto())
                 .placeholder(R.drawable.ic_banner)
-                .apply(RequestOptions.circleCropTransform())
+                .apply(new RequestOptions().transform(new RoundedCorners(50)))
                 .into(holder.photo);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(v.getContext(),DetailCommuntiyActivity.class);
                 intent.putExtra("id_com", mCommunity.get(posisi).getId_community());
+                intent.putExtra("photo", mCommunity.get(posisi).getPhoto());
                 intent.putExtra("name_community",mCommunity.get(posisi).getName_community());
                 v.getContext().startActivity(intent);
 

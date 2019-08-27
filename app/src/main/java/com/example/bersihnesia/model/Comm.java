@@ -5,7 +5,18 @@ import android.os.Parcelable;
 
 public class Comm implements Parcelable {
     int id_community;
-    String name_community, description;
+    String name_community;
+    String description;
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    String photo;
 
     public int getId_community() {
         return id_community;

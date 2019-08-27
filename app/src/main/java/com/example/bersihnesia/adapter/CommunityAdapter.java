@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.bersihnesia.R;
 import com.example.bersihnesia.activity.DetailCommuntiyActivity;
 import com.example.bersihnesia.model.Community;
@@ -34,10 +36,16 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.MyVi
     public void onBindViewHolder(CommunityAdapter.MyViewHolder holder, final int posisi) {
         holder.title.setText(mCommunity.get(posisi).getName_community());
         holder.description.setText(mCommunity.get(posisi).getDescription());
+        Glide.with(context)
+                .load("http://jwpdigitalent.com/gagas/upload/"+mCommunity.get(posisi).getPhoto())
+                .placeholder(R.drawable.ic_banner)
+                .apply(RequestOptions.circleCropTransform())
+                .into(holder.photo);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(v.getContext(),DetailCommuntiyActivity.class);
+                intent.putExtra("id_com", mCommunity.get(posisi).getId_community());
                 intent.putExtra("name_community",mCommunity.get(posisi).getName_community());
                 v.getContext().startActivity(intent);
 
@@ -59,7 +67,8 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.MyVi
             super(itemView);
             title=itemView.findViewById(R.id.txt_title);
             description=itemView.findViewById(R.id.txt_description);
-            photo=itemView.findViewById(R.id.photo);
+            photo=itemView.findViewById(R.id.i_community);
+
         }
     }
 }

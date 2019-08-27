@@ -40,6 +40,13 @@ public interface BaseApiService {
     @GET("api/list_event/search/{cari}")
     Call<ResponseBody> getEventSearch(@Path("cari") Editable cari);
 
+    @GET("api/status_member/sum/{id_community}")
+    Call<ResponseBody> getSum(@Path("id_community") int id_community);
+
+    @GET("api/status_member/check/{id_community}/{id_personal}")
+    Call<ResponseBody> getCheckMember(@Path("id_community") int id_community,
+                                      @Path("id_personal") int id_personal);
+
     @GET("api/list_event/detail/{id_event}/{id_personal}")
     Call<ResponseBody> getCheck(@Path("id_event") int id_event,
                                 @Path("id_personal") int id_personal);

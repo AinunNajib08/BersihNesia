@@ -118,6 +118,7 @@ public class ReedemAdapter extends RecyclerView.Adapter<ReedemAdapter.MyViewHold
                 else {
                     Intent intent=new Intent(context, ReedemPointActivity.class);
                     context.startActivity(intent);
+                    dialog.dismiss();
                 }
             }
         });

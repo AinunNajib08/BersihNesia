@@ -26,7 +26,8 @@ public class CreateEventActivity extends AppCompatActivity {
     private SimpleDateFormat dateFormatter;
     private SimpleTimeZone simpleTimeZone;
     ImageButton datePick;
-    EditText ettDate;
+    EditText ettDate, etTime;
+    ImageButton btnTime;
     private TimePickerDialog timePickerDialog;
 
     @Override
@@ -37,8 +38,16 @@ public class CreateEventActivity extends AppCompatActivity {
 
         datePick = findViewById(R.id.btnDatePick);
         ettDate = findViewById(R.id.ettDate);
+        btnTime = findViewById(R.id.btnTime);
+        etTime = findViewById(R.id.etTime);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         datePick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateDialog();
+            }
+        });
+        btnTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showTimeDialog();
@@ -50,73 +59,30 @@ public class CreateEventActivity extends AppCompatActivity {
     }
 
     private void showTimeDialog() {
-
-        /**
-         * Calendar untuk mendapatkan waktu saat ini
-         */
         Calendar calendar = Calendar.getInstance();
-
-        /**
-         * Initialize TimePicker Dialog
-         */
         timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                /**
-                 * Method ini dipanggil saat kita selesai memilih waktu di DatePicker
-                 */
-                ettDate.setText("Waktu dipilih = "+hourOfDay+":"+minute);
+                etTime.setText(hourOfDay+":"+minute);
             }
         },
-                /**
-                 * Tampilkan jam saat ini ketika TimePicker pertama kali dibuka
-                 */
                 calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),
-
-                /**
-                 * Cek apakah format waktu menggunakan 24-hour format
-                 */
                 DateFormat.is24HourFormat(this));
-
         timePickerDialog.show();
     }
 
     private void showDateDialog(){
-
-        /**
-         * Calendar untuk mendapatkan tanggal sekarang
-         */
         Calendar newCalendar = Calendar.getInstance();
-
-        /**
-         * Initiate DatePicker dialog
-         */
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
-                /**
-                 * Method ini dipanggil saat kita selesai memilih tanggal di DatePicker
-                 */
-
-                /**
-                 * Set Calendar untuk menampung tanggal yang dipilih
-                 */
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-
-                /**
-                 * Update TextView dengan tanggal yang kita pilih
-                 */
                 ettDate.setText(dateFormatter.format(newDate.getTime()));
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-
-        /**
-         * Tampilkan DatePicker dialog
-         */
         datePickerDialog.show();
     }
 }

@@ -10,7 +10,29 @@ public class Community {
     }
 
     int id_community;
-    public String name_community,contact_person,description,photo;
+    public String name_community;
+    public String contact_person;
+    public String description;
+    public String photo;
+    public String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String time;
 
     public String getName_community() {
         return name_community;

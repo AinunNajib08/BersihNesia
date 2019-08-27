@@ -353,6 +353,7 @@ TextView point;
                                     Comm c = new Comm();
                                     c.setId_community(id_community);
                                     c.setName_community(name_community);
+                                    c.setPhoto(jsonObject.getString("photo"));
                                     arrayCom.add(c);
                                 }
                                 commAdapter.setListEvent(arrayCom);

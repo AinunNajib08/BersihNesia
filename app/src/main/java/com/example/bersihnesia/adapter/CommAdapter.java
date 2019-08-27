@@ -6,8 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.bersihnesia.R;
 import com.example.bersihnesia.model.Comm;
 
@@ -37,7 +41,11 @@ public class CommAdapter extends RecyclerView.Adapter<CommAdapter.GridHolder>  {
 
     @Override
     public void onBindViewHolder(@NonNull GridHolder gridHolder, int i) {
-        gridHolder.tv_nameCommunity.setText(getListComm().get(i).getName_community());
+        Glide.with(context)
+                .load("http://jwpdigitalent.com/gagas/upload/"+getListComm().get(i).getPhoto())
+                .placeholder(R.drawable.ic_banner)
+                .apply(new RequestOptions().transform(new RoundedCorners(1)))
+                .into(gridHolder.imgCom);
     }
 
     @Override
@@ -47,10 +55,12 @@ public class CommAdapter extends RecyclerView.Adapter<CommAdapter.GridHolder>  {
 
     public class GridHolder extends RecyclerView.ViewHolder {
         TextView tv_nameCommunity, tv_Description;
+        ImageView imgCom;
         public GridHolder(@NonNull View itemView) {
             super(itemView);
             tv_nameCommunity = itemView.findViewById(R.id.name_community);
             tv_Description = itemView.findViewById(R.id.description);
+            imgCom = itemView.findViewById(R.id.imgCom);
         }
     }
 }

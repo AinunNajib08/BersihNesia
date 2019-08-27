@@ -16,6 +16,7 @@ import com.example.bersihnesia.adapter.ReedemAdapter;
 import com.example.bersihnesia.apihelper.BaseApiService;
 import com.example.bersihnesia.apihelper.UtilsApi;
 import com.example.bersihnesia.model.GetItemReedem;
+import com.example.bersihnesia.model.PostPersonal;
 import com.example.bersihnesia.model.Reedem;
 
 import java.util.List;
@@ -35,14 +36,14 @@ public class ReedemActivity extends AppCompatActivity {
     TextView txt_point;
     ProgressBar progressBar;
     SharedPreferences sharedPreferences;
+    String sIdPersonal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reedem);
         sharedPreferences = ReedemActivity.this.getSharedPreferences("remember", Context.MODE_PRIVATE);
-        String sPoint = sharedPreferences.getString("point","1");
+        sIdPersonal = sharedPreferences.getString("id_personal","1");
         txt_point=findViewById(R.id.jum_point);
-        txt_point.setText(sPoint+" pt");
         mRecyclerView=findViewById(R.id.rv_item);
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(GONE);
@@ -50,6 +51,7 @@ public class ReedemActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mApiInterface= UtilsApi.getAPIService();
         refresh();
+        getPoint();
     }
 
     private void refresh() {
@@ -66,6 +68,20 @@ public class ReedemActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<GetItemReedem> call, Throwable t) {
+
+            }
+        });
+    }
+    private void getPoint() {
+        Call<PostPersonal> postPoint=mApiInterface.postPoint(sIdPersonal);
+        postPoint.enqueue(new Callback<PostPersonal>() {
+            @Override
+            public void onResponse(Call<PostPersonal> call, Response<PostPersonal> response) {
+                String my_point=response.body().getPoint();
+                txt_point.setText(my_point+" pt");
+            }
+            @Override
+            public void onFailure(Call<PostPersonal> call, Throwable t) {
 
             }
         });

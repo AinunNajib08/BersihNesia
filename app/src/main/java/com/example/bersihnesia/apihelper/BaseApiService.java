@@ -95,11 +95,29 @@ public interface BaseApiService {
 
     );
 
+    @FormUrlEncoded
+    @POST("api/item_reedem")
+    Call<PostPersonal> postReedem(
+                                    @Field("id_personal") String id_personal,
+                                    @Field("id_item") int id_item,
+                                     @Field("nama") String nama,
+                                     @Field("no_hp") String no_hp,
+                                     @Field("alamat_pengiriman") String alamat_pengiriman,
+                                     @Field("reedem_point") String reedem_point
+
+    );
+
 
     @FormUrlEncoded
     @POST("api/login_personal")
     Call<PostPersonal> postLogin(@Field("email") String email,
                                  @Field("password") String password
+
+    );
+
+    @FormUrlEncoded
+    @POST("api/item_reedem/point")
+    Call<PostPersonal> postPoint(@Field("id_personal") String id_personal
 
     );
 

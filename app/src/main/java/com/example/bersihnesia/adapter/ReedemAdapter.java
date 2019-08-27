@@ -113,7 +113,7 @@ public class ReedemAdapter extends RecyclerView.Adapter<ReedemAdapter.MyViewHold
             public void onClick(View v) {
                 if (kon==true){
                     Toast.makeText(context,"Point anda kurang!",Toast.LENGTH_SHORT).show();
-                    Log.e("Test","Gagal");
+
                 }
                 else {
                     Intent intent=new Intent(context, ReedemPointActivity.class);

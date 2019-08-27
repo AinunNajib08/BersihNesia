@@ -2,13 +2,22 @@ package com.example.bersihnesia.model;
 
 public class Reedem {
     int id_item;
-    String name_item,jumlah_point,jumlah_item;
+    String name_item,jumlah_point,jumlah_item,photo;
 
-    public Reedem(int id_item, String name_item, String jumlah_point, String jumlah_item) {
+    public Reedem(int id_item, String name_item, String jumlah_point, String jumlah_item,String photo) {
         this.id_item = id_item;
         this.name_item = name_item;
         this.jumlah_point = jumlah_point;
         this.jumlah_item = jumlah_item;
+        this.photo=photo;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public int getId_item() {

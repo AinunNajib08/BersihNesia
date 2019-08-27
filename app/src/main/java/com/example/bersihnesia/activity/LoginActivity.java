@@ -59,7 +59,7 @@ SharedPreferences  sharedPreferences;
                         String photo=response.body().getPhoto();
                         String point=response.body().getPoint();
 
-                        Log.e("Berhasil Login", "Berhasil " +id_personal);
+                        Log.e("Berhasil Login", "Berhasil " +point);
                         if (TextUtils.isEmpty(id_personal)){
                             Toast.makeText(LoginActivity.this,"Email atau Password Salah",Toast.LENGTH_LONG).show();
                         }

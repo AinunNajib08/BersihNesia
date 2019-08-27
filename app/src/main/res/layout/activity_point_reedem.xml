@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.ReedemPointActivity">
+    <android.support.v7.widget.Toolbar
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@drawable/logo_bersihnesia_full"
+            android:layout_marginStart="13dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"/>
+
+    </android.support.v7.widget.Toolbar>
+    <View
+        android:background="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <LinearLayout
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="16dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_marginBottom="5dp"
+            android:text="Nama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:textSize="12sp"
+            android:padding="10dp"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/nama"
+            android:background="@drawable/ic_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Alamat"
+            android:layout_marginBottom="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:textSize="12sp"
+            android:padding="10dp"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/alamat"
+            android:background="@drawable/ic_form"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"/>
+        <TextView
+            android:layout_marginBottom="5dp"
+            android:text="No HP (Aktif)"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/no"
+            android:textSize="12sp"
+            android:padding="10dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/ic_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/colorBlue"
+            android:textSize="18sp"
+            android:text="Item pilihan anda : "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:textColor="@android:color/black"
+            android:id="@+id/name_item"
+            android:layout_marginBottom="10dp"
+            android:text="Nama item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <ImageView
+            android:src="@mipmap/ic_launcher_round"
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
+            <TextView
+                android:id="@+id/txt_point"
+                android:layout_toLeftOf="@id/my_point"
+                android:text="My Point : "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_alignParentRight="true"
+                android:id="@+id/my_point"
+                android:text="0 pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_toLeftOf="@id/item_point"
+                android:text="Item Point : "
+                android:layout_below="@id/txt_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/item_point"
+                android:text="0 pt"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/my_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:gravity="right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <Button
+            android:layout_marginEnd="20dp"
+            android:id="@+id/tukar"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:textColor="@android:color/white"
+            android:background="@color/btnBlue"
+            android:textAllCaps="false"
+            android:text="Tukar"
+            android:layout_marginTop="20dp"
+            android:layout_width="80dp"
+            android:layout_height="40dp"/>
+        <Button
+            android:id="@+id/batal"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:textColor="@android:color/white"
+            android:background="@color/colorRed"
+            android:textAllCaps="false"
+            android:text="Batal"
+            android:layout_marginTop="20dp"
+            android:layout_width="80dp"
+            android:layout_height="40dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -40,7 +40,7 @@ public class ReedemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reedem);
         sharedPreferences = ReedemActivity.this.getSharedPreferences("remember", Context.MODE_PRIVATE);
-        String sPoint = sharedPreferences.getString("point","0");
+        String sPoint = sharedPreferences.getString("point","1");
         txt_point=findViewById(R.id.jum_point);
         txt_point.setText(sPoint+" pt");
         mRecyclerView=findViewById(R.id.rv_item);

@@ -102,7 +102,7 @@ TextView point;
         boolean permissionGranted = ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
         mContext = getContext();
         sharedPreferences=view.getContext().getSharedPreferences("remember",Context.MODE_PRIVATE);
-        String sPoint = sharedPreferences.getString("point","0");
+        String sPoint = sharedPreferences.getString("point","1");
         linearLayout = view.findViewById(R.id.event_click);
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override

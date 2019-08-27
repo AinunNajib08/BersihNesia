@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activity.ReedemPointActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            ></activity>
         <activity android:name=".activity.ReedemActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             ></activity>

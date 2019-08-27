@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.bersihnesia.R;
 import com.example.bersihnesia.adapter.CommunityTabLayout;
@@ -70,13 +71,20 @@ public class DetailCommuntiyActivity extends AppCompatActivity {
         Glide.with(this)
                 .load("http://jwpdigitalent.com/gagas/upload/"+intent.getStringExtra("photo"))
                 .placeholder(R.drawable.ic_banner)
-                .apply(RequestOptions.circleCropTransform())
+                .apply(new RequestOptions().transform(new RoundedCorners(1)))
                 .into(imageView);
         btnJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getInsert();
                 btnJoin.setVisibility(View.GONE);
+            }
+        });
+        btnEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailCommuntiyActivity.this, CreateEventActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -91,7 +99,7 @@ public class DetailCommuntiyActivity extends AppCompatActivity {
                                 assert response.body() != null;
                                 JSONObject jsonRESULTS = new JSONObject(response.body().string());
                                 String data = jsonRESULTS.getString("result");
-                                jumlah.setText(data + " Orang bergabung dalam komunitas");
+                                jumlah.setText(data + " Orang bergabung");
                             } catch (JSONException | IOException e) {
                                 e.printStackTrace();
                             }

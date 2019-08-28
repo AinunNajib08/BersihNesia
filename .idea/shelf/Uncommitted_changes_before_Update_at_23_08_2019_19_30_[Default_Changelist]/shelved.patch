@@ -1,0 +1,129 @@
+Index: app/src/main/java/com/example/bersihnesia/activity/InformationSampahActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.bersihnesia.activity;\r\n\r\nimport android.support.v7.app.AppCompatActivity;\r\nimport android.os.Bundle;\r\nimport android.support.v7.widget.CardView;\r\nimport android.support.v7.widget.LinearLayoutManager;\r\nimport android.support.v7.widget.RecyclerView;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.widget.ProgressBar;\r\nimport com.example.bersihnesia.R;\r\nimport com.example.bersihnesia.adapter.SampahOrganikAdapter;\r\nimport com.example.bersihnesia.adapter.SampahnonOrganikAdapter;\r\nimport com.example.bersihnesia.apihelper.BaseApiService;\r\nimport com.example.bersihnesia.apihelper.UtilsApi;\r\nimport com.example.bersihnesia.model.GetSampahnonOrganik;\r\nimport com.example.bersihnesia.model.SampahOrganik;\r\nimport com.example.bersihnesia.model.GetSampahOrganik;\r\nimport com.example.bersihnesia.model.SampahnonOrganik;\r\n\r\nimport java.util.List;\r\nimport retrofit2.Call;\r\nimport retrofit2.Callback;\r\nimport retrofit2.Response;\r\n\r\npublic class InformationSampahActivity extends AppCompatActivity {\r\nRecyclerView rv_nonorganik, rv_organik;\r\nCardView organik;\r\nRecyclerView.Adapter mAdapter;\r\nRecyclerView.LayoutManager mLayoutManager;\r\nBaseApiService mApiInterface;\r\nProgressBar progressBar;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_information_sampah);\r\n        rv_nonorganik = findViewById(R.id.rv_nonorganik);\r\n        rv_organik = (RecyclerView) findViewById(R.id.rv_organik);\r\n        mLayoutManager=new LinearLayoutManager(this);\r\n        rv_nonorganik.setLayoutManager(mLayoutManager);\r\n        rv_organik.setLayoutManager(mLayoutManager);\r\n        progressBar = findViewById(R.id.pBar);\r\n        progressBar.setVisibility(View.GONE);\r\n        mApiInterface= UtilsApi.getAPIService();\r\n        rv_nonorganik.setVisibility(View.GONE);\r\n        rv_organik.setVisibility(View.GONE);\r\n        refresh();\r\n        organik.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                if (rv_organik.getVisibility() == View.VISIBLE) {\r\n                    rv_organik.setVisibility(View.GONE);\r\n                } else {\r\n                    rv_organik.setVisibility(View.VISIBLE);\r\n                }\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    public void nonorganik(View view) {\r\n        if (rv_nonorganik.getVisibility() == View.VISIBLE) {\r\n            rv_nonorganik.setVisibility(View.GONE);\r\n        } else {\r\n            rv_nonorganik.setVisibility(View.VISIBLE);\r\n        }\r\n    }\r\n\r\n    private void refresh() {\r\n        Call<GetSampahOrganik> sampahOrganikCall = mApiInterface.getSampahOrganik();\r\n        sampahOrganikCall.enqueue(new Callback<GetSampahOrganik>() {\r\n            @Override\r\n            public void onResponse(Call<GetSampahOrganik> call, Response<GetSampahOrganik> response) {\r\n//                progressBar.setVisibility(View.VISIBLE);\r\n                List<SampahOrganik> sampahOrganikList = response.body().getSampahOrganikList();\r\n                mAdapter=new SampahOrganikAdapter(sampahOrganikList, InformationSampahActivity.this);\r\n                Log.d(\"Retrofit Get\", \"Jumlah data Kontak: \" +\r\n                        String.valueOf(sampahOrganikList.size()));\r\n                rv_organik.setAdapter(mAdapter);\r\n            }\r\n\r\n            @Override\r\n            public void onFailure(Call<GetSampahOrganik> call, Throwable t) {\r\n\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    private void refresh2() {\r\n        Call<GetSampahnonOrganik> sampahnonOrganikCall = mApiInterface.getSampahnonOrganik();\r\n        sampahnonOrganikCall.enqueue(new Callback<GetSampahnonOrganik>() {\r\n            @Override\r\n            public void onResponse(Call<GetSampahnonOrganik> call, Response<GetSampahnonOrganik> response) {\r\n                progressBar.setVisibility(View.VISIBLE);\r\n                List<SampahnonOrganik> sampahnonOrganikList = response.body().getSampahnonOrganikList();\r\n                mAdapter=new SampahnonOrganikAdapter(sampahnonOrganikList, InformationSampahActivity.this);\r\n                Log.d(\"Retrofit Get\", \"Jumlah data Kontak: \" +\r\n                        String.valueOf(sampahnonOrganikList.size()));\r\n                rv_nonorganik.setAdapter(mAdapter);\r\n            }\r\n\r\n            @Override\r\n            public void onFailure(Call<GetSampahnonOrganik> call, Throwable t) {\r\n\r\n            }\r\n        });\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/bersihnesia/activity/InformationSampahActivity.java	(revision b13551aec42210d90f485e70adb02dd6413de81e)
++++ app/src/main/java/com/example/bersihnesia/activity/InformationSampahActivity.java	(date 1566563339906)
+@@ -37,34 +37,34 @@
+         rv_nonorganik = findViewById(R.id.rv_nonorganik);
+         rv_organik = (RecyclerView) findViewById(R.id.rv_organik);
+         mLayoutManager=new LinearLayoutManager(this);
+-        rv_nonorganik.setLayoutManager(mLayoutManager);
++//        rv_nonorganik.setLayoutManager(mLayoutManager);
+         rv_organik.setLayoutManager(mLayoutManager);
+-        progressBar = findViewById(R.id.pBar);
+-        progressBar.setVisibility(View.GONE);
++//        progressBar = findViewById(R.id.pBar);
++//        progressBar.setVisibility(View.GONE);
+         mApiInterface= UtilsApi.getAPIService();
+-        rv_nonorganik.setVisibility(View.GONE);
+-        rv_organik.setVisibility(View.GONE);
+-        refresh();
+-        organik.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                if (rv_organik.getVisibility() == View.VISIBLE) {
+-                    rv_organik.setVisibility(View.GONE);
+-                } else {
+-                    rv_organik.setVisibility(View.VISIBLE);
+-                }
+-            }
+-        });
++//        rv_nonorganik.setVisibility(View.GONE);
++        rv_organik.setVisibility(View.VISIBLE);
++        refresh();
++//        organik.setOnClickListener(new View.OnClickListener() {
++//            @Override
++//            public void onClick(View v) {
++//                if (rv_organik.getVisibility() == View.VISIBLE) {
++//                    rv_organik.setVisibility(View.GONE);
++//                } else {
++//                    rv_organik.setVisibility(View.VISIBLE);
++//                }
++//            }
++//        });
+ 
+     }
+ 
+-    public void nonorganik(View view) {
+-        if (rv_nonorganik.getVisibility() == View.VISIBLE) {
+-            rv_nonorganik.setVisibility(View.GONE);
+-        } else {
+-            rv_nonorganik.setVisibility(View.VISIBLE);
+-        }
+-    }
++//    public void nonorganik(View view) {
++//        if (rv_nonorganik.getVisibility() == View.VISIBLE) {
++//            rv_nonorganik.setVisibility(View.GONE);
++//        } else {
++//            rv_nonorganik.setVisibility(View.VISIBLE);
++//        }
++//    }
+ 
+     private void refresh() {
+         Call<GetSampahOrganik> sampahOrganikCall = mApiInterface.getSampahOrganik();
+@@ -87,23 +87,23 @@
+ 
+     }
+ 
+-    private void refresh2() {
+-        Call<GetSampahnonOrganik> sampahnonOrganikCall = mApiInterface.getSampahnonOrganik();
+-        sampahnonOrganikCall.enqueue(new Callback<GetSampahnonOrganik>() {
+-            @Override
+-            public void onResponse(Call<GetSampahnonOrganik> call, Response<GetSampahnonOrganik> response) {
+-                progressBar.setVisibility(View.VISIBLE);
+-                List<SampahnonOrganik> sampahnonOrganikList = response.body().getSampahnonOrganikList();
+-                mAdapter=new SampahnonOrganikAdapter(sampahnonOrganikList, InformationSampahActivity.this);
+-                Log.d("Retrofit Get", "Jumlah data Kontak: " +
+-                        String.valueOf(sampahnonOrganikList.size()));
+-                rv_nonorganik.setAdapter(mAdapter);
+-            }
+-
+-            @Override
+-            public void onFailure(Call<GetSampahnonOrganik> call, Throwable t) {
+-
+-            }
+-        });
+-    }
++//    private void refresh2() {
++//        Call<GetSampahnonOrganik> sampahnonOrganikCall = mApiInterface.getSampahnonOrganik();
++//        sampahnonOrganikCall.enqueue(new Callback<GetSampahnonOrganik>() {
++//            @Override
++//            public void onResponse(Call<GetSampahnonOrganik> call, Response<GetSampahnonOrganik> response) {
++//                progressBar.setVisibility(View.VISIBLE);
++//                List<SampahnonOrganik> sampahnonOrganikList = response.body().getSampahnonOrganikList();
++//                mAdapter=new SampahnonOrganikAdapter(sampahnonOrganikList, InformationSampahActivity.this);
++//                Log.d("Retrofit Get", "Jumlah data Kontak: " +
++//                        String.valueOf(sampahnonOrganikList.size()));
++//                rv_nonorganik.setAdapter(mAdapter);
++//            }
++//
++//            @Override
++//            public void onFailure(Call<GetSampahnonOrganik> call, Throwable t) {
++//
++//            }
++//        });
++//    }
+ }
+Index: app/src/main/java/com/example/bersihnesia/adapter/SampahOrganikAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.bersihnesia.adapter;\r\n\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.support.v7.widget.RecyclerView;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\nimport com.example.bersihnesia.R;\r\nimport com.example.bersihnesia.activity.DetailCommuntiyActivity;\r\nimport com.example.bersihnesia.model.SampahOrganik;\r\nimport java.util.List;\r\n\r\n\r\npublic class SampahOrganikAdapter extends RecyclerView.Adapter<SampahOrganikAdapter.MyViewHolder> {\r\n    List<SampahOrganik> mSampahOrganik;\r\n    Context context;\r\n    public SampahOrganikAdapter(List<SampahOrganik>ListSampahOrganik, Context context){\r\n        mSampahOrganik=ListSampahOrganik;\r\n        this.context=context;\r\n    }\r\n    public SampahOrganikAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {\r\n        View mView=LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sampahorganik,parent,false);\r\n        MyViewHolder myViewHolder=new MyViewHolder(mView);\r\n        return myViewHolder;\r\n    }\r\n    @Override\r\n    public void onBindViewHolder(SampahOrganikAdapter.MyViewHolder holder, final int posisi) {\r\n        holder.name_information.setText(mSampahOrganik.get(posisi).getName_information());\r\n        holder.description.setText(mSampahOrganik.get(posisi).getDescription());\r\n        holder.itemView.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent intent= new Intent(v.getContext(),DetailCommuntiyActivity.class);\r\n                intent.putExtra(\"name_information\",mSampahOrganik.get(posisi).getName_information());\r\n                v.getContext().startActivity(intent);\r\n            }\r\n        });\r\n    }\r\n    @Override\r\n    public int getItemCount() {\r\n        return mSampahOrganik.size();\r\n    }\r\n    public class MyViewHolder extends RecyclerView.ViewHolder {\r\n        public TextView name_information,description;\r\n        public ImageView photo;\r\n        public MyViewHolder( View itemView) {\r\n            super(itemView);\r\n            name_information=itemView.findViewById(R.id.name_information);\r\n            description=itemView.findViewById(R.id.description);\r\n//            photo=itemView.findViewById(R.id.photo_sampah);\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/bersihnesia/adapter/SampahOrganikAdapter.java	(revision b13551aec42210d90f485e70adb02dd6413de81e)
++++ app/src/main/java/com/example/bersihnesia/adapter/SampahOrganikAdapter.java	(date 1566563339965)
+@@ -50,7 +50,7 @@
+             super(itemView);
+             name_information=itemView.findViewById(R.id.name_information);
+             description=itemView.findViewById(R.id.description);
+-//            photo=itemView.findViewById(R.id.photo_sampah);
++            photo=itemView.findViewById(R.id.photo_sampah);
+         }
+     }
+ }
+\ No newline at end of file

@@ -83,8 +83,9 @@ public class DetailCommuntiyActivity extends AppCompatActivity {
         btnEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetailCommuntiyActivity.this, CreateEventActivity.class);
-                startActivity(intent);
+                Intent intents = new Intent(DetailCommuntiyActivity.this, CreateEventActivity.class);
+                intents.putExtra("id_comm", intent.getIntExtra("id_com", 0));
+                startActivity(intents);
             }
         });
     }

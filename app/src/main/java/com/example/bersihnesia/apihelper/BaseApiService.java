@@ -2,6 +2,7 @@ package com.example.bersihnesia.apihelper;
 
 import android.text.Editable;
 
+import com.example.bersihnesia.model.Community;
 import com.example.bersihnesia.model.GetCommunity;
 import com.example.bersihnesia.model.GetItemReedem;
 import com.example.bersihnesia.model.GetSampahOrganik;
@@ -55,6 +56,20 @@ public interface BaseApiService {
     @GET("api/list_event/detail/{id_event}/{id_personal}")
     Call<ResponseBody> getCheck(@Path("id_event") int id_event,
                                 @Path("id_personal") int id_personal);
+
+    @FormUrlEncoded
+    @POST("api/insert_event")
+    Call<PostPersonal> postEventt( @Field("id_community") int id_community,
+                                    @Field("name_event") String name_event,
+                                  @Field("photo") String photo,
+                                  @Field("description") String description,
+                                  @Field("address") String address,
+                                  @Field("date") String date,
+                                  @Field("time") String time,
+                                  @Field("longlat") String longlat,
+                                  @Field("status_event") String status_event
+
+    );
 
     @GET("api/list_event/member/{id_event}")
     Call<ResponseBody> getMember(@Path("id_event") int id_event);
@@ -133,6 +148,10 @@ public interface BaseApiService {
 
     @GET("api/list_community")
     Call<GetCommunity> getCommunity();
+
+    @GET("api/list_community/location")
+    Call<Community> getLocCommunity();
+
 
     @GET("api/item_reedem")
     Call<GetItemReedem> getItem();

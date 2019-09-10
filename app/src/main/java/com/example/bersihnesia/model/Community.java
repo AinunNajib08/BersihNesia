@@ -1,5 +1,7 @@
 package com.example.bersihnesia.model;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class Community {
     public int getId_community() {
         return id_community;
@@ -15,9 +17,28 @@ public class Community {
     public String description;
     public String photo;
     public String date;
+    public String address;
+    public String latlong;
+
+    public String getLatlong() {
+        return latlong;
+    }
+
+    public void setLatlong(String latlong) {
+        this.latlong = latlong;
+    }
 
     public String getDate() {
         return date;
+    }
+
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setDate(String date) {
@@ -66,10 +87,15 @@ public class Community {
         this.photo = photo;
     }
 
-    public Community(String name_community, String contact_person, String description, String photo) {
+    public Community(int id_community, String name_community, String contact_person, String description, String photo, String date, String address, String latlong, String time) {
+        this.id_community = id_community;
         this.name_community = name_community;
         this.contact_person = contact_person;
         this.description = description;
         this.photo = photo;
+        this.date = date;
+        this.address = address;
+        this.latlong = latlong;
+        this.time = time;
     }
 }

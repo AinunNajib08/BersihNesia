@@ -2,6 +2,7 @@ package com.example.bersihnesia.apihelper;
 
 import android.text.Editable;
 
+import com.example.bersihnesia.model.Community;
 import com.example.bersihnesia.model.GetCommunity;
 import com.example.bersihnesia.model.GetItemReedem;
 import com.example.bersihnesia.model.GetSampahOrganik;
@@ -133,6 +134,10 @@ public interface BaseApiService {
 
     @GET("api/list_community")
     Call<GetCommunity> getCommunity();
+
+    @GET("api/list_community/location")
+    Call<Community> getLocCommunity();
+
 
     @GET("api/item_reedem")
     Call<GetItemReedem> getItem();

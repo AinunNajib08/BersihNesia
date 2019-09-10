@@ -47,6 +47,7 @@ public class PostPersonal {
     int reedem_point;
 
 
+
     public String getNama() {
         return nama;
     }

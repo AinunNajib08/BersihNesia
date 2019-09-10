@@ -6,6 +6,7 @@ import com.example.bersihnesia.model.GetCommunity;
 import com.example.bersihnesia.model.GetItemReedem;
 import com.example.bersihnesia.model.GetSampahOrganik;
 import com.example.bersihnesia.model.GetSampahnonOrganik;
+import com.example.bersihnesia.model.PostNotif;
 import com.example.bersihnesia.model.PostPersonal;
 import com.example.bersihnesia.model.UploadImage;
 
@@ -136,6 +137,11 @@ public interface BaseApiService {
     @FormUrlEncoded
     @POST("api/item_reedem/point")
     Call<PostPersonal> postPoint(@Field("id_personal") String id_personal
+
+    );
+    @FormUrlEncoded
+    @POST("api/item_reedem/trans")
+    Call<PostNotif> postTrans(@Field("id_personal") String id_personal
 
     );
 

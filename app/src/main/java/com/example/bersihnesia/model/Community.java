@@ -13,12 +13,22 @@ public class Community {
 
     int id_community;
     public String name_community;
+    public String jumlah;
     public String contact_person;
     public String description;
     public String photo;
     public String date;
     public String address;
     public String latlong;
+
+
+    public String getJumlah() {
+        return jumlah;
+    }
+
+    public void setJumlah(String jumlah) {
+        this.jumlah = jumlah;
+    }
 
     public String getLatlong() {
         return latlong;

@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.bersihnesia.R;
 import com.example.bersihnesia.model.Event;
 
@@ -38,6 +41,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.GridViewHold
 
     @Override
     public void onBindViewHolder(@NonNull GridViewHolder gridViewHolder, int i) {
+        Glide.with(context)
+                .load("http://jwpdigitalent.com/gagas/upload/"+getListEvent().get(i).getPhoto())
+                .apply(new RequestOptions().transform(new RoundedCorners(50)))
+                .into(gridViewHolder.imgEvent);
         gridViewHolder.tvNameEvent.setText(getListEvent().get(i).getName_event());
     }
 

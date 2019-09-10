@@ -92,6 +92,7 @@ TextView point;
     LinearLayout linearLayout,l_reedem;
     ProgressBar progressBar;
     SharedPreferences sharedPreferences;
+    private Location location;
     String sIdPersonal;
 
     @Override
@@ -313,6 +314,24 @@ TextView point;
                                     String name_event = jsonObject.getString("name_event");
                                     Event event = new Event();
                                     event.setId_event(id_event);
+
+                                    double latiounde = location.getLatitude();
+                                    double asd = location.getLongitude();
+
+                                    Location loc1 = new Location("");
+                                    loc1.setLatitude(latiounde);
+                                    loc1.setLongitude(asd);
+
+                                    Location loc2 = new Location("");
+                                    loc2.setLatitude(-8.174230);
+                                    loc2.setLongitude(113.718665);
+
+                                    float distanceInMeters = loc1.distanceTo(loc2);
+
+                                    String tes = String.valueOf(distanceInMeters * 0.001);
+                                    Log.e("RAG", "onCreateView: "+tes );
+                                    event.setPhoto(jsonObject.getString("photo"));
+                                    event.setLonglat(tes);
                                     event.setName_event(name_event);
                                     arrayList.add(event);
                                 }

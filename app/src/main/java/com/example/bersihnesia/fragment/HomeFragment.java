@@ -335,6 +335,9 @@ public class HomeFragment extends Fragment implements LocationListener {
                                     double longitude = Double.parseDouble(sda[1]);
                                     loc2.setLatitude(latitude);
                                     loc2.setLongitude(longitude);
+                                    float distanceInMeters = location.distanceTo(loc2);
+
+                                    String tes = String.valueOf(distanceInMeters * 0.001);
                                     event.setPhoto(jsonObject.getString("photo"));
                                     event.setName_event(name_event);
                                     arrayList.add(event);

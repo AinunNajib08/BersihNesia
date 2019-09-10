@@ -28,6 +28,7 @@ import com.example.bersihnesia.R;
 import com.example.bersihnesia.apihelper.BaseApiService;
 import com.example.bersihnesia.apihelper.UtilsApi;
 import com.example.bersihnesia.model.PostPersonal;
+import com.example.bersihnesia.model.UploadImage;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
@@ -38,9 +39,14 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.SimpleTimeZone;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,6 +67,7 @@ public class CreateEventActivity extends AppCompatActivity {
     Activity activity;
     Intent intent;
     Button btnCreate;
+    private File file;
     private int PLACE_PICKER_REQUEST = 2;
     private int REQUEST_PICTURE_CAPTURE = 1;
     EditText ettDate, etTime, tvLokasi;
@@ -154,6 +161,7 @@ public class CreateEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mApiService = UtilsApi.getAPIService();
+                uploadFile();
                 mApiService.postEventt(intent.getIntExtra("id_comm", 1) ,tvNameEvent.getText().toString(), imgEvent.getText().toString(), tvDesciption.getText().toString(), tvLokasi.getText().toString(), ettDate.getText().toString(), etTime.getText().toString(), longlat.getText().toString(), "Public" )
                         .enqueue(new Callback<PostPersonal>() {
                             @Override
@@ -255,5 +263,42 @@ public class CreateEventActivity extends AppCompatActivity {
 
 
     }
+
+    private void uploadFile() {
+
+        if (mediaPath!=null){
+            file = new File(mediaPath);
+        } else if (pictureFilePath!=null) {
+            file = new File(pictureFilePath);
+        }
+
+        // Parsing any Media type file
+        RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
+        MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
+        RequestBody filename = RequestBody.create(MediaType.parse("text/plain"), file.getName());
+
+
+        retrofit2.Call<UploadImage> call = mApiService.uploadFile(fileToUpload, filename);
+        call.enqueue(new Callback<UploadImage>() {
+            @Override
+            public void onResponse(retrofit2.Call<UploadImage> call, Response<UploadImage> response) {
+                UploadImage serverResponse = response.body();
+                if (serverResponse != null) {
+                    if (serverResponse.getSuccess()) {
+                        Toast.makeText(getApplicationContext().getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext().getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<UploadImage> call, Throwable t) {
+                Toast.makeText(getApplicationContext().getApplicationContext(), "Gagal", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
 }

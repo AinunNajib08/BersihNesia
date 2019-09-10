@@ -16,6 +16,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.bersihnesia.R;
 import com.example.bersihnesia.activity.DetailCommuntiyActivity;
 import com.example.bersihnesia.fragment.EventFragment;
@@ -46,6 +49,10 @@ public class EventActivityAdapter extends RecyclerView.Adapter<EventActivityAdap
 
     @Override
     public void onBindViewHolder(@NonNull final EventActivityAdapter.GridViewHolder gridViewHolder, final int i) {
+        Glide.with(context)
+                .load("http://jwpdigitalent.com/gagas/upload/"+getListEvent().get(i).getPhoto())
+                .apply(new RequestOptions().transform(new RoundedCorners(50)))
+                .into(gridViewHolder.imgEvent);
         gridViewHolder.tvNameEvent.setText(getListEvent().get(i).getName_event());
         gridViewHolder.tvDesc.setText(getListEvent().get(i).getDescription());
     }
@@ -57,8 +64,10 @@ public class EventActivityAdapter extends RecyclerView.Adapter<EventActivityAdap
 
     public class GridViewHolder extends RecyclerView.ViewHolder {
         TextView tvDesc, tvNameEvent;
+        ImageView imgEvent;
         public GridViewHolder(@NonNull View itemView) {
             super(itemView);
+            imgEvent = itemView.findViewById(R.id.imgEvent);
             tvNameEvent = itemView.findViewById(R.id.tvName);
             tvDesc = itemView.findViewById(R.id.tvDesc);
         }

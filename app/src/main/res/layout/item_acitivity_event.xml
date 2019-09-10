@@ -15,7 +15,8 @@
             android:layout_marginVertical="15dp">
 
             <ImageView
-                android:id="@+id/i_community"
+                android:id="@+id/imgEvent"
+                android:scaleType="centerCrop"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:src="@mipmap/ic_launcher_round" />
@@ -23,7 +24,7 @@
                 android:id="@+id/tvName"
                 android:textColor="@android:color/black"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/i_community"
+                android:layout_toRightOf="@id/imgEvent"
                 android:text="Judul Komunitas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -33,7 +34,7 @@
                 android:textStyle="italic"
                 android:text="Lorem ipsum dolor sit,"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/i_community"
+                android:layout_toRightOf="@id/imgEvent"
                 android:layout_below="@id/tvName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

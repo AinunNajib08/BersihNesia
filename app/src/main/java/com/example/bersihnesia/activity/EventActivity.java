@@ -128,6 +128,7 @@ public class EventActivity extends AppCompatActivity {
                                     String desc = jsonObject.getString("description");
                                     Event event = new Event();
                                     event.setId_event(id_event);
+                                    event.setPhoto(jsonObject.getString("photo"));
                                     event.setName_event(name_event);
                                     event.setDescription(desc);
                                     arrayList.add(event);
@@ -168,6 +169,7 @@ public class EventActivity extends AppCompatActivity {
                                     String desc = jsonObject.getString("description");
                                     Event event = new Event();
                                     event.setId_event(id_event);
+                                    event.setPhoto(jsonObject.getString("photo"));
                                     event.setName_event(name_event);
                                     event.setDescription(desc);
                                     arrayList.add(event);

@@ -198,8 +198,8 @@ public class DetailCommuntiyActivity extends AppCompatActivity {
                 }
                 Intent intent=new Intent(DetailCommuntiyActivity.this,JumlahBarangActivity.class);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("id", id_personal);
-                editor.putString("nama", name);
+                editor.putString("id_da", id_personal);
+                editor.putString("nama_da", name);
                 startActivity(intent);
             }
         } else {

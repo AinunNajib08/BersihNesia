@@ -43,7 +43,7 @@ public class DetailCommuntiyActivity extends AppCompatActivity {
     ImageView imageView;
     BaseApiService mApiService;
     Intent intent;
-    String idPersonal,id_personal;
+    String idPersonal,id_personal,name;
     SharedPreferences sharedPreferences;
     Button btnEvent, btnJoin;
     FloatingActionButton scanner;
@@ -185,7 +185,9 @@ public class DetailCommuntiyActivity extends AppCompatActivity {
                     JSONObject obj = new JSONObject(result.getContents());
                     //setting values to textviews
                      id_personal= (obj.getString("id_personal"));
-                    //alamat.setText(obj.getString("address"));
+                     name = (obj.getString("name"));
+
+                    //showDialog();
                 } catch (JSONException e) {
                     e.printStackTrace();
                     //if control comes here
@@ -194,6 +196,11 @@ public class DetailCommuntiyActivity extends AppCompatActivity {
                     //to a toast
                     Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                 }
+                Intent intent=new Intent(DetailCommuntiyActivity.this,JumlahBarangActivity.class);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("id_personal", id_personal);
+                editor.putString("name", name);
+                startActivity(intent);
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);

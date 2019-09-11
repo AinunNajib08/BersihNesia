@@ -31,13 +31,8 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (cek.equals("0")){
                     Intent i = new Intent(SplashActivity.this,LoginActivity.class);
                     startActivity(i);
-                } else {
-                    Intent i = new Intent(SplashActivity.this,HomeActivity.class);
-                    startActivity(i);
-                }
 
                 //finish berguna untuk mengakhiri activity
                 //disini saya menggunakan finish,supaya ketika menekan tombol back

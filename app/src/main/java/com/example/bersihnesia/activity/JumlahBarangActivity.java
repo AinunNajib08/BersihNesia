@@ -16,8 +16,8 @@ TextView name;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jumlah_barang);
         sharedPreferences = this.getSharedPreferences("remember", Context.MODE_PRIVATE);
-        String sNama = sharedPreferences.getString("name", "0");
-        String sId = sharedPreferences.getString("id_personal", "id");
+        String sNama = sharedPreferences.getString("nama_da", "0");
+        String sId = sharedPreferences.getString("id_da", "id");
         name=findViewById(R.id.name);
         name.setText(sNama);
 

@@ -24,6 +24,7 @@ import com.example.bersihnesia.activity.LocationCommuityActivity;
 import com.example.bersihnesia.activity.LoginActivity;
 import com.example.bersihnesia.activity.ReedemActivity;
 import com.example.bersihnesia.activity.RegisterActivity;
+import com.example.bersihnesia.activity.SplashActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void Login(View view) {
-        Intent intent=new Intent(MainActivity.this, LocationCommuityActivity.class);
+        Intent intent=new Intent(MainActivity.this, SplashActivity.class);
         startActivity(intent);
     }
 

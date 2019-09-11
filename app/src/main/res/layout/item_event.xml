@@ -26,6 +26,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:textSize="11sp"
                 android:id="@+id/name_event"
                 android:textStyle="bold"
                 android:maxLines="2"
@@ -35,6 +36,8 @@
                 android:text="Example" />
 
             <TextView
+                android:textSize="10sp"
+                android:textStyle="italic"
                 android:id="@+id/tvDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

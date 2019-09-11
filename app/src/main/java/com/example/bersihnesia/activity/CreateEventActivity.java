@@ -167,6 +167,7 @@ public class CreateEventActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(Call<PostPersonal> call, Response<PostPersonal> response) {
                                 Toast.makeText(getApplicationContext(), "Terima Kasih Permintaan Sedang di Proses", Toast.LENGTH_SHORT).show();
+                                finish();
                             }
 
                             @Override

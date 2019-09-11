@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.SplashActivity"></activity>
+        <activity android:name=".activity.SplashActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity android:name=".activity.LocationCommuityActivity" />
         <activity
             android:name=".activity.CreateEventActivity"

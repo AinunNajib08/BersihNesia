@@ -4,33 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/splash"
+    android:background="#B8B8B8"
     android:gravity="center"
     android:orientation="vertical">
     <LinearLayout
         android:id="@+id/lv_loading"
+        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-
-
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/img_google" />
-
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:src="@drawable/santai" />
         <com.wang.avi.AVLoadingIndicatorView
             android:id="@+id/avi"
             style="@style/AVLoadingIndicatorView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="visible"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            app:indicatorColor="#1180D1"
-
             app:indicatorName="BallPulseIndicator" />
     </LinearLayout>
 </LinearLayout>

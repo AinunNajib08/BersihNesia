@@ -28,13 +28,13 @@ public class DrawTrashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_draw_trash);
         sharedPreferences = DrawTrashActivity.this.getSharedPreferences("remember", Context.MODE_PRIVATE);
-        sId = sharedPreferences.getString("id_personal", "id");
-        sNama = sharedPreferences.getString("name", "name");
+        sId = sharedPreferences.getString("id", "id");
+        sNama = sharedPreferences.getString("nama", "name");
         imageView = findViewById(R.id.imageBitmap);
         JSONObject student1 = new JSONObject();
         try {
-            student1.put("id_personal", sId);
-            student1.put("name", sNama);
+            student1.put("id", sId);
+            student1.put("nama", sNama);
 
         } catch (JSONException e) {
             // TODO Auto-generated catch block

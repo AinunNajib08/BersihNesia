@@ -31,8 +31,8 @@ public class JoinAdapter extends RecyclerView.Adapter<JoinAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder( MyViewHolder holder, int i) {
-        holder.txt_title.setText(mJoin.get(i).getName_community()+" orang yang bergabung");
-        holder.txt_jumlah.setText(mJoin.get(i).getJumlah());
+        holder.txt_title.setText(mJoin.get(i).getName_community());
+        holder.txt_jumlah.setText(mJoin.get(i).getJumlah()+" orang yang bergabung");
 
     }
 

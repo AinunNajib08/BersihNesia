@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bersihnesia.MainActivity;
@@ -25,6 +26,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
 EditText email,password;
 Button login;
+TextView regist;
 ProgressDialog progressDialog;
 BaseApiService mApiService;
 SharedPreferences  sharedPreferences;
@@ -35,8 +37,17 @@ SharedPreferences  sharedPreferences;
         email=findViewById(R.id.email);
         password=findViewById(R.id.password);
         login=findViewById(R.id.login);
+        regist=findViewById(R.id.daftar);
         mApiService = UtilsApi.getAPIService();
         sharedPreferences = LoginActivity.this.getSharedPreferences("remember",Context.MODE_PRIVATE);
+
+        regist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

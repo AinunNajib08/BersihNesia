@@ -94,6 +94,11 @@ public interface BaseApiService {
                                     @Field("jk") String jk,
                                     @Field("photo") String photo
     );
+    @FormUrlEncoded
+    @POST("api/informasi_sampah/jumlah")
+    Call<PostPersonal> postSampah(@Field("id_personal") String id_personal,
+                                    @Field("jumlah_sampah") String jumlah_sampah
+    );
 
     @FormUrlEncoded
     @POST("api/report_lokasi")

@@ -47,7 +47,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.GridViewHold
                 .into(gridViewHolder.imgEvent);
         gridViewHolder.tvNameEvent.setText(getListEvent().get(i).getName_event());
         String km = String.valueOf(getListEvent().get(i).getLonglat());
-        gridViewHolder.tvDesc.setText(km +" KM");
+        gridViewHolder.tvDesc.setText(getListEvent().get(i).getTime_date());
     }
 
     @Override

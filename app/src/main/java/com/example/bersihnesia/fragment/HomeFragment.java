@@ -68,7 +68,6 @@ public class HomeFragment extends Fragment implements LocationListener {
     FloatingActionButton fab;
     TextView point;
     String da;
-
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -256,7 +255,7 @@ public class HomeFragment extends Fragment implements LocationListener {
         float distanceInMeters = loc1.distanceTo(loc2);
 
         String tes = String.valueOf(distanceInMeters * 0.001);
-        Log.e("RAG", "onCreateView: " + tes);
+        Log.e("RAG", "TEST: " + tes);
 
     }
 
@@ -333,7 +332,7 @@ public class HomeFragment extends Fragment implements LocationListener {
                                     double asd = location.getLongitude();
 
                                     String[] das =  da.split(",");
-                                    double asdasd = Double.parseDouble(das[1]);
+                                    double asdasd = Double.parseDouble(das[0]);
                                     double asds = Double.parseDouble(das[1]);
                                     Location loc1 = new Location("");
                                     loc1.setLatitude(latiounde);
@@ -344,14 +343,11 @@ public class HomeFragment extends Fragment implements LocationListener {
                                     loc2.setLongitude(asds);
 
                                     float distanceInMeters = loc1.distanceTo(loc2);
-
-                                    String tes = String.valueOf(distanceInMeters / 1000);
-                                    Double reat = Double.parseDouble(tes);
-                                    Double kilometer = Double.parseDouble(tes);
-                                    Log.e("RAG", "onCreateView: " + tes);
-                                    Double distance = (double) (Math.round(reat * 100)) / 100;
+                                    Log.e("RAG", "onResponse: KM"+distanceInMeters );
+                                    String tes = String.valueOf(distanceInMeters);
+                                    event.setTime_date(jsonObject.getString("date"));
                                     event.setPhoto(jsonObject.getString("photo"));
-                                    event.setLonglat(distance);
+                                    event.setLonglat(tes);
                                     event.setName_event(name_event);
                                     arrayList.add(event);
                                 }

@@ -105,7 +105,11 @@ public class EventFragment extends Fragment {
                                     Log.e("RAG", "onResponse: "+id_event );
                                     nameEvent = jsonObject.getString("name_event");
                                     Community = jsonObject.getString("name_community");
-                                    Mode = jsonObject.getString("status");
+                                    if (jsonObject.getString("status").equals("1")){
+                                        Mode = "Sudah Terdaftar";
+                                    } else {
+                                        Mode = "Belum Terdaftar";
+                                    }
                                     tvNameEvent.setText(nameEvent);
                                     tvCommunity.setText("by "+Community);
                                     tvMode.setText(Mode);

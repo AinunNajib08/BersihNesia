@@ -6,7 +6,7 @@ import android.os.Parcelable;
 public class Event implements Parcelable {
     private int id_event, id_community;
     private String name_event, photo, description, address, time_date,  status_event;
-    Double longlat;
+    String longlat;
 
     public int getId_event() {
         return id_event;
@@ -64,11 +64,11 @@ public class Event implements Parcelable {
         this.time_date = time_date;
     }
 
-    public Double getLonglat() {
+    public String getLonglat() {
         return longlat;
     }
 
-    public void setLonglat(Double longlat) {
+    public void setLonglat(String longlat) {
         this.longlat = longlat;
     }
 
@@ -94,7 +94,7 @@ public class Event implements Parcelable {
         dest.writeString(this.description);
         dest.writeString(this.address);
         dest.writeString(this.time_date);
-        dest.writeDouble(this.longlat);
+        dest.writeString(this.longlat);
         dest.writeString(this.status_event);
     }
 
@@ -109,7 +109,7 @@ public class Event implements Parcelable {
         this.description = in.readString();
         this.address = in.readString();
         this.time_date = in.readString();
-        this.longlat = in.readDouble();
+        this.longlat = in.readString();
         this.status_event = in.readString();
     }
 

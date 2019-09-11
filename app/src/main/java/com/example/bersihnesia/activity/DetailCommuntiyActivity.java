@@ -197,9 +197,8 @@ public class DetailCommuntiyActivity extends AppCompatActivity {
                     Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                 }
                 Intent intent=new Intent(DetailCommuntiyActivity.this,JumlahBarangActivity.class);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("id_da", id_personal);
-                editor.putString("nama_da", name);
+                intent.putExtra("id",id_personal);
+                intent.putExtra("nama",name);
                 startActivity(intent);
             }
         } else {

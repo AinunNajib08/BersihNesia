@@ -12,14 +12,16 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="my_point">My Point</string>
+    <string name="my_point">Poin saya</string>
     <string name="community">Komunitas</string>
     <string name="information">Informasi</string>
     <string name="event">Event Terbaru</string>
     <string name="more">Lebih</string>
     <string name="join_community">Join Komunitas</string>
     <string name="news">News</string>
-    <string name="lorem_ipsum">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis at cupiditate fugit obcaecati omnis, exercitationem temporibus sit nulla quisquam earum ratione repellendus pariatur alias facere dicta quia iure reiciendis expedita.</string>
+    <string name="lorem_ipsum">Supriyadi bergantung pada air keruh Citarum – di mana karpet, sampah rumah tangga, bahan kimia beracun hingga kotoran hewan mengambang – untuk mengairi sepetak lahan padi di Jawa Barat yang menjadi penopang kehidupan enam anggota keluarganya.
+Artikel ini telah tayang di Tribunjogja.com dengan judul Sungai Terkotor di Dunia, Beginilah Kehidupan di Pinggir Citarum, https://jogja.tribunnews.com/2018/03/04/sungai-terkotor-di-dunia-beginilah-kehidupan-di-pinggir-citarum.
+Editor: iwanoganapriansyah</string>
     <string name="title_activity_event">EventActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>

@@ -2,6 +2,7 @@ package com.example.bersihnesia.fragment;
 
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -68,6 +69,7 @@ public class HomeFragment extends Fragment implements LocationListener {
     FloatingActionButton fab;
     TextView point;
     String da;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -104,6 +106,7 @@ public class HomeFragment extends Fragment implements LocationListener {
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         boolean permissionGranted = ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
         mContext = getContext();
+        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         sharedPreferences = view.getContext().getSharedPreferences("remember", Context.MODE_PRIVATE);
         sIdPersonal = sharedPreferences.getString("id_personal", "2");
         linearLayout = view.findViewById(R.id.event_click);
@@ -312,16 +315,11 @@ public class HomeFragment extends Fragment implements LocationListener {
                                     String name_event = jsonObject.getString("name_event");
                                     Event event = new Event();
                                     event.setId_event(id_event);
-                                    LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-                                    if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                                        // TODO: Consider calling
-                                        //    ActivityCompat#requestPermissions
-                                        // here to request the missing permissions, and then overriding
-                                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                        //                                          int[] grantResults)
-                                        // to handle the case where the user grants the permission. See the documentation
-                                        // for ActivityCompat#requestPermissions for more details.
-                                        return;
+
+                                    if (ActivityCompat.checkSelfPermission((Activity)mContext, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                                        ActivityCompat.requestPermissions((Activity)mContext, new String[]{
+                                                android.Manifest.permission.ACCESS_FINE_LOCATION
+                                        }, 10);
                                     }
                                     Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                                     double longlat = location.getLongitude();
@@ -367,7 +365,7 @@ public class HomeFragment extends Fragment implements LocationListener {
                     @Override
                     public void onFailure(@NonNull Call<ResponseBody> call,@NonNull Throwable t) {
                         progressBar.setVisibility(View.GONE);
-                        Toast.makeText(getActivity(), "Error "+t, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Error "+t, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -406,7 +404,7 @@ public class HomeFragment extends Fragment implements LocationListener {
                     @Override
                     public void onFailure(@NonNull Call<ResponseBody> call,@NonNull Throwable t) {
                         progressBar.setVisibility(View.GONE);
-                        Toast.makeText(getActivity(), "Error "+t, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Error "+t, Toast.LENGTH_SHORT).show();
                     }
                 });
 

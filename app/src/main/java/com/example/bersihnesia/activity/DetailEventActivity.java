@@ -40,6 +40,7 @@ public class DetailEventActivity extends AppCompatActivity {
         tvCommunity = findViewById(R.id.name_community);
         tvMode = findViewById(R.id.tvMode);
         code = bundle.getInt("data1");
+        Log.e("RAG", "CodeTM: "+code );
         TabLayout tabLayout = findViewById(R.id.event_tab_layout);
         ViewPager viewPager = findViewById(R.id.event_viewpager);
         viewPager.setOffscreenPageLimit(3);

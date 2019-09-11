@@ -17,7 +17,6 @@ Intent intent;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jumlah_barang);
-        sharedPreferences = this.getSharedPreferences("remember", Context.MODE_PRIVATE);
         intent = getIntent();
         name=findViewById(R.id.name);
         name.setText(intent.getStringExtra("nama"));

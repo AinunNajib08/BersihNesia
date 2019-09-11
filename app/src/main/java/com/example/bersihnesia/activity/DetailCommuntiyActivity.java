@@ -184,8 +184,8 @@ public class DetailCommuntiyActivity extends AppCompatActivity {
                     //converting the data to json
                     JSONObject obj = new JSONObject(result.getContents());
                     //setting values to textviews
-                     id_personal= (obj.getString("id_personal"));
-                     name = (obj.getString("name"));
+                     id_personal= (obj.getString("id"));
+                     name = (obj.getString("nama"));
 
                     //showDialog();
                 } catch (JSONException e) {

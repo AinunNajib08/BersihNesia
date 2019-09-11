@@ -101,7 +101,6 @@ public class DetailCommuntiyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 qrScan.initiateScan();
-                showDialog();
             }
         });
     }
@@ -205,8 +204,7 @@ public class DetailCommuntiyActivity extends AppCompatActivity {
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_scanner);
         Button iya=dialog.findViewById(R.id.iya);
-        TextView id=dialog.findViewById(R.id.id_personal);
-        id.setText(id_personal);
+        TextView id_personal=dialog.findViewById(R.id.id_personal);
         iya.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

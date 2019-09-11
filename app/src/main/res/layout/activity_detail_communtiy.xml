@@ -7,7 +7,6 @@
     tools:context=".fragment.EventFragment">
 
     <android.support.design.widget.FloatingActionButton
-        android:visibility="visible"
         android:src="@drawable/ic_fullscreen"
         android:id="@+id/scanner"
         android:layout_width="wrap_content"

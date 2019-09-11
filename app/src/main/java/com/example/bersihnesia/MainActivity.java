@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     JSONObject obj = new JSONObject(result.getContents());
                     //setting values to textviews
                     nama.setText(obj.getString("name"));
-                    alamat.setText(obj.getString("address"));
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                     //if control comes here

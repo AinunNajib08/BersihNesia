@@ -101,6 +101,7 @@ public class DetailCommuntiyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 qrScan.initiateScan();
+                showDialog();
             }
         });
     }

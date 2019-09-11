@@ -75,6 +75,7 @@ public class PdfActivity extends AppCompatActivity implements OnPageChangeListen
                 launchPicker();
                 return true;
             case R.id.upload:
+                uploadFile();
                 Intent intent=new Intent(PdfActivity.this,CreateCommunityActivity.class);
                 intent.putExtra("pdf_name",pdfFileName);
                 Bundle bundle = getIntent().getExtras();

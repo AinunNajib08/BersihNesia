@@ -56,7 +56,6 @@ public class CreateCommunityActivity extends PdfActivity {
         daftar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadFile();
                 Call<PostPersonal> postCommunity=mApiService.postCommunity(sId,name_community.getText().toString(),no_hp.getText().toString(),lokasi.getText().toString(),lol.getText().toString(),deskripsi.getText().toString(),pdf_name.getText().toString());
                 postCommunity.enqueue(new Callback<PostPersonal>() {
                     @Override

@@ -7,34 +7,34 @@
     tools:context=".fragment.ProfileFragment">
 
 
-        <RelativeLayout
-            android:id="@+id/r1"
+    <RelativeLayout
+        android:id="@+id/r1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_profil"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:scaleType="fitXY"
-                android:src="@drawable/bg_profil"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"/>
-            <TextView
-                android:textStyle="bold"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="50dp"
-                android:layout_toRightOf="@id/img"
-                android:text="name"
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-            <TextView
-                android:textStyle="italic"
-                android:layout_marginStart="20dp"
-                android:layout_below="@id/name"
-                android:layout_toRightOf="@id/img"
-                android:text="email"
-                android:id="@+id/email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            android:layout_height="200dp"/>
+        <TextView
+            android:textStyle="bold"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"
+            android:layout_toRightOf="@id/img"
+            android:text="name"
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:textStyle="italic"
+            android:layout_marginStart="20dp"
+            android:layout_below="@id/name"
+            android:layout_toRightOf="@id/img"
+            android:text="email"
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_marginTop="30dp"
             android:layout_marginStart="20dp"
@@ -42,7 +42,7 @@
             android:src="@mipmap/ic_launcher_round"
             android:layout_width="100dp"
             android:layout_height="100dp"/>
-        </RelativeLayout>
+    </RelativeLayout>
     <LinearLayout
         android:layout_below="@id/r1"
         android:orientation="vertical"
@@ -53,109 +53,109 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <ImageButton
-            android:id="@+id/img_photo"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/ic_camera"
-            android:background="@color/btnBlue"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
-        <TextView
-            android:id="@+id/photo"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:text="pick_name.jpg"
-            android:layout_toRightOf="@id/img_photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <ImageButton
+                android:id="@+id/img_photo"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_camera"
+                android:background="@color/btnBlue"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <TextView
+                android:id="@+id/photo"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="pick_name.jpg"
+                android:layout_toRightOf="@id/img_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
         <ScrollView
             android:scrollbars="none"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/txt_profil"
-            android:textSize="20sp"
-            android:layout_marginTop="10dp"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            android:text="Profil"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:textStyle="bold"
-            android:layout_marginTop="5dp"
-            android:text="Jenis Kelamin"
-            android:id="@+id/txt_jk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="jenis kelamin"
-            android:id="@+id/jk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:textStyle="bold"
-            android:layout_marginTop="5dp"
-            android:text="No. HP"
-            android:id="@+id/txt_no"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/no"
-            android:text="No HP"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:textStyle="bold"
-            android:layout_marginTop="5dp"
-            android:text="Alamat"
-            android:id="@+id/txt_alamat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="alamat"
-            android:id="@+id/alamat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            android:text="Others"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:text="Komunitas Diikuti"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_komunitas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:text="Event Diikuti"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_event"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"/>
-        </LinearLayout>
-    </ScrollView>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/txt_profil"
+                    android:textSize="20sp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:text="Profil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_marginTop="5dp"
+                    android:text="Jenis Kelamin"
+                    android:id="@+id/txt_jk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="jenis kelamin"
+                    android:id="@+id/jk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_marginTop="5dp"
+                    android:text="No. HP"
+                    android:id="@+id/txt_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/no"
+                    android:text="No HP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_marginTop="5dp"
+                    android:text="Alamat"
+                    android:id="@+id/txt_alamat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="alamat"
+                    android:id="@+id/alamat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:text="Others"
+                    android:layout_marginTop="10dp"
+                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:text="Komunitas Diikuti"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_komunitas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:text="Event Diikuti"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_event"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"/>
+            </LinearLayout>
+        </ScrollView>
 
-</LinearLayout>
+    </LinearLayout>
 
 
 </RelativeLayout>

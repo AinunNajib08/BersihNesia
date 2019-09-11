@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.bersihnesia.R;
 import com.example.bersihnesia.activity.CommunityActivity;
@@ -79,6 +80,7 @@ public class NotificationFragment extends Fragment {
 
             @Override
             public void onFailure(Call<PostNotif> call, Throwable t) {
+                Toast.makeText(getContext(),"Koneksi Anda Lemah",Toast.LENGTH_SHORT).show();
 
             }
         });

@@ -40,7 +40,9 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".activity.DrawTrashActivity" />
+        <activity
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:name=".activity.DrawTrashActivity" />
         <activity
             android:name=".activity.HomeActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />

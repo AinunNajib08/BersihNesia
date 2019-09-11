@@ -48,6 +48,7 @@ public class JumlahBarangActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<PostPersonal> call, Response<PostPersonal> response) {
                         Toast.makeText(JumlahBarangActivity.this, "Berhasil", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
 
                     @Override

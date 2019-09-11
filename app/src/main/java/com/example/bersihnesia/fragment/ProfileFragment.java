@@ -17,10 +17,15 @@ import com.example.bersihnesia.R;
 import com.example.bersihnesia.activity.CommunityActivity;
 import com.example.bersihnesia.activity.LoginActivity;
 import com.example.bersihnesia.adapter.CommunityAdapter;
+import com.example.bersihnesia.adapter.EventAdapter;
 import com.example.bersihnesia.adapter.JoinAdapter;
+import com.example.bersihnesia.adapter.JoinEventAdapter;
 import com.example.bersihnesia.apihelper.BaseApiService;
 import com.example.bersihnesia.apihelper.UtilsApi;
 import com.example.bersihnesia.model.Community;
+import com.example.bersihnesia.model.Event;
+import com.example.bersihnesia.model.EventJoin;
+import com.example.bersihnesia.model.PostEvent;
 import com.example.bersihnesia.model.PostJoin;
 import com.example.bersihnesia.model.PostPersonal;
 import com.squareup.picasso.Picasso;
@@ -43,9 +48,9 @@ public class ProfileFragment extends Fragment {
     CircleImageView img;
     BaseApiService mApiService;
     String sId;
-    RecyclerView mRecyclerView;
-    RecyclerView.Adapter mAdapter;
-    RecyclerView.LayoutManager mLayoutManager;
+    RecyclerView mRecyclerView,mRecyclerView2;
+    RecyclerView.Adapter mAdapter,mAdapter2;
+    RecyclerView.LayoutManager mLayoutManager,mLayoutManager2;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -86,8 +91,12 @@ public class ProfileFragment extends Fragment {
         mRecyclerView=view.findViewById(R.id.rv_komunitas);
         mLayoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView2=view.findViewById(R.id.rv_event);
+        mLayoutManager2=new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView2.setLayoutManager(mLayoutManager2);
 
         refresh();
+        refresh2();
         return view;
     }
 
@@ -103,6 +112,24 @@ public class ProfileFragment extends Fragment {
 
             @Override
             public void onFailure(Call<PostJoin> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+    private void refresh2() {
+        retrofit2.Call<PostEvent> postJoin = mApiService.postEvent(sId);
+        postJoin.enqueue(new Callback<PostEvent>() {
+            @Override
+            public void onResponse(Call<PostEvent> call, Response<PostEvent> response) {
+                List<EventJoin> communityList=response.body().getEventList();
+                mAdapter2=new JoinEventAdapter(communityList,getContext());
+                mRecyclerView2.setAdapter(mAdapter2);
+            }
+
+            @Override
+            public void onFailure(Call<PostEvent> call, Throwable t) {
 
             }
         });

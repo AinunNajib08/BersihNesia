@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.bersihnesia.R;
 import com.example.bersihnesia.activity.ReedemPointActivity;
 import com.example.bersihnesia.model.Reedem;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -50,6 +51,10 @@ public class ReedemAdapter extends RecyclerView.Adapter<ReedemAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int item) {
+        final String urlGambarBerita = "http://jwpdigitalent.com/gagas/upload/" + mReedem.get(item).getPhoto();
+        // Set image ke widget dengna menggunakan Library Piccasso
+        // krena imagenya dari internet
+        Picasso.with(context).load(urlGambarBerita).into(holder.photo);
         holder.name_item.setText(mReedem.get(item).getName_item());
         holder.jumlah_point.setText(mReedem.get(item).getJumlah_point() + " pt");
         holder.jumlah_item.setText(mReedem.get(item).getJumlah_item() + " pcs");

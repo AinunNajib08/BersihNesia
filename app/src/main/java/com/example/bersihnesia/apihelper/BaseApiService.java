@@ -7,6 +7,7 @@ import com.example.bersihnesia.model.GetCommunity;
 import com.example.bersihnesia.model.GetItemReedem;
 import com.example.bersihnesia.model.GetSampahOrganik;
 import com.example.bersihnesia.model.GetSampahnonOrganik;
+import com.example.bersihnesia.model.PostEvent;
 import com.example.bersihnesia.model.PostJoin;
 import com.example.bersihnesia.model.PostNotif;
 import com.example.bersihnesia.model.PostPersonal;
@@ -143,6 +144,11 @@ public interface BaseApiService {
     @FormUrlEncoded
     @POST("api/status_member/join")
     Call<PostJoin> postJoin(@Field("id_personal") String id_personal
+    );
+
+    @FormUrlEncoded
+    @POST("api/status_member/event")
+    Call<PostEvent> postEvent(@Field("id_personal") String id_personal
     );
 
     @FormUrlEncoded

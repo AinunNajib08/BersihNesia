@@ -87,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(retrofit2.Call call, Response response) {
                         progressDialog.dismiss();
-                        Toast.makeText(RegisterActivity.this, "Berhasil", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Point akan segera dikirim!", Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
                         startActivity(intent);
                     }

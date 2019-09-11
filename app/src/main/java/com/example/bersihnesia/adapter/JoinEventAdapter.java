@@ -11,22 +11,24 @@ import android.widget.TextView;
 
 import com.example.bersihnesia.R;
 import com.example.bersihnesia.model.Community;
+import com.example.bersihnesia.model.Event;
+import com.example.bersihnesia.model.EventJoin;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class JoinAdapter extends RecyclerView.Adapter<JoinAdapter.MyViewHolder> {
-    List<Community> mJoin;
+public class JoinEventAdapter extends RecyclerView.Adapter<JoinEventAdapter.MyViewHolder> {
+    List<EventJoin> mJoin;
     Context context;
 
-    public  JoinAdapter(List<Community>JoinList,Context context){
+    public JoinEventAdapter(List<EventJoin>JoinList, Context context){
         mJoin=JoinList;
         this.context=context;
     }
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View mView= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_community_join,parent,false);
+        View mView= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_event_join,parent,false);
         MyViewHolder myViewHolder=new MyViewHolder(mView);
         return myViewHolder;
     }
@@ -37,8 +39,7 @@ public class JoinAdapter extends RecyclerView.Adapter<JoinAdapter.MyViewHolder> 
         // Set image ke widget dengna menggunakan Library Piccasso
         // krena imagenya dari internet
         Picasso.with(context).load(urlGambarBerita).into(holder.i_community);
-        holder.txt_title.setText(mJoin.get(i).getName_community());
-        holder.txt_jumlah.setText(mJoin.get(i).getJumlah()+" orang yang bergabung");
+        holder.txt_jumlah.setText(mJoin.get(i).getDate());
 
     }
 
@@ -52,8 +53,7 @@ public class JoinAdapter extends RecyclerView.Adapter<JoinAdapter.MyViewHolder> 
         ImageView i_community;
         public MyViewHolder(View itemView) {
             super(itemView);
-            i_community=itemView.findViewById(R.id.i_community);
-            txt_title=itemView.findViewById(R.id.txt_title);
+           i_community=itemView.findViewById(R.id.i_community);
             txt_jumlah=itemView.findViewById(R.id.txt_jumlah);
         }
     }

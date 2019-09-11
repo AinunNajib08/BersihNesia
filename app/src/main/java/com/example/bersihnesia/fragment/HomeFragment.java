@@ -345,11 +345,13 @@ public class HomeFragment extends Fragment implements LocationListener {
 
                                     float distanceInMeters = loc1.distanceTo(loc2);
 
-                                    String tes = String.valueOf(distanceInMeters / 0.001);
+                                    String tes = String.valueOf(distanceInMeters / 1000);
+                                    Double reat = Double.parseDouble(tes);
                                     Double kilometer = Double.parseDouble(tes);
                                     Log.e("RAG", "onCreateView: " + tes);
+                                    Double distance = (double) (Math.round(reat * 100)) / 100;
                                     event.setPhoto(jsonObject.getString("photo"));
-                                    event.setLonglat(kilometer);
+                                    event.setLonglat(distance);
                                     event.setName_event(name_event);
                                     arrayList.add(event);
                                 }

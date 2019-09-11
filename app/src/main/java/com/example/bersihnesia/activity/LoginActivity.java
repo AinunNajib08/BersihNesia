@@ -94,8 +94,6 @@ SharedPreferences  sharedPreferences;
                     public void onFailure(retrofit2.Call<PostPersonal> call, Throwable t) {
                         progressDialog.dismiss();
                         Toast.makeText(LoginActivity.this, "Gagal Login", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
 
 
                     }

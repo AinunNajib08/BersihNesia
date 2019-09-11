@@ -45,8 +45,16 @@ public class PostPersonal {
     String alamat_pengiriman;
     @SerializedName("reedem_point")
     int reedem_point;
+    @SerializedName("jumlah_sampah")
+    String jumlah_sampah;
 
+    public String getJumlah_sampah() {
+        return jumlah_sampah;
+    }
 
+    public void setJumlah_sampah(String jumlah_sampah) {
+        this.jumlah_sampah = jumlah_sampah;
+    }
 
     public String getNama() {
         return nama;

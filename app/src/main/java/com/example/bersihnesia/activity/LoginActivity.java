@@ -40,7 +40,6 @@ SharedPreferences  sharedPreferences;
         regist=findViewById(R.id.daftar);
         mApiService = UtilsApi.getAPIService();
         sharedPreferences = LoginActivity.this.getSharedPreferences("remember",Context.MODE_PRIVATE);
-
         regist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +66,7 @@ SharedPreferences  sharedPreferences;
                         String address=response.body().getAddress();
                         String jk=response.body().getJk();
                         String no=response.body().getContact_person();
-                        String photo=response.body().getPhoto();
+                        String photo=response.body().getPhoto_personal();
                         String point=response.body().getPoint();
 
                         Log.e("Berhasil Login", "Berhasil " +point);
@@ -94,7 +93,7 @@ SharedPreferences  sharedPreferences;
                     public void onFailure(retrofit2.Call<PostPersonal> call, Throwable t) {
                         progressDialog.dismiss();
                         Toast.makeText(LoginActivity.this, "Gagal Login", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(intent);
 
 

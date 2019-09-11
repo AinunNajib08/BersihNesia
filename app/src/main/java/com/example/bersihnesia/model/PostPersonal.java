@@ -33,8 +33,8 @@ public class PostPersonal {
     String name_community;
     @SerializedName("legality")
     String legality;
-    @SerializedName("photo")
-    String photo;
+    @SerializedName("photo_personal")
+    String photo_personal;
     @SerializedName("nama")
     String nama;
     @SerializedName("id_item")
@@ -128,12 +128,12 @@ public class PostPersonal {
         this.description = description;
     }
 
-    public String getPhoto() {
-        return photo;
+    public String getPhoto_personal() {
+        return photo_personal;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setPhoto_personal(String photo_personal) {
+        this.photo_personal = photo_personal;
     }
 
     public String getJk() {

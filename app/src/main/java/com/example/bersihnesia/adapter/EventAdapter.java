@@ -46,6 +46,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.GridViewHold
                 .apply(new RequestOptions().transform(new RoundedCorners(50)))
                 .into(gridViewHolder.imgEvent);
         gridViewHolder.tvNameEvent.setText(getListEvent().get(i).getName_event());
+        String km = String.valueOf(getListEvent().get(i).getLonglat());
+        gridViewHolder.tvNameEvent.setText(km);
     }
 
     @Override
@@ -54,10 +56,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.GridViewHold
     }
 
     public class GridViewHolder extends RecyclerView.ViewHolder {
-        TextView tvNameEvent;
+        TextView tvNameEvent, tvDesc;
         ImageView imgEvent;
+
         public GridViewHolder(@NonNull View itemView) {
             super(itemView);
+            tvDesc = itemView.findViewById(R.id.tvDesc);
             imgEvent = itemView.findViewById(R.id.imgEvent);
             tvNameEvent = itemView.findViewById(R.id.name_event);
         }

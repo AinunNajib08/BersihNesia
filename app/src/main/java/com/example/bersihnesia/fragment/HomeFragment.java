@@ -329,16 +329,27 @@ public class HomeFragment extends Fragment implements LocationListener {
                                     double lat = location.getLatitude();
                                     Log.e("RAG", "onResponse: "+longlat );
                                     da = jsonObject.getString("longlat");
-                                    String sda[] =  da.split(",");
-                                    Location loc2 = new Location("");
-                                    double latitude = Double.parseDouble(sda[0]);
-                                    double longitude = Double.parseDouble(sda[1]);
-                                    loc2.setLatitude(latitude);
-                                    loc2.setLongitude(longitude);
-                                    float distanceInMeters = location.distanceTo(loc2);
+                                    double latiounde = location.getLatitude();
+                                    double asd = location.getLongitude();
 
-                                    String tes = String.valueOf(distanceInMeters * 0.001);
+                                    String[] das =  da.split(",");
+                                    double asdasd = Double.parseDouble(das[1]);
+                                    double asds = Double.parseDouble(das[1]);
+                                    Location loc1 = new Location("");
+                                    loc1.setLatitude(latiounde);
+                                    loc1.setLongitude(asd);
+
+                                    Location loc2 = new Location("");
+                                    loc2.setLatitude(asdasd);
+                                    loc2.setLongitude(asds);
+
+                                    float distanceInMeters = loc1.distanceTo(loc2);
+
+                                    String tes = String.valueOf(distanceInMeters / 0.001);
+                                    Double kilometer = Double.parseDouble(tes);
+                                    Log.e("RAG", "onCreateView: " + tes);
                                     event.setPhoto(jsonObject.getString("photo"));
+                                    event.setLonglat(kilometer);
                                     event.setName_event(name_event);
                                     arrayList.add(event);
                                 }

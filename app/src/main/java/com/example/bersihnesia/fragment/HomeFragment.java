@@ -33,6 +33,7 @@ import android.widget.Toast;
 
 import com.example.bersihnesia.R;
 import com.example.bersihnesia.activity.CommunityActivity;
+import com.example.bersihnesia.activity.DrawTrashActivity;
 import com.example.bersihnesia.activity.EventActivity;
 import com.example.bersihnesia.activity.InformationActivity;
 import com.example.bersihnesia.activity.ReedemActivity;
@@ -96,6 +97,7 @@ public class HomeFragment extends Fragment implements LocationListener {
     ProgressBar progressBar;
     SharedPreferences sharedPreferences;
     String sIdPersonal;
+    LinearLayout ada;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -106,6 +108,14 @@ public class HomeFragment extends Fragment implements LocationListener {
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         boolean permissionGranted = ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
         mContext = getContext();
+        ada = view.findViewById(R.id.ada);
+        ada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), DrawTrashActivity.class);
+                startActivity(intent);
+            }
+        });
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         sharedPreferences = view.getContext().getSharedPreferences("remember", Context.MODE_PRIVATE);
         sIdPersonal = sharedPreferences.getString("id_personal", "2");

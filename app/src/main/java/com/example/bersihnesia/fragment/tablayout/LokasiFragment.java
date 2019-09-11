@@ -129,7 +129,7 @@ public class LokasiFragment extends Fragment implements OnMapReadyCallback {
             e.printStackTrace();
         }
         LatLng sydney = new LatLng(latitude, longitude);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Lokasi di Tetapkan"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         float zoom = 16.0f;

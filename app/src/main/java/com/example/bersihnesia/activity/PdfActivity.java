@@ -81,6 +81,7 @@ public class PdfActivity extends AppCompatActivity implements OnPageChangeListen
                 intent.putExtra("komunitas", bundle.getString("name_com"));
                 intent.putExtra("lokasi", bundle.getString("location"));
                 intent.putExtra("deskripsi", bundle.getString("desc"));
+                intent.putExtra("longlat", bundle.getString("longlat"));
                 startActivity(intent);
                 finish();
                 return true;
@@ -188,7 +189,6 @@ public class PdfActivity extends AppCompatActivity implements OnPageChangeListen
             return;
         } else {
             showpDialog();
-
             // Map is used to multipart the file using okhttp3.RequestBody
             Map<String, RequestBody> map = new HashMap<>();
             File file = new File(pdfPath);

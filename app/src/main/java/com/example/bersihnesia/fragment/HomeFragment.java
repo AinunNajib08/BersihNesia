@@ -397,6 +397,7 @@ public class HomeFragment extends Fragment implements LocationListener {
                                     c.setId_community(id_community);
                                     c.setName_community(name_community);
                                     c.setPhoto(jsonObject.getString("photo"));
+                                    Log.e("RAG", "GOBLOK: "+ jsonObject.getString("photo"));
                                     arrayCom.add(c);
                                 }
                                 commAdapter.setListEvent(arrayCom);

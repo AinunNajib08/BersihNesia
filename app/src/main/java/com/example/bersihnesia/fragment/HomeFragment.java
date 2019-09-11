@@ -64,9 +64,10 @@ import retrofit2.Response;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment implements LocationListener {
-ImageView komunitas;
-FloatingActionButton fab;
-TextView point;
+    ImageView komunitas;
+    FloatingActionButton fab;
+    TextView point;
+    String da;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -89,7 +90,7 @@ TextView point;
     public static final String STATE_EVENT = "state_event";
     EventAdapter eventAdapter;
     CommAdapter commAdapter;
-    LinearLayout linearLayout,l_reedem;
+    LinearLayout linearLayout, l_reedem;
     ProgressBar progressBar;
     SharedPreferences sharedPreferences;
     String sIdPersonal;
@@ -103,8 +104,8 @@ TextView point;
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         boolean permissionGranted = ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
         mContext = getContext();
-        sharedPreferences=view.getContext().getSharedPreferences("remember",Context.MODE_PRIVATE);
-        sIdPersonal = sharedPreferences.getString("id_personal","2");
+        sharedPreferences = view.getContext().getSharedPreferences("remember", Context.MODE_PRIVATE);
+        sIdPersonal = sharedPreferences.getString("id_personal", "2");
         linearLayout = view.findViewById(R.id.event_click);
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,11 +114,11 @@ TextView point;
                 startActivity(goEvent);
             }
         });
-        l_reedem=view.findViewById(R.id.l_reedem);
+        l_reedem = view.findViewById(R.id.l_reedem);
         l_reedem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(), ReedemActivity.class);
+                Intent intent = new Intent(getContext(), ReedemActivity.class);
                 startActivity(intent);
             }
         });
@@ -131,7 +132,7 @@ TextView point;
         });
 
 
-        point=view.findViewById(R.id.point);
+        point = view.findViewById(R.id.point);
         eventAdapter = new EventAdapter(mContext);
         commAdapter = new CommAdapter(mContext);
         mApiService = UtilsApi.getAPIService();
@@ -148,11 +149,11 @@ TextView point;
         LinearLayoutManager lM
                 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rv_community.setLayoutManager(lM);
-        if (arrayList.size() != 0){
+        if (arrayList.size() != 0) {
             getEvent();
         }
 
-        if (arrayCom.size() != 0){
+        if (arrayCom.size() != 0) {
             getCommunity();
         }
         ItemClickSupport.addTo(rv_event).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
@@ -178,23 +179,21 @@ TextView point;
         });
 
 
-
-
         carouselView.setImageListener(new ImageListener() {
             @Override
             public void setImageForPosition(int position, ImageView imageView) {
                 imageView.setImageResource(mImage[position]);
             }
         });
-        komunitas=view.findViewById(R.id.komunitas);
+        komunitas = view.findViewById(R.id.komunitas);
         komunitas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(),CommunityActivity.class);
+                Intent intent = new Intent(getActivity(), CommunityActivity.class);
                 startActivity(intent);
             }
         });
-        fab=view.findViewById(R.id.fab);
+        fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -202,7 +201,7 @@ TextView point;
                         = (CameraManager) getActivity().getSystemService(Context.CAMERA_SERVICE);
                 boolean permissionGranted = ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
 
-                if(permissionGranted) {
+                if (permissionGranted) {
                 } else {
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 200);
                 }
@@ -218,20 +217,20 @@ TextView point;
         return view;
 
 
-
     }
 
     private void getPoint() {
-        Call<PostPersonal> postPoint=mApiService.postPoint(sIdPersonal);
+        Call<PostPersonal> postPoint = mApiService.postPoint(sIdPersonal);
         postPoint.enqueue(new Callback<PostPersonal>() {
             @Override
             public void onResponse(Call<PostPersonal> call, Response<PostPersonal> response) {
-                String my_point=response.body().getPoint();
-                point.setText(my_point+" pt");
+                String my_point = response.body().getPoint();
+                point.setText(my_point + " pt");
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("point", my_point);
                 editor.apply();
             }
+
             @Override
             public void onFailure(Call<PostPersonal> call, Throwable t) {
 
@@ -256,7 +255,7 @@ TextView point;
         float distanceInMeters = loc1.distanceTo(loc2);
 
         String tes = String.valueOf(distanceInMeters * 0.001);
-        Log.e("RAG", "onCreateView: "+tes );
+        Log.e("RAG", "TEST: " + tes);
 
     }
 
@@ -286,33 +285,69 @@ TextView point;
     public void onResume() {
         super.onResume();
         arrayList.clear();
-        if (arrayList.size() == 0){
+        if (arrayList.size() == 0) {
             getEvent();
         }
 
         arrayCom.clear();
-        if (arrayCom.size() == 0){
+        if (arrayCom.size() == 0) {
             getCommunity();
         }
     }
 
 
-    void getEvent(){
+    void getEvent() {
         progressBar.setVisibility(View.VISIBLE);
         mApiService.getEvent()
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
-                        if (response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             try {
                                 JSONObject jsonRESULTS = new JSONObject(response.body().string());
                                 JSONArray data = jsonRESULTS.getJSONArray("result");
-                                for (int i=0; i <data.length(); i++) {
+                                for (int i = 0; i < data.length(); i++) {
                                     JSONObject jsonObject = data.getJSONObject(i);
                                     int id_event = jsonObject.getInt("id_event");
                                     String name_event = jsonObject.getString("name_event");
                                     Event event = new Event();
                                     event.setId_event(id_event);
+                                    LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+                                    if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                                        // TODO: Consider calling
+                                        //    ActivityCompat#requestPermissions
+                                        // here to request the missing permissions, and then overriding
+                                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                        //                                          int[] grantResults)
+                                        // to handle the case where the user grants the permission. See the documentation
+                                        // for ActivityCompat#requestPermissions for more details.
+                                        return;
+                                    }
+                                    Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                                    double longlat = location.getLongitude();
+                                    double lat = location.getLatitude();
+                                    Log.e("RAG", "onResponse: "+longlat );
+                                    da = jsonObject.getString("longlat");
+                                    double latiounde = location.getLatitude();
+                                    double asd = location.getLongitude();
+
+                                    String[] das =  da.split(",");
+                                    double asdasd = Double.parseDouble(das[0]);
+                                    double asds = Double.parseDouble(das[1]);
+                                    Location loc1 = new Location("");
+                                    loc1.setLatitude(latiounde);
+                                    loc1.setLongitude(asd);
+
+                                    Location loc2 = new Location("");
+                                    loc2.setLatitude(asdasd);
+                                    loc2.setLongitude(asds);
+
+                                    float distanceInMeters = loc1.distanceTo(loc2);
+                                    Log.e("RAG", "onResponse: KM"+distanceInMeters );
+                                    String tes = String.valueOf(distanceInMeters);
+                                    event.setTime_date(jsonObject.getString("date"));
+                                    event.setPhoto(jsonObject.getString("photo"));
+                                    event.setLonglat(tes);
                                     event.setName_event(name_event);
                                     arrayList.add(event);
                                 }

@@ -5,7 +5,8 @@ import android.os.Parcelable;
 
 public class Event implements Parcelable {
     private int id_event, id_community;
-    private String name_event, photo, description, address, time_date, longlat, status_event;
+    private String name_event, photo, description, address, time_date,  status_event;
+    String longlat;
 
     public int getId_event() {
         return id_event;

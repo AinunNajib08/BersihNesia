@@ -7,6 +7,7 @@ import com.example.bersihnesia.model.GetCommunity;
 import com.example.bersihnesia.model.GetItemReedem;
 import com.example.bersihnesia.model.GetSampahOrganik;
 import com.example.bersihnesia.model.GetSampahnonOrganik;
+import com.example.bersihnesia.model.PostJoin;
 import com.example.bersihnesia.model.PostNotif;
 import com.example.bersihnesia.model.PostPersonal;
 import com.example.bersihnesia.model.UploadImage;
@@ -133,6 +134,10 @@ public interface BaseApiService {
     Call<PostPersonal> postLogin(@Field("email") String email,
                                  @Field("password") String password
 
+    );
+    @FormUrlEncoded
+    @POST("api/status_member/join")
+    Call<PostJoin> postJoin(@Field("id_personal") String id_personal
     );
 
     @FormUrlEncoded

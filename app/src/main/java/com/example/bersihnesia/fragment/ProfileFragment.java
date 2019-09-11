@@ -22,6 +22,7 @@ import com.example.bersihnesia.apihelper.BaseApiService;
 import com.example.bersihnesia.apihelper.UtilsApi;
 import com.example.bersihnesia.model.Community;
 import com.example.bersihnesia.model.PostJoin;
+import com.example.bersihnesia.model.PostPersonal;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
@@ -108,6 +109,25 @@ public class ProfileFragment extends Fragment {
 
 
     }
+   /* private void getPoint() {
+        Call<PostPersonal> postPoint = mApiService.postPoint(sId);
+        postPoint.enqueue(new Callback<PostPersonal>() {
+            @Override
+            public void onResponse(Call<PostPersonal> call, Response<PostPersonal> response) {
+                String my_point = response.body().getPoint();
+                point.setText(my_point + " pt");
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("point", my_point);
+                editor.apply();
+            }
+
+            @Override
+            public void onFailure(Call<PostPersonal> call, Throwable t) {
+
+            }
+        });
+    }*/
+
 
 
 }

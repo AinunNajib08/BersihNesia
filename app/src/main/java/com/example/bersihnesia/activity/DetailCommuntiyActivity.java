@@ -1,10 +1,12 @@
 package com.example.bersihnesia.activity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +24,8 @@ import com.example.bersihnesia.R;
 import com.example.bersihnesia.adapter.CommunityTabLayout;
 import com.example.bersihnesia.apihelper.BaseApiService;
 import com.example.bersihnesia.apihelper.UtilsApi;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,9 +43,11 @@ public class DetailCommuntiyActivity extends AppCompatActivity {
     ImageView imageView;
     BaseApiService mApiService;
     Intent intent;
-    String idPersonal;
+    String idPersonal,id_personal;
     SharedPreferences sharedPreferences;
     Button btnEvent, btnJoin;
+    FloatingActionButton scanner;
+    private IntentIntegrator qrScan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +62,12 @@ public class DetailCommuntiyActivity extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.favorite_viewpager);
         viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(new CommunityTabLayout(getSupportFragmentManager(), this));
-
+        qrScan = new IntentIntegrator(this);
         tabLayout.setupWithViewPager(viewPager);
+
         btnEvent.setVisibility(View.GONE);
         btnJoin.setVisibility(View.GONE);
+
         sharedPreferences = this.getSharedPreferences("remember", Context.MODE_PRIVATE);
         idPersonal = sharedPreferences.getString("id_personal", null);
         mApiService = UtilsApi.getAPIService();
@@ -86,6 +94,13 @@ public class DetailCommuntiyActivity extends AppCompatActivity {
                 Intent intents = new Intent(DetailCommuntiyActivity.this, CreateEventActivity.class);
                 intents.putExtra("id_comm", intent.getIntExtra("id_com", 0));
                 startActivity(intents);
+            }
+        });
+        scanner=findViewById(R.id.scanner);
+        scanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                qrScan.initiateScan();
             }
         });
     }
@@ -155,6 +170,50 @@ public class DetailCommuntiyActivity extends AppCompatActivity {
 
                     }
                 });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            //if qrcode has nothing in it
+            if (result.getContents() == null) {
+                Toast.makeText(this, "Barcode Tidak Ada", Toast.LENGTH_LONG).show();
+            } else {
+                //if qr contains data
+                try {
+                    //converting the data to json
+                    JSONObject obj = new JSONObject(result.getContents());
+                    //setting values to textviews
+                     id_personal= (obj.getString("id_personal"));
+                    //alamat.setText(obj.getString("address"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    //if control comes here
+                    //that means the encoded format not matches
+                    //in this case you can display whatever data is available on the qrcode
+                    //to a toast
+                    Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
+                }
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    private void showDialog() {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_scanner);
+        Button iya=dialog.findViewById(R.id.iya);
+        TextView id=dialog.findViewById(R.id.id_personal);
+        id.setText(id_personal);
+        iya.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        dialog.show();
+
     }
 
     void getInsert(){
